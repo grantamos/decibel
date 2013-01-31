@@ -1,0 +1,2 @@
+C:\Users\Grant\documents\GitHub\Music8\Byteopia.Music.GoogleMusicAPI\Byteopia.Music.GoogleMusicAPI.csproj;neutral
+C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Music8.csproj;neutral

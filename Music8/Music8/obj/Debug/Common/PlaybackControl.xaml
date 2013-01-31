@@ -1,0 +1,148 @@
+﻿<UserControl
+    x:Name="root"
+    x:Class="Music8.Common.PlaybackControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Music8.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="100">
+    <UserControl.Resources>
+        <local:MediaElementStateConverter x:Name="MediaElementStateConverter"/>
+        <local:TimeSpanConverter x:Name="TimeSpanConverter"/>
+    </UserControl.Resources>
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="rootGrid">
+        <MediaElement x:Name="mediaElement"/>
+        <Grid x:Name="FilledGrid" Visibility="Visible" Margin="10" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
+                <Button x:ConnectionId='1' Style="{StaticResource RepeatAppBarButtonStyle}"                     />
+                <Button x:ConnectionId='2' Style="{StaticResource ShuffleAppBarButtonStyle}"                      />
+                <Button x:ConnectionId='3' Style="{StaticResource MySkipBackAppBarButtonStyle}"                       />
+                <Button x:ConnectionId='4' Style="{StaticResource MyPlayAppBarButtonStyle}"                    x:Name="playButton"/>
+                <Button x:ConnectionId='5' Style="{StaticResource MySkipAheadAppBarButtonStyle}"                   />
+                <Button x:ConnectionId='6' Style="{StaticResource ListAppBarButtonStyle}"                    />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Grid.ColumnSpan="2" Width="300"
+                        Visibility="{Binding ElementName=mediaElement, Path=CurrentState, Converter={StaticResource MediaElementStateConverter}, Mode=OneWay}">
+                <TextBlock x:Name="smallDetailsTitle" Text="{Binding ElementName=mediaElement, Path=DataContext.Title, Mode=OneWay}"
+                            Style="{StaticResource TitleTextStyle}"
+                            HorizontalAlignment="Center"/>
+                <TextBlock x:Name="smallDetailsArtist" Text="{Binding ElementName=mediaElement, Path=DataContext.Artist, Mode=OneWay}"
+                            Style="{StaticResource CaptionTextStyle}" LineHeight="15"
+                            HorizontalAlignment="Center"/>
+                <Grid Grid.Row="1" VerticalAlignment="Center" Height="25">
+                    <ProgressBar x:Name="bufferProgress" Value="{Binding ElementName=mediaElement, Path=DownloadProgress, Mode=OneWay}"
+                                 HorizontalAlignment="Stretch" Maximum="1"
+                                 Foreground="Gray" Height="11"/>
+                    <Slider x:Name="playProgress" Value="{Binding ElementName=mediaElement, Path=Position, Mode=TwoWay, Converter={StaticResource TimeSpanConverter}}"
+                            Minimum="0" Maximum="{Binding ElementName=mediaElement, Path=NaturalDuration, Mode=OneWay, Converter={StaticResource TimeSpanConverter}}"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                 Foreground="DodgerBlue" Margin="0,-10,0,0" />
+                </Grid>
+                <Grid>
+                    <TextBlock Text="{Binding ElementName=mediaElement, Path=Position.ToString, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0"/>
+                    <TextBlock Text="{Binding ElementName=mediaElement, Path=NaturalDuration.ToString, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,0,0"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="SnappedGrid" Visibility="Collapsed" VerticalAlignment="Stretch" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ListView x:Name="songList" ScrollViewer.VerticalScrollMode="Enabled" Margin="0,10,0,20" BorderBrush="Gray" BorderThickness="0,0,0,1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="0,5,0,5">
+                            <TextBlock Text="{Binding Title}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap"/>
+                            <TextBlock Text="{Binding Artist}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid HorizontalAlignment="Stretch" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <!--<ColumnDefinition Width="100"/>-->
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!--<Image Grid.Column="0" Source="http://blog.rhapsody.com/kse%20album%20art.jpg" Margin="0,0,10,0"/>-->
+                <Grid Grid.Column="1">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <TextBlock Text="Killswitch Engage" Style="{StaticResource TitleTextStyle}"/>
+                        <TextBlock Text="The End Is Near" Style="{StaticResource CaptionTextStyle}" LineHeight="15"/>
+                    </StackPanel>
+                    <ProgressBar Grid.Row="1" x:Name="playProgressSnapped" Value="50" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="DodgerBlue"/>
+                    <TextBlock Grid.Row="2" Text="2:20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,30,0,0"/>
+                    <TextBlock Grid.Row="2" Text="4:40" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,30,0,0"/>
+                </Grid>
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2">
+                <Button Style="{StaticResource RepeatAppBarButtonStyle}"/>
+                <Button Style="{StaticResource ShuffleAppBarButtonStyle}"/>
+                <Button Style="{StaticResource MySkipBackAppBarButtonStyle}"/>
+                <Button Style="{StaticResource MyPlayAppBarButtonStyle}"/>
+                <Button Style="{StaticResource MySkipAheadAppBarButtonStyle}"/>
+            </StackPanel>
+        </Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's view state -->
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="FullScreenLandscape">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SnappedGrid" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FilledGrid" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Filled">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SnappedGrid" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FilledGrid" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <!-- The entire page respects the narrower 100-pixel margin convention for portrait -->
+                <VisualState x:Name="FullScreenPortrait">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SnappedGrid" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FilledGrid" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <!-- The back button and title have different styles when snapped -->
+                <VisualState x:Name="Snapped">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SnappedGrid" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FilledGrid" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</UserControl>
+

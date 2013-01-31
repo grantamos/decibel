@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>GRANT-ASUS</Machine>
+    <WindowsUser>Grant</WindowsUser>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <RegisteredManifestChecksum>30CBE1566AA8D5BF1A8EC818443289B907C49526434E2652BC0025261F54D145</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>59ade58e-bb1f-40e2-924f-de0a5595d15e_1.0.0.0_neutral__fh60rfhwagkgt</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>59ade58e-bb1f-40e2-924f-de0a5595d15e_fh60rfhwagkgt!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>59ade58e-bb1f-40e2-924f-de0a5595d15e</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Grant</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-01-31T03:43:01.130</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Music8.exe">
+      <PackagePath>Music8.exe</PackagePath>
+      <Modified>2013-01-31T18:15:32.419</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Music8.pdb">
+      <PackagePath>Music8.pdb</PackagePath>
+      <Modified>2013-01-31T18:15:32.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\GitHub\Music8\Byteopia.Music.GoogleMusicAPI\bin\Debug\GoogleMusicAPI.pdb">
+      <PackagePath>GoogleMusicAPI.pdb</PackagePath>
+      <Modified>2013-01-25T05:14:50.801</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.PlayerFramework.Xaml\1.5.0\References\CommonConfiguration\neutral\Microsoft.PlayerFramework.dll">
+      <PackagePath>Microsoft.PlayerFramework.dll</PackagePath>
+      <Modified>2012-10-19T09:25:42.176</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\GitHub\Music8\Byteopia.Music.GoogleMusicAPI\bin\Debug\GoogleMusicAPI.dll">
+      <PackagePath>GoogleMusicAPI.dll</PackagePath>
+      <Modified>2013-01-25T05:14:50.823</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.PlayerFramework.Xaml\1.5.0\References\CommonConfiguration\neutral\Microsoft.PlayerFramework.xml">
+      <PackagePath>Microsoft.PlayerFramework.xml</PackagePath>
+      <Modified>2012-10-19T09:25:42.187</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.PlayerFramework.Xaml\1.5.0\Redist\CommonConfiguration\neutral\Microsoft.PlayerFramework\Themes\generic.xaml">
+      <PackagePath>Microsoft.PlayerFramework\Themes\generic.xaml</PackagePath>
+      <Modified>2012-10-19T09:25:42.144</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Assets\albumStack.png">
+      <PackagePath>Assets\albumStack.png</PackagePath>
+      <Modified>2013-01-25T03:15:33.454</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Assets\albumStackShadowed.png">
+      <PackagePath>Assets\albumStackShadowed.png</PackagePath>
+      <Modified>2013-01-25T03:58:58.558</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Assets\Logo.png">
+      <PackagePath>Assets\Logo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-01-25T17:03:29.893</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Assets\shadow.png">
+      <PackagePath>Assets\shadow.png</PackagePath>
+      <Modified>2013-01-25T04:24:35.871</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Assets\SmallLogo.png">
+      <PackagePath>Assets\SmallLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-03-16T03:42:52.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Assets\SplashScreen.png">
+      <PackagePath>Assets\SplashScreen.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-01-25T17:06:40.353</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Assets\StoreLogo.png">
+      <PackagePath>Assets\StoreLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-03-16T03:42:52.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Assets\background6.jpg">
+      <PackagePath>Assets\background6.jpg</PackagePath>
+      <Modified>2012-12-18T23:16:49.500</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Common\ReadMe.txt">
+      <PackagePath>Common\ReadMe.txt</PackagePath>
+      <Modified>2012-10-19T06:39:31.564</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\Password.txt">
+      <PackagePath>Password.txt</PackagePath>
+      <Modified>2012-10-19T07:45:36.513</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\GitHub\Music8\Byteopia.Music.GoogleMusicAPI\notes.txt">
+      <PackagePath>GoogleMusicAPI\notes.txt</PackagePath>
+      <Modified>2012-10-15T23:02:41.049</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\App.xaml">
+      <PackagePath>App.xaml</PackagePath>
+      <Modified>2012-10-19T06:46:19.377</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Common\CustomStyles.xaml">
+      <PackagePath>Common\CustomStyles.xaml</PackagePath>
+      <Modified>2013-01-28T01:31:10.878</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Common\DetailsPage.xaml">
+      <PackagePath>Common\DetailsPage.xaml</PackagePath>
+      <Modified>2012-12-19T22:43:40.135</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Common\PlaybackControl.xaml">
+      <PackagePath>Common\PlaybackControl.xaml</PackagePath>
+      <Modified>2013-01-31T05:17:57.306</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Common\StandardStyles.xaml">
+      <PackagePath>Common\StandardStyles.xaml</PackagePath>
+      <Modified>2013-01-25T05:03:19.797</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Pages\CollectionPage.xaml">
+      <PackagePath>Pages\CollectionPage.xaml</PackagePath>
+      <Modified>2013-01-31T03:52:49.730</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Pages\EventsPage.xaml">
+      <PackagePath>Pages\EventsPage.xaml</PackagePath>
+      <Modified>2012-12-14T01:52:34.351</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Pages\LoginPage.xaml">
+      <PackagePath>Pages\LoginPage.xaml</PackagePath>
+      <Modified>2013-01-25T19:14:36.840</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Pages\MainPage.xaml">
+      <PackagePath>Pages\MainPage.xaml</PackagePath>
+      <Modified>2013-01-27T06:17:46.890</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\Pages\NowPlaying.xaml">
+      <PackagePath>Pages\NowPlaying.xaml</PackagePath>
+      <Modified>2012-12-14T05:16:51.613</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\documents\visual studio 2012\Projects\Music8\Music8\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2013-01-25T17:07:08.695</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
