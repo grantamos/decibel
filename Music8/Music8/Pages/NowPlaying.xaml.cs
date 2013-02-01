@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Byteopia.Music.GoogleMusicAPI;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,6 +38,7 @@ namespace Music8.Pages
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
+            this.nowPlayingList.ItemsSource = App.songQueue.GetQueue();
         }
 
         /// <summary>
@@ -47,6 +49,22 @@ namespace Music8.Pages
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
+        }
+
+        private void Remove_Song(object sender, RoutedEventArgs e)
+        {
+            GoogleMusicSong song = (sender as Button).DataContext as GoogleMusicSong;
+
+            App.songQueue.RemoveSong(song);
+        }
+
+        private void nowPlayingList_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            ListView listView = sender as ListView;
+            GoogleMusicSong song = e.ClickedItem as GoogleMusicSong;
+
+            App.songQueue.ChangeSong(listView.Items.IndexOf(song));
+            App.songQueue.Play();
         }
     }
 }

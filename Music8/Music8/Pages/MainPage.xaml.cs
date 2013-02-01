@@ -84,8 +84,8 @@ namespace Music8.Pages
             else if (radioBtn.Name == "nowPlayingRadioButton")
             {
                 NavigateContentFrame(typeof(Pages.NowPlaying));
-                AnimationLibrary.AnimateOpacity(DarkBackground, .75, 1);
-                playbackControl.Expand();
+                //AnimationLibrary.AnimateOpacity(DarkBackground, .75, 1);
+                //playbackControl.Expand();
             }
         }
 

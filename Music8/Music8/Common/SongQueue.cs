@@ -13,7 +13,7 @@ namespace Music8.Common
     public class SongQueue
     {
         private ObservableCollection<GoogleMusicSong> queue = new ObservableCollection<GoogleMusicSong>();
-        private int currentIndex = -1;
+        public int currentIndex = -1;
         private bool shuffle = false;
         private bool repeat = false;
         private MediaElement mediaElement;
@@ -136,6 +136,11 @@ namespace Music8.Common
             Clear();
             AddSongs(songs);
             NextSong();
+        }
+
+        public ObservableCollection<GoogleMusicSong> GetQueue()
+        {
+            return this.queue;
         }
 
         int mod(int x, int m)

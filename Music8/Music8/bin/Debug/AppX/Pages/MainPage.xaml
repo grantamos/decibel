@@ -19,7 +19,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Rectangle x:Name="DarkBackground" Fill="Black" Opacity="0" Visibility="Collapsed"/>
+        <Rectangle x:Name="DarkBackground" Fill="Black" Opacity="0" Visibility="Collapsed" Grid.RowSpan="3"/>
         
         <StackPanel x:Name="NavigationHeader" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 20 0 0">
             <StackPanel.ChildrenTransitions>
