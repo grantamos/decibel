@@ -83,6 +83,11 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VariableSizedWrapGrid/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
             <GridView.ItemContainerTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>
@@ -152,6 +157,11 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VariableSizedWrapGrid/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
             <GridView.ItemContainerTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>
@@ -169,33 +179,6 @@
                   VerticalAlignment="Stretch">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <!--<Grid HorizontalAlignment="Left" Width="150" Height="150">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
-                        </Grid.RowDefinitions>
-                        <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Grid.RowSpan="2">
-                            <Image Source="{Binding ArtURL}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-                        </Border>
-                        <Grid Grid.Row="1">
-                            <Grid.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#00000000" Offset="0"/>
-                                    <GradientStop Color="#FF000000" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Grid.Background>
-                            <StackPanel VerticalAlignment="Bottom">
-                                <TextBlock Text="{Binding Title}"
-                                           Style="{StaticResource ItemTitleTextStyle}"
-                                           Margin="8,0,0,0"
-                                           TextTrimming="WordEllipsis"/>
-                                <TextBlock Text="{Binding AlbumArtist}"
-                                           Style="{StaticResource ItemSubtitleTextStyle}"
-                                           Margin="8,0,0,5"
-                                           TextTrimming="WordEllipsis"/>
-                            </StackPanel>
-                        </Grid>
-                    </Grid>-->
                     <Grid Height="110" Width="350" Margin="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
@@ -237,6 +220,11 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VariableSizedWrapGrid/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
             <GridView.ItemContainerTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>
