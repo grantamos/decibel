@@ -44,7 +44,8 @@ namespace Music8.Pages
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
             this.parent = navigationParameter as MainPage;
-            App.collection.CollectionChanged += songs_CollectionChanged;
+            //App.collection.CollectionChanged += songs_CollectionChanged;
+            App.googleAPI.ChunkAdded += new API.NotifyChunkAdded(this.songs_CollectionChanged);
         }
 
         public void songs_CollectionChanged(ObservableCollection<GoogleMusicSong> songs)

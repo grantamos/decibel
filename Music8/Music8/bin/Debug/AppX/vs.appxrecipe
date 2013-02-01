@@ -22,15 +22,15 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Music8.exe">
       <PackagePath>Music8.exe</PackagePath>
-      <Modified>2013-02-01T05:57:37.718</Modified>
+      <Modified>2013-02-01T22:49:56.658</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Music8.pdb">
       <PackagePath>Music8.pdb</PackagePath>
-      <Modified>2013-02-01T05:57:37.698</Modified>
+      <Modified>2013-02-01T22:49:56.637</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\Music8\Byteopia.Music.GoogleMusicAPI\bin\Debug\GoogleMusicAPI.pdb">
       <PackagePath>GoogleMusicAPI.pdb</PackagePath>
-      <Modified>2013-01-25T05:14:50.801</Modified>
+      <Modified>2013-02-01T22:37:55.468</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.PlayerFramework.Xaml\1.5.0\References\CommonConfiguration\neutral\Microsoft.PlayerFramework.dll">
       <PackagePath>Microsoft.PlayerFramework.dll</PackagePath>
@@ -38,7 +38,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\Music8\Byteopia.Music.GoogleMusicAPI\bin\Debug\GoogleMusicAPI.dll">
       <PackagePath>GoogleMusicAPI.dll</PackagePath>
-      <Modified>2013-01-25T05:14:50.823</Modified>
+      <Modified>2013-02-01T22:37:55.489</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.PlayerFramework.Xaml\1.5.0\References\CommonConfiguration\neutral\Microsoft.PlayerFramework.xml">
       <PackagePath>Microsoft.PlayerFramework.xml</PackagePath>
@@ -118,7 +118,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\CollectionPage.xaml">
       <PackagePath>Pages\CollectionPage.xaml</PackagePath>
-      <Modified>2013-02-01T05:57:30.553</Modified>
+      <Modified>2013-02-01T22:49:53.877</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\EventsPage.xaml">
       <PackagePath>Pages\EventsPage.xaml</PackagePath>
@@ -138,7 +138,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2013-02-01T05:49:25.043</Modified>
+      <Modified>2013-02-01T16:10:58.012</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

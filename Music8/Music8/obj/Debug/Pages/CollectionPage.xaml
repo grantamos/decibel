@@ -83,11 +83,6 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VariableSizedWrapGrid/>
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
             <GridView.ItemContainerTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>
@@ -157,11 +152,6 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VariableSizedWrapGrid/>
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
             <GridView.ItemContainerTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>
@@ -220,11 +210,6 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VariableSizedWrapGrid/>
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
             <GridView.ItemContainerTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>

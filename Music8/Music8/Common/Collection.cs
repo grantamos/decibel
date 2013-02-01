@@ -23,7 +23,8 @@ namespace Music8.Common
 
         private void songs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            CollectionChanged.Invoke(this.songs);
+            if(CollectionChanged != null)
+                CollectionChanged.Invoke(this.songs);
         }
 
         public List<GoogleMusicSong> GetAlbum(GoogleMusicSong song)
