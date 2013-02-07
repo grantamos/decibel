@@ -1,0 +1,8 @@
+﻿sjaid cookie expires exactly two months after its request time (according to debugging)
+xt cookie expires exactly one day after its request time (according to debugging)
+Auth token is two weeks  (according to deprecated docs)
+
+So once every two weeks https://accounts.google.com/ClientLogin is hit for a new AuthToken
+When the auth token is valid, we check if xt and sjaid are too. If not we hit https://play.google.com/music/listen?hl=en&u=0 for the cookies again
+
+So ClientLogin is hit once every two weeks listen is hit once a day. This will allow us to save our "session" and reduce requests a lot

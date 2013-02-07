@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Music8", "Music8\Music8.csproj", "{B4F4F8AE-3BC1-4780-A334-2679C0D931E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byteopia.Music.GoogleMusicAPI", "..\..\..\GitHub\Music8\Byteopia.Music.GoogleMusicAPI\Byteopia.Music.GoogleMusicAPI.csproj", "{645DA80F-FE08-45F8-A0EF-27C23D11E2FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byteopia.Music.GoogleMusicAPI", "Byteopia.Music.GoogleMusicAPI\Byteopia.Music.GoogleMusicAPI.csproj", "{645DA80F-FE08-45F8-A0EF-27C23D11E2FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byteopia.Helpers", "Byteopia.Helpers\Byteopia.Helpers.csproj", "{0DCCBDCD-D973-4C8B-B765-494B55090A59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byteopia.Music.Lastfm", "Byteopia.Music.Lastfm\Byteopia.Music.Lastfm.csproj", "{9ED56221-EDAC-41E8-90EF-464CCB4C8048}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,38 @@ Global
 		{645DA80F-FE08-45F8-A0EF-27C23D11E2FA}.Release|x64.Build.0 = Release|x64
 		{645DA80F-FE08-45F8-A0EF-27C23D11E2FA}.Release|x86.ActiveCfg = Release|x86
 		{645DA80F-FE08-45F8-A0EF-27C23D11E2FA}.Release|x86.Build.0 = Release|x86
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Debug|ARM.Build.0 = Debug|ARM
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Debug|x64.ActiveCfg = Debug|x64
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Debug|x64.Build.0 = Debug|x64
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Debug|x86.ActiveCfg = Debug|x86
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Debug|x86.Build.0 = Debug|x86
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Release|ARM.ActiveCfg = Release|ARM
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Release|ARM.Build.0 = Release|ARM
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Release|x64.ActiveCfg = Release|x64
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Release|x64.Build.0 = Release|x64
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Release|x86.ActiveCfg = Release|x86
+		{0DCCBDCD-D973-4C8B-B765-494B55090A59}.Release|x86.Build.0 = Release|x86
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Debug|ARM.ActiveCfg = Debug|ARM
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Debug|ARM.Build.0 = Debug|ARM
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Debug|x64.ActiveCfg = Debug|x64
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Debug|x64.Build.0 = Debug|x64
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Debug|x86.ActiveCfg = Debug|x86
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Debug|x86.Build.0 = Debug|x86
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Release|ARM.ActiveCfg = Release|ARM
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Release|ARM.Build.0 = Release|ARM
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Release|x64.ActiveCfg = Release|x64
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Release|x64.Build.0 = Release|x64
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Release|x86.ActiveCfg = Release|x86
+		{9ED56221-EDAC-41E8-90EF-464CCB4C8048}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

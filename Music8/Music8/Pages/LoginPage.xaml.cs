@@ -51,6 +51,7 @@ namespace Music8.Pages
             }
             catch (Exception exception) { }
 
+       
             if (credential == null)
             {
                 CredentialPickerOptions credPickerOptions = new CredentialPickerOptions();
