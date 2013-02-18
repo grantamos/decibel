@@ -58,7 +58,6 @@ C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Music8.pdb
 C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\resources.pri
 C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\AppxManifest.xml
 C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Music8.build.appxrecipe
-C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Microsoft.PlayerFramework.dll
 C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Microsoft.PlayerFramework.xml
 C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\GoogleMusicAPI.dll
 C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\GoogleMusicAPI.pdb
@@ -165,3 +164,6 @@ C:\Users\tmfin_000\Desktop\decibel\Music8\Music8\obj\Debug\resources.resfiles
 C:\Users\tmfin_000\Desktop\decibel\Music8\Music8\obj\Debug\pri.resfiles
 C:\Users\tmfin_000\Desktop\decibel\Music8\Music8\obj\Debug\LanguageQualifiers.txt
 C:\Users\tmfin_000\Desktop\decibel\Music8\Music8\obj\Debug\ProjectArchitectures.txt
+C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Byteopia.Helpers.dll
+C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Byteopia.Helpers.pdb
+C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Byteopia.Helpers.pri

@@ -1,6 +1,7 @@
 ﻿using Byteopia.Music.GoogleMusicAPI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
@@ -11,6 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
@@ -39,6 +41,18 @@ namespace Music8.Pages
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
             this.nowPlayingList.ItemsSource = App.songQueue.GetQueue();
+
+            App.songQueue.SongChanged += songQueue_SongChanged;
+            this.nowPlayingList.SelectedIndex = App.songQueue.currentIndex;
+            //this.nowPlayingList.ScrollIntoView(this.nowPlayingList.SelectedItem, ScrollIntoViewAlignment.Leading);
+        }
+
+        private void songQueue_SongChanged(GoogleMusicSong song, int index)
+        {
+            if (song != null && song.ArtURL != null)
+                artistBackground.Source = new BitmapImage(new Uri(song.ArtURL, UriKind.Absolute));
+
+            this.nowPlayingList.SelectedIndex = index;
         }
 
         /// <summary>
@@ -55,7 +69,7 @@ namespace Music8.Pages
         {
             GoogleMusicSong song = (sender as Button).DataContext as GoogleMusicSong;
 
-            App.songQueue.RemoveSong(song);
+            //App.songQueue.RemoveSong((nowPlayingList.ItemsSource as ObservableCollection<GoogleMusicSong>).IndexOf(song));
         }
 
         private void nowPlayingList_ItemClick_1(object sender, ItemClickEventArgs e)
@@ -65,6 +79,11 @@ namespace Music8.Pages
 
             App.songQueue.ChangeSong(listView.Items.IndexOf(song));
             App.songQueue.Play();
+        }
+
+        private void nowPlayingList_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            App.songQueue.ChangeSong(this.nowPlayingList.SelectedIndex);
         }
     }
 }

@@ -33,7 +33,6 @@ namespace Music8.Pages
             Window.Current.SizeChanged += Window_SizeChanged;
 
             NavigateContentFrame(typeof(Pages.CollectionPage));
-            DarkBackground.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
         }
@@ -99,7 +98,6 @@ namespace Music8.Pages
 
         private void nowPlayingRadioButton_Unchecked(object sender, RoutedEventArgs e)
         {
-            AnimationLibrary.AnimateOpacity(DarkBackground, 0.0, 1);
             playbackControl.Collapse();
         }
 

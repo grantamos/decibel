@@ -12,12 +12,15 @@ namespace Music8.Common
 {
     public class SongQueue
     {
-        private ObservableCollection<GoogleMusicSong> queue = new ObservableCollection<GoogleMusicSong>();
         public int currentIndex = -1;
+
+        private ObservableCollection<GoogleMusicSong> queue = new ObservableCollection<GoogleMusicSong>();
         private bool shuffle = false;
         private bool repeat = false;
         private MediaElement mediaElement;
-        private bool seeked = false;
+
+        public delegate void NotifySongChanged(GoogleMusicSong song, int index);
+        public event NotifySongChanged SongChanged;
 
         public SongQueue(MediaElement mediaElement)
         {
@@ -31,52 +34,40 @@ namespace Music8.Common
                 this.NextSong();
         }
 
-        public GoogleMusicSong GetCurrentSong()
+        public void NextSong()
         {
-            return queue.ElementAt(currentIndex);
+            ChangeSong(currentIndex + 1);
+        }
+
+        public void PreviousSong()
+        {
+            ChangeSong(currentIndex - 1);
         }
 
         public async void ChangeSong(int index)
         {
             mediaElement.Stop();
 
-            if (!repeat)
-            {
-                currentIndex = index;
-                currentIndex = mod(currentIndex, queue.Count);
-            }
-            else if (shuffle)
+            if (shuffle)
             {
                 int previousIndex = currentIndex;
-                currentIndex = new Random().Next(queue.Count);
+                index = new Random().Next(queue.Count);
 
-                if (currentIndex == previousIndex)
-                    currentIndex++;
+                if (index == previousIndex)
+                    index++;
             }
 
-            GoogleMusicSong song = GetCurrentSong();
+            index = mod(index, queue.Count);
+
+            GoogleMusicSong song = queue.ElementAt(index);
+
             mediaElement.DataContext = song;
             mediaElement.Source = new Uri(await App.googleAPI.GetStreamURL(song));
-        }
 
-        public void NextSong()
-        {
-            ChangeSong(currentIndex + 1);
+            if (SongChanged != null)
+                SongChanged.Invoke(song, index);
 
-            Play();
-        }
-
-        public void PreviousSong()
-        {
-            ChangeSong(currentIndex - 1);
-
-            Play();
-        }
-
-        public void Clear()
-        {
-            queue.Clear();
-            currentIndex = -1;
+            currentIndex = index;
         }
 
         public async Task<bool> Play()
@@ -84,6 +75,10 @@ namespace Music8.Common
             if (queue.Count > 0 && currentIndex < 0)
             {
                 NextSong();
+                return false;
+            }
+            else if (queue.Count == 0)
+            {
                 return false;
             }
             else
@@ -98,6 +93,12 @@ namespace Music8.Common
             mediaElement.Pause();
         }
 
+        public void Clear()
+        {
+            queue.Clear();
+            currentIndex = -1;
+        }
+
         public void AddSong(GoogleMusicSong song)
         {
             queue.Add(song);
@@ -105,13 +106,15 @@ namespace Music8.Common
 
         public void AddSongs(List<GoogleMusicSong> songs)
         {
-            foreach(GoogleMusicSong song in songs)
+            foreach (GoogleMusicSong song in songs)
                 queue.Add(song);
         }
 
-        public void RemoveSong(GoogleMusicSong song)
+        public void RemoveSong(int index)
         {
-            queue.Remove(song);
+            if (index == currentIndex)
+                NextSong();
+            queue.RemoveAt(index);
         }
 
         public void PlaySong(GoogleMusicSong song)
@@ -127,8 +130,6 @@ namespace Music8.Common
             {
                 currentIndex = index;
             }
-
-            Play();
         }
 
         public void PlaySongs(List<GoogleMusicSong> songs)

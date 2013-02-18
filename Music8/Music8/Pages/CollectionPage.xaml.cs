@@ -46,6 +46,7 @@ namespace Music8.Pages
             this.parent = navigationParameter as MainPage;
             //App.collection.CollectionChanged += songs_CollectionChanged;
             App.googleAPI.ChunkAdded += new API.NotifyChunkAdded(this.songs_CollectionChanged);
+            songs_CollectionChanged(App.googleAPI.Tracks);
         }
 
         public void songs_CollectionChanged(ObservableCollection<GoogleMusicSong> songs)

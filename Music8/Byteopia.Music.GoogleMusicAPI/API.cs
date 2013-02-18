@@ -113,16 +113,11 @@ namespace Byteopia.Music.GoogleMusicAPI
 
                 playlist = await client.POST<GoogleMusicPlaylist>(new Uri("https://play.google.com/music/services/loadalltracks"), content);
 
-
-               
-
                 foreach (GoogleMusicSong song in playlist.Songs)
                   Tracks.Add(song);
 
-         
                 if (String.IsNullOrEmpty(playlist.ContToken))
                     break;
-
             }
         }
 
