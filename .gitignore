@@ -41,6 +41,12 @@ local.properties
 *.user
 *.sln.docstates
 
+Music8/Music8/bin/
+Music8/Music8/obj/
+obj/
+bin/
+Music8\Music8\bin\
+Music8\Music8\obj\
 # Build results
 [Dd]ebug/
 [Rr]elease/

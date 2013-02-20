@@ -137,6 +137,7 @@ namespace Byteopia.Music.GoogleMusicAPI
         public async Task<String> POST(Uri address, HttpContent content = null)
         {
             SetAuthHeader();
+            RebuildCookieContainer();
 
             HttpResponseMessage responseMessage = await client.PostAsync(BuildGoogleRequest(address), content);
 
@@ -152,6 +153,7 @@ namespace Byteopia.Music.GoogleMusicAPI
         public async Task<HttpResponseMessage> GETResp(Uri address)
         {
             SetAuthHeader();
+            RebuildCookieContainer();
 
             HttpResponseMessage responseMessage = await client.GetAsync(BuildGoogleRequest(address));
 
@@ -170,6 +172,7 @@ namespace Byteopia.Music.GoogleMusicAPI
         public async Task<String> GET(Uri address)
         {
             SetAuthHeader();
+            RebuildCookieContainer();
 
             HttpResponseMessage responseMessage = await client.GetAsync(BuildGoogleRequest(address));
 
@@ -181,6 +184,12 @@ namespace Byteopia.Music.GoogleMusicAPI
             return await responseMessage.Content.ReadAsStringAsync();
         }
 
+        private void RebuildCookieContainer()
+        {
+            foreach (GoogleCookie gc in _cookies)
+                cookieContainer.Add(new Uri("https://play.google.com/music/play?u=0&songid=a45bc256-75fa-3025-9119-21ee49f84bff"), 
+                    new Cookie(gc.Key, gc.Value));
+        }
         /// <summary>
         /// Sets Google's auth header
         /// </summary>
