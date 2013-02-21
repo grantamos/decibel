@@ -118,7 +118,7 @@ namespace Byteopia.Music.GoogleMusicAPI
 
                 this.ChunkAdded(Tracks);
 
-                if (String.IsNullOrEmpty(playlist.ContToken))
+                if (true || String.IsNullOrEmpty(playlist.ContToken))
                     break;
             }
         }
