@@ -316,6 +316,14 @@ namespace Byteopia.Music.GoogleMusicAPI
         {
             return ID.GetHashCode();
         }
+
+        public TimeSpan DurationClean
+        {
+            get
+            {
+                return TimeSpan.FromMilliseconds(Duration);
+            }
+        }
     }
 
     [DataContract]
