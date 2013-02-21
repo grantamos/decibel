@@ -114,7 +114,6 @@
     </Compile>
     <Compile Include="Common\Flyout.cs" />
     <Compile Include="Common\LayoutAwarePage.cs" />
-    <Compile Include="Common\Library.cs" />
     <Compile Include="Common\MediaElementStateConverter.cs" />
     <Compile Include="Common\PlaybackControl.xaml.cs">
       <DependentUpon>PlaybackControl.xaml</DependentUpon>
