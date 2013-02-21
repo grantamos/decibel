@@ -116,6 +116,8 @@ namespace Byteopia.Music.GoogleMusicAPI
                 foreach (GoogleMusicSong song in playlist.Songs)
                   Tracks.Add(song);
 
+                this.ChunkAdded(Tracks);
+
                 if (String.IsNullOrEmpty(playlist.ContToken))
                     break;
             }

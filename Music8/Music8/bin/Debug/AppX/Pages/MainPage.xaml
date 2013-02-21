@@ -13,41 +13,39 @@
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/background6.jpg"/>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Rectangle x:Name="DarkBackground" Fill="Black" Opacity="0" Visibility="Collapsed" Grid.RowSpan="3"/>
-        
-        <StackPanel x:Name="NavigationHeader" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 20 0 0">
-            <StackPanel.ChildrenTransitions>
-                <TransitionCollection>
-                    <ContentThemeTransition/>
-                </TransitionCollection>
-            </StackPanel.ChildrenTransitions>
-            <RadioButton x:ConnectionId='2' x:Name="collectionRadioButton" Content="collection" GroupName="mainGroup" 
-                                                       IsChecked="True" Style="{StaticResource TextRadioButtonStyle}"
-                         FontSize="30"                                          />
-            <RadioButton x:ConnectionId='3' x:Name="eventsRadioButton" Content="events" GroupName="mainGroup" 
-                                                       Style="{StaticResource TextRadioButtonStyle}"
-                         FontSize="30"                                          />
-            <RadioButton x:ConnectionId='4' x:Name="nowPlayingRadioButton" Content="now playing" GroupName="mainGroup" 
-                                                       Style="{StaticResource TextRadioButtonStyle}"
-                         FontSize="30"                                                                                      />
-        </StackPanel>
-        <TextBox x:ConnectionId='1' x:Name="searchTextBox" Width="300" VerticalAlignment="Bottom"
-                 HorizontalAlignment="Right"
-                 Margin="0,20,120,0"
-                                                   
-                                                     
-                 Text="Search..."
-                                                        
-                 BorderThickness="1"/>
-        <Image x:Name="Logo" Source="/Assets/Logo.png" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="30" Margin="10,20,40,0"/>
-        <Frame x:Name="ContentFrame" Grid.Row="1" Grid.RowSpan="2"/>
-        <common:PlaybackControl x:Name="playbackControl" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="2"/>
+        </Grid.Background>        
+        <Frame x:Name="ContentFrame"/>
+
+        <Grid Height="60" VerticalAlignment="Top">
+            <StackPanel x:Name="NavigationHeader" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 20 0 0">
+                <StackPanel.ChildrenTransitions>
+                    <TransitionCollection>
+                        <ContentThemeTransition/>
+                    </TransitionCollection>
+                </StackPanel.ChildrenTransitions>
+                <RadioButton x:ConnectionId='2' x:Name="collectionRadioButton" Content="collection" GroupName="mainGroup" 
+                                                           IsChecked="True" Style="{StaticResource TextRadioButtonStyle}"
+                             FontSize="30"                                          />
+                <RadioButton x:ConnectionId='3' x:Name="eventsRadioButton" Content="events" GroupName="mainGroup" 
+                                                           Style="{StaticResource TextRadioButtonStyle}"
+                             FontSize="30"                                          />
+                <RadioButton x:ConnectionId='4' x:Name="nowPlayingRadioButton" Content="now playing" GroupName="mainGroup" 
+                                                           Style="{StaticResource TextRadioButtonStyle}"
+                             FontSize="30"                                                                                      />
+            </StackPanel>
+            <TextBox x:ConnectionId='1' x:Name="searchTextBox" Width="300" VerticalAlignment="Bottom"
+                     HorizontalAlignment="Right"
+                     Margin="0,20,60,0"
+                                                       
+                                                         
+                     Text="Search..."
+                                                            
+                     BorderThickness="1"/>
+            <Image x:Name="Logo" Source="/Assets/Logo.png" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="30" Margin="15,20,15,0"/>
+        </Grid>
+        <common:PlaybackControl Height="100" x:Name="playbackControl"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"/>
         
         <VisualStateManager.VisualStateGroups>
             <!-- Visual states reflect the application's view state -->
