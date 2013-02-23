@@ -92,6 +92,12 @@ namespace Byteopia.Music.GoogleMusicAPI
             return true;
         }
 
+        public async Task<int> GetTrackCount()
+        {
+            GoogleMusicStatus status = await client.GET<GoogleMusicStatus>(new Uri("https://play.google.com/music/services/getstatus"));
+            return status.TotalTracks;
+        }
+
         /// <summary>
         /// Gets all songs in music library
         /// </summary>

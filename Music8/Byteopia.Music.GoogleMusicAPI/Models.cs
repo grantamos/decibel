@@ -352,4 +352,14 @@ namespace Byteopia.Music.GoogleMusicAPI
         [DataMember(Name = "results")]
         public GoogleMusicSearchResults Results { get; set; }
     }
+
+    [DataContract]
+    public class GoogleMusicStatus
+    {
+        [DataMember(Name = "totalTracks")]
+        public int TotalTracks { get; set; }
+
+        [DataMember(Name = "availableTracks")]
+        public int AvailableTracks { get; set; }
+    }
 }
