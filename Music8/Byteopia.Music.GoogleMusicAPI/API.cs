@@ -103,13 +103,17 @@ namespace Byteopia.Music.GoogleMusicAPI
         /// </summary>
         /// <param name="continuationToken">Tells Google's servers where to pick up</param>
         /// <returns></returns>
-        public async void GetAllSongs()
+        public async void GetAllSongs(int pagesToFetch = -1)
         {
             GoogleMusicPlaylist playlist = null;
+            int pagesFetched = 0;
 
             // Loop until no more token to continue from
             while (true)
             {
+                if (pagesFetched == pagesToFetch)
+                    break;
+
                 String jsonString = "{\"continuationToken\":\"" + ((playlist == null) ? "" : playlist.ContToken) + "\"}";
                
                 HttpContent content = new FormUrlEncodedContent(new[]
@@ -124,8 +128,10 @@ namespace Byteopia.Music.GoogleMusicAPI
 
                 this.ChunkAdded(Tracks);
 
-                if (true || String.IsNullOrEmpty(playlist.ContToken))
+                if (String.IsNullOrEmpty(playlist.ContToken))
                     break;
+
+                pagesFetched++;
             }
         }
 
