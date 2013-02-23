@@ -187,9 +187,10 @@ namespace Byteopia.Music.GoogleMusicAPI
         private void RebuildCookieContainer()
         {
             foreach (GoogleCookie gc in _cookies)
-                cookieContainer.Add(new Uri("https://play.google.com/music/play?u=0&songid=a45bc256-75fa-3025-9119-21ee49f84bff"), 
+                cookieContainer.Add(new Uri("https://play.google.com/music/play"), 
                     new Cookie(gc.Key, gc.Value));
         }
+
         /// <summary>
         /// Sets Google's auth header
         /// </summary>
