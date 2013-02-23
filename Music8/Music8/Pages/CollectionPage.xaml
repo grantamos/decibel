@@ -67,17 +67,13 @@
                         </StackPanel>
                         <Grid Grid.Row="1">
                             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                                <TextBlock Text="{Binding AlbumArtist}"
+                                <TextBlock Text="{Binding Artist}"
                                            HorizontalAlignment="Center"
                                            Foreground="{StaticResource ListViewItemOverlayBackgroundThemeBrush}"
                                            Style="{StaticResource SubtitleTextStyle}"
                                            Margin="8,0,0,0" MaxHeight="40"
                                            FontSize="18" TextAlignment="Center"/>
-                                <TextBlock Text="{Binding AlbumArtist}"
-                                           HorizontalAlignment="Center"
-                                           Foreground="{StaticResource ListViewItemOverlayBackgroundThemeBrush}"
-                                           Style="{StaticResource BodyTextStyle}"
-                                           FontSize="14" TextAlignment="Center"/>
+                    
                             </StackPanel>
                         </Grid>
                     </Grid>

@@ -46,12 +46,14 @@ namespace Music8.Pages
             this.parent = navigationParameter as MainPage;
             //App.collection.CollectionChanged += songs_CollectionChanged;
             App.googleAPI.ChunkAdded += new API.NotifyChunkAdded(this.songs_CollectionChanged);
-            songs_CollectionChanged(App.googleAPI.Tracks);
+            //songs_CollectionChanged(App.googleAPI.Tracks);
         }
 
         public void songs_CollectionChanged(ObservableCollection<GoogleMusicSong> songs)
         {
-            artistsGridView.ItemsSource = Filter(App.collection.GetArtists());
+           // artistsGridView.Items.Clear();
+
+            artistsGridView.ItemsSource = App.collection.GetArtists();// Filter(App.collection.GetArtists());
 
             albumsGridView.ItemsSource = Filter(App.collection.GetAlbums());
 

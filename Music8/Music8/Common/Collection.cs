@@ -34,15 +34,16 @@ namespace Music8.Common
 
         public List<GoogleMusicSong> GetArtist(GoogleMusicSong song)
         {
-            return songs.Where(s => s.Artist == song.Artist).OrderBy(s => s.AlbumArtist).ThenBy(s => s.Track).ToList();
+           return songs.Where(s => s.Artist == song.Artist).OrderBy(s => s.AlbumArtist).ThenBy(s => s.Track).ToList();
         }
 
         public List<GoogleMusicSong> GetArtists()
         {
-            return songs.GroupBy(song => song.Artist)
+            return songs.OrderBy(x => x.ArtistNorm).Distinct(new DistinctItemComparers.DistinctItemComparerArtist()).ToList();
+            /*return songs.GroupBy(song => song.Artist)
                 .Select(g => g.First())
                 .OrderBy(g => g.AlbumArtist)
-                .ToList();
+                .ToList();*/
         }
 
         public List<GoogleMusicSong> GetAlbums()

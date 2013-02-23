@@ -112,6 +112,7 @@
     <Compile Include="Common\DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\DistinctItemComparers.cs" />
     <Compile Include="Common\Flyout.cs" />
     <Compile Include="Common\LayoutAwarePage.cs" />
     <Compile Include="Common\MediaElementStateConverter.cs" />
