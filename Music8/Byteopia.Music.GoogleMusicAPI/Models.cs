@@ -205,6 +205,27 @@ namespace Byteopia.Music.GoogleMusicAPI
         [DataMember(Name = "totalTracks")]
         public int TotalTracks { get; set; }
 
+        public String AlbumDetailString
+        {
+            get
+            {
+                if (TotalTracks != 0 && !Genre.Equals(String.Empty))
+                {
+                    return String.Format("{0}, {1} tracks", Genre, TotalTracks);
+                }
+                else
+                {
+                    String r = "";
+                    if (Genre != "")
+                        r += Genre;
+                    if (TotalTracks != 0 && Genre != "")
+                        r += ", " + TotalTracks + " tracks";
+                    if (TotalTracks != 0 && Genre == "")
+                        return TotalTracks + " tracks";
+                    return r;
+                }
+            }
+        }
         [DataMember(Name = "name")]
         public string Name { get; set; }
 

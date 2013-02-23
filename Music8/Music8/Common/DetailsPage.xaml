@@ -17,65 +17,94 @@
         </Grid.Transitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="1"></ColumnDefinition>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Background="Gray">
-            <TextBlock Text="{Binding AlbumArtist}" Style="{StaticResource HeaderTextStyle}" Padding="10"/>
-            <ListView x:Name="albumListView" HorizontalAlignment="Center" Padding="10">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Center">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Grid.RowSpan="2">
-                                <Image Source="{Binding ArtURL}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-                            </Border>
-                            <Grid Grid.Row="1">
-                                <Grid.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#00000000" Offset="0"/>
-                                        <GradientStop Color="#FF000000" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Grid.Background>
-                                <TextBlock Text="{Binding Album}"
-                                       VerticalAlignment="Bottom"
-                                       Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}"
-                                       Style="{StaticResource TitleTextStyle}"
-                                       Margin="8,0,0,8"
-                                       FontSize="12"/>
-                            </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
-        <StackPanel Grid.Column="1" Background="LightGray">
-            <TextBlock Text="{Binding Album}" Style="{StaticResource SubheaderTextStyle}" Padding="20, 20, 0, 0"/>
-            <TextBlock Style="{StaticResource TitleTextStyle}" Padding="20, 10, 0, 0">
-                <Run Text="{Binding Genre}"/>
-                <Run Text=", "/>
-                <Run Text="{Binding TotalTracks}"/>
-                <Run Text=" Tracks"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Background="LightGray" Grid.ColumnSpan="2" Height="150">
+            <TextBlock Text="{Binding Artist}" Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" Margin="4, 10, 0, 0">
+
+
             </TextBlock>
-            <ListView x:Name="songListView" HorizontalAlignment="Center" Padding="10">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Track}" Style="{StaticResource SubheaderTextStyle}" Padding="10"/>
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Text="{Binding Title}" Style="{StaticResource SubheaderTextStyle}" Padding="10, 10, 0, 0"/>
-                                <TextBlock Text="{Binding DurationClean}" Padding="10"/>
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+
+            <TextBlock Text="{Binding Album}" Style="{StaticResource SubheaderTextStyle}" VerticalAlignment="Center" Margin="4, 10, 0, 0">
+
+
+            </TextBlock>
+
+            <TextBlock Text="{Binding AlbumDetailString}" Style="{StaticResource SubtitleTextStyle}" VerticalAlignment="Center" Margin="4, 10, 0, 0">
+
+
+            </TextBlock>
         </StackPanel>
+        
+        
+        <ListView x:Name="albumListView" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Background="LightGray" Padding="0" Margin="0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="0,0,0,-8" />
+                </Style>
+
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="200">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200"></RowDefinition>
+                            <RowDefinition Height="25"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Column="0" Grid.Row="0" Source="{Binding ArtURL}" Stretch="UniformToFill" Width="200" Height="200" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Album}"
+                                Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}"
+                                FontSize="12" HorizontalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+     
+        <Border  Background="LightGray" Grid.Column="1" Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Rectangle Width="1">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="#00000000" />
+                            <GradientStop Offset="0.2" Color="#50909090" />
+                            <GradientStop Offset="0.8" Color="#50909090" />
+                            <GradientStop Offset="1" Color="#00000000" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </StackPanel>
+        </Border>
+     
+        
+        <ListView x:Name="songListView" HorizontalAlignment="Center" Padding="10" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Background="LightGray">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Track}" Style="{StaticResource SubheaderTextStyle}" Padding="10"/>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="{Binding Title}" Style="{StaticResource SubheaderTextStyle}" Padding="10, 10, 0, 0"/>
+                            <TextBlock Text="{Binding DurationClean}" Padding="10"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
     </Grid>
 </UserControl>
