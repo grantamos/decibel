@@ -109,7 +109,7 @@
     <Compile Include="Common\BooleanNegationConverter.cs" />
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\Collection.cs" />
-    <Compile Include="Common\DetailsPage.xaml.cs">
+    <Compile Include="Pages\DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\DistinctItemComparers.cs" />
@@ -150,6 +150,7 @@
     <Content Include="Assets\albumStack.png" />
     <Content Include="Assets\albumStackShadowed.png" />
     <Content Include="Assets\background6.jpg" />
+    <Content Include="Assets\defaultArtist.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\shadow.png" />
     <Content Include="Assets\SmallLogo.png" />
@@ -168,7 +169,7 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Common\DetailsPage.xaml">
+    <Page Include="Pages\DetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,6 +212,10 @@
     <ProjectReference Include="..\Byteopia.Music.GoogleMusicAPI\Byteopia.Music.GoogleMusicAPI.csproj">
       <Project>{645da80f-fe08-45f8-a0ef-27c23d11e2fa}</Project>
       <Name>Byteopia.Music.GoogleMusicAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Byteopia.Music.Lastfm\Byteopia.Music.Lastfm.csproj">
+      <Project>{9ed56221-edac-41e8-90ef-464ccb4c8048}</Project>
+      <Name>Byteopia.Music.Lastfm</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">

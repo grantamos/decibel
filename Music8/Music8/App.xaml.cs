@@ -25,6 +25,8 @@ namespace Music8
     sealed partial class App : Application
     {
         public static Byteopia.Music.GoogleMusicAPI.API googleAPI = new Byteopia.Music.GoogleMusicAPI.API();
+        public static Byteopia.Music.Lastfm.API lastAPI = new Byteopia.Music.Lastfm.API();
+
         public static SongQueue songQueue;
         public static Collection collection;
 

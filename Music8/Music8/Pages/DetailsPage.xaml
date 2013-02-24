@@ -16,39 +16,52 @@
             </TransitionCollection>
         </Grid.Transitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="1"></ColumnDefinition>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="110"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Background="LightGray" Grid.ColumnSpan="2" Height="150">
-            <TextBlock Text="{Binding Artist}" Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" Margin="4, 10, 0, 0">
+        <StackPanel Orientation="Vertical" Background="LightGray" Grid.Row="0" Grid.Column="1">
+            <StackPanel Orientation="Horizontal"  Margin="30, 15, 0, 0">
+                <Border BorderThickness="1" BorderBrush="Gray" Width="50" Height="50">
+                        <Image Width="50" Height="50" Source="/Assets/defaultArtist.png" Name="ArtistImage" Stretch="UniformToFill">
+                    
+                        </Image>
+                </Border>
+                <TextBlock Text="{Binding Artist}" Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" Padding="10"/>
+               
+            </StackPanel>
 
+            <TextBlock Text="" Style="{StaticResource SubheaderTextStyle}" VerticalAlignment="Center"  Margin="30, 0, 0, 0" Name="AristDetails" ></TextBlock>
 
-            </TextBlock>
+        </StackPanel>
 
-            <TextBlock Text="{Binding Album}" Style="{StaticResource SubheaderTextStyle}" VerticalAlignment="Center" Margin="4, 10, 0, 0">
-
-
-            </TextBlock>
-
-            <TextBlock Text="{Binding AlbumDetailString}" Style="{StaticResource SubtitleTextStyle}" VerticalAlignment="Center" Margin="4, 10, 0, 0">
-
-
-            </TextBlock>
+        <StackPanel Background="LightGray" Grid.Row="1" Grid.Column="1" Orientation="Vertical" Width="Auto">
+            <TextBlock Text="" Style="{StaticResource CaptionTextStyle}" VerticalAlignment="Center" Margin="30, 30, 0, 0" Name="AlbumTextBlock" />
+            <Rectangle Height="1" Margin="30, 10, 30, 0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="#FF808080" />
+                        <GradientStop Offset="0.2" Color="#FF808080" />
+                        <GradientStop Offset="0.8" Color="#FF808080" />
+                        <GradientStop Offset="1" Color="#FF808080" />
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
         </StackPanel>
         
-        
-        <ListView x:Name="albumListView" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Background="LightGray" Padding="0" Margin="0">
+        <ListView x:Name="albumListView" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" 
+                  Background="Gray" Padding="0" Margin="0">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
                     <Setter Property="VerticalContentAlignment" Value="Center" />
-                    <Setter Property="Margin" Value="0,0,0,-8" />
+                    <Setter Property="Margin" Value="0,15,0,-8" />
                 </Style>
 
             </ListView.ItemContainerStyle>
@@ -71,27 +84,12 @@
             </ListView.ItemTemplate>
         </ListView>
 
-     
-        <Border  Background="LightGray" Grid.Column="1" Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-                <Rectangle Width="1">
-                    <Rectangle.Fill>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Offset="0" Color="#00000000" />
-                            <GradientStop Offset="0.2" Color="#50909090" />
-                            <GradientStop Offset="0.8" Color="#50909090" />
-                            <GradientStop Offset="1" Color="#00000000" />
-                        </LinearGradientBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
-            </StackPanel>
-        </Border>
-     
-        
-        <ListView x:Name="songListView" HorizontalAlignment="Center" Padding="10" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Background="LightGray">
+ 
+        <ListView x:Name="songListView" HorizontalAlignment="Center" Padding="18, 0, 0, 0" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Column="2" Grid.Row="2" 
+                  Background="LightGray">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Center">
+                    <Grid HorizontalAlignment="Center" Width="Auto">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
