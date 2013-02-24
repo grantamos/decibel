@@ -9,6 +9,15 @@ namespace Byteopia.Music.Lastfm
 {
     public class Models
     {
+        public enum ImageSize : int
+        {
+            small = 0,
+            medium = 1,
+            large = 2,
+            extrallarge = 3,
+            mega=4
+        };
+
         [DataContract]
         public class AlbumImages
         {

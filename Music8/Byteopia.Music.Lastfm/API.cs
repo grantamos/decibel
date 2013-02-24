@@ -42,5 +42,20 @@ namespace Byteopia.Music.Lastfm
         {
             return await GET<Byteopia.Music.Lastfm.Models.Artist>(new Uri(String.Format(API.ARTIST_BASE, artist, API_KEY)));
         }
+
+        public async Task<String> GetArtistImage(String artist, Models.ImageSize size)
+        {
+            Models.Artist art = await GetArtistInfo(artist);
+
+            if (art != null)
+            {
+                if( (int) size <= art.Data.Images.Count )
+                {
+                    return art.Data.Images[(int)size].URL;
+                }
+            }
+
+            return String.Empty;
+        }
     }
 }
