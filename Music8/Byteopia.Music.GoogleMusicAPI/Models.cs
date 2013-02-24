@@ -157,6 +157,7 @@ namespace Byteopia.Music.GoogleMusicAPI
     {
         string albumart;
         string albumArtist;
+        string album;
 
         [DataMember(Name = "genre")]
         public string Genre { get; set; }
@@ -171,7 +172,15 @@ namespace Byteopia.Music.GoogleMusicAPI
         public string ArtistNorm { get; set; }
 
         [DataMember(Name = "album")]
-        public string Album { get; set; }
+        public string Album
+        {
+            get { return album; }
+            set
+            {
+                NotifyPropertyChanged("Album");
+                album = value;
+            }
+        }
 
         [DataMember(Name = "lastPlayed")]
         public double LastPlayed { get; set; }
