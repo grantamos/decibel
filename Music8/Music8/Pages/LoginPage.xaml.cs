@@ -88,7 +88,7 @@ namespace Music8.Pages
                 }
 
                 App.googleAPI.GetUserPlaylists();
-                App.googleAPI.GetAllSongs(1);
+                App.googleAPI.GetAllSongs();
 
                 if (!this.Frame.Navigate(typeof(Pages.MainPage)))
                 {
