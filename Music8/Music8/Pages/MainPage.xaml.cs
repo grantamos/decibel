@@ -130,9 +130,9 @@ namespace Music8.Pages
         public void showDetailFlyout(GoogleMusicSong song)
         {
             Flyout flyout = new Flyout();
-            flyout.FlyoutWidth = (int) Window.Current.Bounds.Width / 2;
+            flyout.FlyoutWidth =  (int)(Window.Current.Bounds.Width * .6);
             flyout.FlyoutHeight = (int)(Window.Current.Bounds.Height * .8);
-            flyout.FlyoutLeft = (int)Window.Current.Bounds.Width / 4;
+            flyout.FlyoutLeft = (int)(Window.Current.Bounds.Width * .2);
             flyout.FlyoutTop = (int)(Window.Current.Bounds.Height / 10);
             flyout.ShowFlyout(new DetailsPage(song));
         }
