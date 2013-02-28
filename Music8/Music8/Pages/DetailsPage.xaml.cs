@@ -53,15 +53,17 @@ namespace Music8.Common
             GetArtistImage();
 
             this.AristDetails.Text = String.Format("{0} albums, {1} songs", artistAlbums.Count, artistAlbums.Sum(alb => alb.TotalTracks));
+            this.ArtistGenere.Text = SelectedAlbum.Genre;
         }
 
         private async void GetArtistImage()
         {
-            String path = await App.lastAPI.GetArtistImage(selectedAlbum.Artist, Byteopia.Music.Lastfm.Models.ImageSize.extrallarge);
+            String path = await App.lastAPI.GetArtistImage(selectedAlbum.Artist, Byteopia.Music.Lastfm.Models.ImageSize.mega);
             if (!path.Equals(String.Empty))
             {
                 BitmapImage newImage = new BitmapImage();
                 newImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                
                 newImage.UriSource = new Uri(path);
 
                 ArtistImage.Source = newImage;

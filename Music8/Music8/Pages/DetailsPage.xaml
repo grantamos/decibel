@@ -9,7 +9,7 @@
     d:DesignHeight="768"
     d:DesignWidth="512">
     
-    <Grid>
+    <Grid Background="Transparent">
         <Grid.Transitions>
             <TransitionCollection>
                 <PopupThemeTransition/>
@@ -20,30 +20,24 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="110"></RowDefinition>
+            <RowDefinition Height="250"></RowDefinition>
             <RowDefinition Height="65"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         
 
-        <StackPanel Orientation="Vertical" Background="LightGray" Grid.Row="0" Grid.Column="1">
-            <StackPanel Orientation="Horizontal"  Margin="30, 15, 0, 0">
-                <Border BorderThickness="1" BorderBrush="Gray" Width="50" Height="50">
-                        <Image Width="50" Height="50" Source="/Assets/defaultArtist.png" Name="ArtistImage" Stretch="UniformToFill">
-                    
-                        </Image>
-                </Border>
+        <StackPanel Orientation="Vertical" Background="LightGray" Grid.Row="0" Grid.Column="1" >    
+            <StackPanel Orientation="Horizontal"  Margin="18, 15, 0, 0">
                 <TextBlock Text="{Binding Artist}" Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" Padding="10"/>
-               
             </StackPanel>
 
-            <TextBlock Text="" Style="{StaticResource SubheaderTextStyle}" VerticalAlignment="Center"  Margin="30, 0, 0, 0" Name="AristDetails" ></TextBlock>
-
+            <TextBlock Text="" Style="{StaticResource SubheaderTextStyle}" VerticalAlignment="Center" Padding="10" Margin="15, 0, 0, 0" Name="AristDetails" ></TextBlock>
+            <TextBlock Text="" Style="{StaticResource SubheaderTextStyle}" VerticalAlignment="Center" Padding="10" Margin="15, 0, 0, 0" Name="ArtistGenere" ></TextBlock>
         </StackPanel>
 
         <StackPanel Background="LightGray" Grid.Row="1" Grid.Column="1" Orientation="Vertical" Width="Auto">
-            <TextBlock Text="" Style="{StaticResource CaptionTextStyle}" VerticalAlignment="Center" Margin="30, 30, 0, 0" Name="AlbumTextBlock" />
-            <Rectangle Height="1" Margin="30, 10, 30, 0">
+            <TextBlock Text="" Style="{StaticResource CaptionTextStyle}" VerticalAlignment="Center" Margin="30, 5, 0, 0" Name="AlbumTextBlock" />
+            <Rectangle Height="1" Margin="30, 5, 30, -15">
                 <Rectangle.Fill>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Offset="0" Color="#FF808080" />
@@ -54,9 +48,14 @@
                 </Rectangle.Fill>
             </Rectangle>
         </StackPanel>
+
+        <Border   BorderBrush="Gray" BorderThickness="1" Background="Transparent" Grid.Row="0" Grid.Column="2" Margin="0, 30, 30, 0" HorizontalAlignment="Right" Width="200" Height="200" >
+        <Image Name="ArtistImage" Source="http://lh5.googleusercontent.com/VGXhs7J5hRrSP7UzZE0NW8ZHfHIZLul1M9hle1S8jwFgI4eE2FoiXlAJDWKPuQ=s130-c-e100" Width="200" Height="200" 
+               Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="0, 0, 0, 0" Stretch="UniformToFill"></Image>
+        </Border>
         
         <ListView x:Name="albumListView" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" 
-                  Background="Gray" Padding="0" Margin="0">
+                  Background="Gray" Padding="0, 0, 0, 0" Margin="0">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -75,10 +74,16 @@
                             <RowDefinition Height="200"></RowDefinition>
                             <RowDefinition Height="25"></RowDefinition>
                         </Grid.RowDefinitions>
+
+                        <Rectangle Grid.Column="0" Grid.Row="0" Width="225" Height="225" Margin="1,1,0,0" Stroke="#99000000" StrokeThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <Rectangle Grid.Column="0" Grid.Row="0" Width="225" Height="225" Margin="2,2,0,0" Stroke="#4C000000" StrokeThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <Rectangle Grid.Column="0" Grid.Row="0" Width="225" Height="225" Margin="3,3,0,0" Stroke="#19000000" StrokeThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
                         <Image Grid.Column="0" Grid.Row="0" Source="{Binding ArtURL}" Stretch="UniformToFill" Width="200" Height="200" HorizontalAlignment="Center"/>
                         <TextBlock Grid.Row="1" Text="{Binding Album}"
                                 Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}"
                                 FontSize="12" HorizontalAlignment="Center"/>
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -101,11 +106,10 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-
-                        <TextBlock Grid.Column="0" Text="{Binding Track}" Style="{StaticResource SubheaderTextStyle}" Padding="10"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Track}" Style="{StaticResource SubheaderTextStyle}" Padding="10, 0, 0, 0"/>
 
                         <StackPanel  HorizontalAlignment="Left" Grid.Column="1">
-                            <TextBlock Text="{Binding Title}" Style="{StaticResource SubheaderTextStyle}" Padding="10, 10, 0, 0"/>
+                            <TextBlock Text="{Binding Title}" Style="{StaticResource SubheaderTextStyle}" Padding="10, 0, 0, 0"/>
                             <TextBlock Text="{Binding DurationClean}" Padding="10"/>
                         </StackPanel>
 
