@@ -87,18 +87,34 @@
  
         <ListView x:Name="songListView" HorizontalAlignment="Center" Padding="18, 0, 0, 0" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Column="2" Grid.Row="2" 
                   Background="LightGray">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Center" Width="Auto">
+                    <Grid Width="Auto" HorizontalAlignment="Stretch">
+                       
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
+
+
                         <TextBlock Grid.Column="0" Text="{Binding Track}" Style="{StaticResource SubheaderTextStyle}" Padding="10"/>
-                        <StackPanel Grid.Column="1">
+
+                        <StackPanel  HorizontalAlignment="Left" Grid.Column="1">
                             <TextBlock Text="{Binding Title}" Style="{StaticResource SubheaderTextStyle}" Padding="10, 10, 0, 0"/>
                             <TextBlock Text="{Binding DurationClean}" Padding="10"/>
                         </StackPanel>
+
+                        
+                        <StackPanel  HorizontalAlignment="Right" Grid.Column="1" Orientation="Horizontal" >
+                            <Button Content="&#xE102;" Style="{StaticResource CustomButtonStyle}"/>
+                            <Button Content="&#xE109;" Style="{StaticResource CustomButtonStyle}"/>    
+                        </StackPanel>
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
