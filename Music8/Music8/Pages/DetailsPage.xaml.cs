@@ -22,6 +22,8 @@ namespace Music8.Common
     {
         GoogleMusicSong selectedAlbum = null;
 
+        List<GoogleMusicSong> artistSongs;
+
         public GoogleMusicSong SelectedAlbum
         {
             get { return selectedAlbum; }
@@ -36,6 +38,8 @@ namespace Music8.Common
 
             List<GoogleMusicSong> artistAlbums = App.googleAPI.Tracks.Where(c => c.Artist == selectedSong.Artist)
                 .OrderBy(c => c.Album).Distinct(new DistinctItemComparers.DistinctItemComparerAlbum()).ToList();
+
+            artistSongs = App.googleAPI.Tracks.Where(song => song.AlbumArtist == selectedSong.AlbumArtist).ToList();
 
             albumListView.ItemsSource = artistAlbums;
 
@@ -52,7 +56,8 @@ namespace Music8.Common
 
             GetArtistImage();
 
-            this.AristDetails.Text = String.Format("{0} albums, {1} songs", artistAlbums.Count, artistAlbums.Sum(alb => alb.TotalTracks));
+            this.AristDetails.Text = String.Format("{0} albums, {1} songs", artistAlbums.Count, artistSongs.Count());
+
             this.ArtistGenere.Text = SelectedAlbum.Genre;
         }
 
@@ -74,10 +79,10 @@ namespace Music8.Common
         {
             if (album != null)
             {
-                songListView.ItemsSource = App.googleAPI.Tracks.Where(song => song.AlbumArtist == album.AlbumArtist && song.AlbumNorm == album.AlbumNorm).OrderBy(song => song.Track);
+                songListView.ItemsSource = artistSongs.Where(song => song.AlbumNorm == album.AlbumNorm).OrderBy(song => song.Track);
                 selectedAlbum = album;
                 this.DataContext = album;
-                this.AlbumTextBlock.Text = String.Format("{0} songs in \"{1}\"", selectedAlbum.TotalTracks, selectedAlbum.Album);
+                this.AlbumTextBlock.Text = String.Format("{0} songs in \"{1}\"", songListView.Items.Count, selectedAlbum.Album);
             }
         }
 
