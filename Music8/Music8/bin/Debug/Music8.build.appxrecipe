@@ -43,6 +43,9 @@
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\Assets\albumStackShadowed.png">
       <PackagePath>Assets\albumStackShadowed.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\Assets\highlight.png">
+      <PackagePath>Assets\highlight.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\Assets\Logo.png">
       <PackagePath>Assets\Logo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
@@ -71,6 +74,9 @@
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\Password.txt">
       <PackagePath>Password.txt</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\To-Do.txt">
+      <PackagePath>To-Do.txt</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Byteopia.Music.GoogleMusicAPI\notes.txt">
       <PackagePath>GoogleMusicAPI\notes.txt</PackagePath>
     </AppxPackagedFile>
@@ -88,6 +94,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Common\StandardStyles.xaml">
       <PackagePath>Common\StandardStyles.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\ArtistDetailPage.xaml">
+      <PackagePath>Pages\ArtistDetailPage.xaml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\CollectionPage.xaml">
       <PackagePath>Pages\CollectionPage.xaml</PackagePath>

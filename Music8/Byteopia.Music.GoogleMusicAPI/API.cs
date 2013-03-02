@@ -333,7 +333,7 @@ namespace Byteopia.Music.GoogleMusicAPI
 
         public bool NeedsAuth()
         {
-            return client.AuthroizationToken.Equals(String.Empty);
+            return client.AuthorizationToken.Equals(String.Empty);
         }
 
         public async void DeleteFile()
@@ -373,7 +373,7 @@ namespace Byteopia.Music.GoogleMusicAPI
             }
 
             this.Client = new GoogleHTTP();
-            this.Client.AuthroizationToken = tmp.Client.AuthroizationToken;
+            this.Client.AuthorizationToken = tmp.Client.AuthorizationToken;
             this.Client.Cookies = tmp.Client.Cookies;
             this.User = tmp.User;
             this.Pass = tmp.Pass;

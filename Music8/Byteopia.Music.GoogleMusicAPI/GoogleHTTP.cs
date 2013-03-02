@@ -31,11 +31,11 @@ namespace Byteopia.Music.GoogleMusicAPI
         /// </summary>
         ///
         [DataMember(Name="AuthToken")]
-        private String authroizationToken;
-        public System.String AuthroizationToken
+        private String authorizationToken;
+        public System.String AuthorizationToken
         {
-            get { return authroizationToken; }
-            set { authroizationToken = value; }
+            get { return authorizationToken; }
+            set { authorizationToken = value; }
         }
 
         [DataMember(Name = "AuthTokenIssueDate")]
@@ -76,7 +76,7 @@ namespace Byteopia.Music.GoogleMusicAPI
 
         public GoogleHTTP()
         {
-            authroizationToken = String.Empty;
+            authorizationToken = String.Empty;
 
             cookieContainer = new CookieContainer();
 
@@ -100,7 +100,7 @@ namespace Byteopia.Music.GoogleMusicAPI
             string CountTemplate = @"Auth=(?<AUTH>(.*?))$";
             Regex CountRegex = new Regex(CountTemplate, RegexOptions.IgnoreCase);
             string auth = CountRegex.Match(loginData).Groups["AUTH"].ToString();
-            authroizationToken = auth;
+            authorizationToken = auth;
 
             this.AuthTokenIssueDate = DateTime.Now;
         }
@@ -186,8 +186,8 @@ namespace Byteopia.Music.GoogleMusicAPI
         /// </summary>
         private void SetAuthHeader()
         {
-            if (!authroizationToken.Equals(String.Empty))
-                client.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse(String.Format("GoogleLogin auth={0}", authroizationToken));
+            if (!authorizationToken.Equals(String.Empty))
+                client.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse(String.Format("GoogleLogin auth={0}", authorizationToken));
         }
 
         public bool CheckForUpdatedAuth(HttpResponseMessage responseMessage)
@@ -198,7 +198,7 @@ namespace Byteopia.Music.GoogleMusicAPI
                 {
                     foreach (var v in header.Value)
                     {
-                        authroizationToken = v;
+                        authorizationToken = v;
                         return true;
                     }
                 }

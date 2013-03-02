@@ -47,6 +47,18 @@ namespace Music8.Pages
             //App.collection.CollectionChanged += songs_CollectionChanged;
             App.googleAPI.ChunkAdded += new API.NotifyChunkAdded(this.songs_CollectionChanged);
             songs_CollectionChanged(App.googleAPI.Tracks);
+
+            App.googleAPI.Tracks.CollectionChanged += Tracks_CollectionChanged;
+        }
+
+        //TO DO - Different Solution
+        void Tracks_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            artistsGridView.ItemsSource = Filter(App.collection.GetArtists());
+
+            albumsGridView.ItemsSource = Filter(App.collection.GetAlbums());
+
+            songsGridView.ItemsSource = Filter(App.collection.GetSongs());
         }
 
         public void songs_CollectionChanged(ObservableCollection<GoogleMusicSong> songs)
@@ -112,7 +124,8 @@ namespace Music8.Pages
 
         private void artistsGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.parent.showDetailFlyout(e.ClickedItem as GoogleMusicSong);
+            //this.parent.showDetailFlyout(e.ClickedItem as GoogleMusicSong);
+            this.parent.NavigateContentFrame(typeof(ArtistDetailPage), e.ClickedItem);
         }
 
         private void Play_Artist(object sender, RoutedEventArgs e)

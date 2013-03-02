@@ -1,4 +1,5 @@
 ﻿using Byteopia.Music.GoogleMusicAPI;
+using Music8.Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,15 +41,15 @@ namespace Music8.Pages
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            this.nowPlayingList.ItemsSource = App.songQueue.GetQueue();
+            this.nowPlayingList.SetBinding(ListView.ItemsSourceProperty, new Binding() { Source = App.songQueue.GetQueue() });
 
             App.songQueue.SongChanged += songQueue_SongChanged;
             this.nowPlayingList.SelectedIndex = App.songQueue.currentIndex;
-            //this.nowPlayingList.ScrollIntoView(this.nowPlayingList.SelectedItem, ScrollIntoViewAlignment.Leading);
         }
 
-        private void songQueue_SongChanged(GoogleMusicSong song, int index)
+        private void songQueue_SongChanged(GoogleMusicSongInstance songInstance, int index)
         {
+            GoogleMusicSong song = songInstance.song;
             if (song != null && song.ArtURL != null)
                 artistBackground.Source = new BitmapImage(new Uri(song.ArtURL, UriKind.Absolute));
 
@@ -67,23 +68,19 @@ namespace Music8.Pages
 
         private void Remove_Song(object sender, RoutedEventArgs e)
         {
-            GoogleMusicSong song = (sender as Button).DataContext as GoogleMusicSong;
+            GoogleMusicSongInstance song = (sender as Button).DataContext as GoogleMusicSongInstance;
 
-            //App.songQueue.RemoveSong((nowPlayingList.ItemsSource as ObservableCollection<GoogleMusicSong>).IndexOf(song));
-        }
-
-        private void nowPlayingList_ItemClick_1(object sender, ItemClickEventArgs e)
-        {
-            ListView listView = sender as ListView;
-            GoogleMusicSong song = e.ClickedItem as GoogleMusicSong;
-
-            App.songQueue.ChangeSong(listView.Items.IndexOf(song));
-            App.songQueue.Play();
+            App.songQueue.RemoveSong((nowPlayingList.ItemsSource as ObservableCollection<GoogleMusicSongInstance>).IndexOf(song));
         }
 
         private void nowPlayingList_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             App.songQueue.ChangeSong(this.nowPlayingList.SelectedIndex);
+        }
+
+        private void nowPlayingList_Drop_1(object sender, DragEventArgs e)
+        {
+
         }
     }
 }

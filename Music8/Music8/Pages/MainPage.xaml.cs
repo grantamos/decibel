@@ -32,7 +32,7 @@ namespace Music8.Pages
 
             Window.Current.SizeChanged += Window_SizeChanged;
 
-            NavigateContentFrame(typeof(Pages.CollectionPage));
+            NavigateContentFrame(typeof(Pages.CollectionPage), this);
 
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
         }
@@ -77,7 +77,7 @@ namespace Music8.Pages
         {
             RadioButton radioBtn = sender as RadioButton;
             if (radioBtn.Name == "collectionRadioButton")
-                NavigateContentFrame(typeof(Pages.CollectionPage));
+                NavigateContentFrame(typeof(Pages.CollectionPage), this);
             else if (radioBtn.Name == "eventsRadioButton")
                 NavigateContentFrame(typeof(Pages.EventsPage));
             else if (radioBtn.Name == "nowPlayingRadioButton")
@@ -88,11 +88,16 @@ namespace Music8.Pages
             }
         }
 
-        private void NavigateContentFrame(Type pageType)
+        public void NavigateContentFrame(Type pageType)
+        {
+            this.NavigateContentFrame(pageType, null);
+        }
+
+        public void NavigateContentFrame(Type pageType, object parameter)
         {
             if (ContentFrame == null)
                 return;
-            if (!ContentFrame.Navigate(pageType, this))
+            if (!ContentFrame.Navigate(pageType, parameter))
                 throw new Exception("Failed to create the page");
         }
 

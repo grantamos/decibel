@@ -14,12 +14,12 @@ namespace Music8.Common
     {
         public int currentIndex = -1;
 
-        private ObservableCollection<GoogleMusicSong> queue = new ObservableCollection<GoogleMusicSong>();
+        private ObservableCollection<GoogleMusicSongInstance> queue = new ObservableCollection<GoogleMusicSongInstance>();
         private bool shuffle = false;
         private bool repeat = false;
         private MediaElement mediaElement;
 
-        public delegate void NotifySongChanged(GoogleMusicSong song, int index);
+        public delegate void NotifySongChanged(GoogleMusicSongInstance song, int index);
         public event NotifySongChanged SongChanged;
 
         public SongQueue(MediaElement mediaElement)
@@ -59,13 +59,17 @@ namespace Music8.Common
 
             index = mod(index, queue.Count);
 
-            GoogleMusicSong song = queue.ElementAt(index);
+            GoogleMusicSongInstance songInstance = queue.ElementAt(index);
 
-            mediaElement.DataContext = song;
-            mediaElement.Source = new Uri(await App.googleAPI.GetStreamURL(song));
+            mediaElement.DataContext = songInstance;
+            String url = await App.googleAPI.GetStreamURL(songInstance.song);
+            if (url == String.Empty)
+                return;
+
+            mediaElement.Source = new Uri(url);
 
             if (SongChanged != null)
-                SongChanged.Invoke(song, index);
+                SongChanged.Invoke(songInstance, index);
 
             currentIndex = index;
         }
@@ -101,13 +105,13 @@ namespace Music8.Common
 
         public void AddSong(GoogleMusicSong song)
         {
-            queue.Add(song);
+            queue.Add(new GoogleMusicSongInstance(song));
         }
 
         public void AddSongs(List<GoogleMusicSong> songs)
         {
             foreach (GoogleMusicSong song in songs)
-                queue.Add(song);
+                queue.Add(new GoogleMusicSongInstance(song));
         }
 
         public void RemoveSong(int index)
@@ -119,17 +123,9 @@ namespace Music8.Common
 
         public void PlaySong(GoogleMusicSong song)
         {
-            int index = queue.IndexOf(song);
-
-            if (index < 0)
-            {
-                queue.Insert(currentIndex + 1, song);
-                currentIndex++;
-            }
-            else
-            {
-                currentIndex = index;
-            }
+            Clear();
+            AddSong(song);
+            NextSong();
         }
 
         public void PlaySongs(List<GoogleMusicSong> songs)
@@ -139,7 +135,7 @@ namespace Music8.Common
             NextSong();
         }
 
-        public ObservableCollection<GoogleMusicSong> GetQueue()
+        public ObservableCollection<GoogleMusicSongInstance> GetQueue()
         {
             return this.queue;
         }

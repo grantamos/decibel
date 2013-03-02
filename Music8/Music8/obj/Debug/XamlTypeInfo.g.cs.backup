@@ -126,17 +126,19 @@ namespace Music8.Music8_XamlTypeInfo
 
         private object Activate_3_PlaybackControl() { return new global::Music8.Common.PlaybackControl(); }
 
-        private object Activate_4_LayoutAwarePage() { return new global::Music8.Common.LayoutAwarePage(); }
+        private object Activate_4_ArtistDetailPage() { return new global::Music8.Pages.ArtistDetailPage(); }
 
-        private object Activate_5_CollectionPage() { return new global::Music8.Pages.CollectionPage(); }
+        private object Activate_5_LayoutAwarePage() { return new global::Music8.Common.LayoutAwarePage(); }
 
-        private object Activate_6_EventsPage() { return new global::Music8.Pages.EventsPage(); }
+        private object Activate_6_CollectionPage() { return new global::Music8.Pages.CollectionPage(); }
 
-        private object Activate_7_LoginPage() { return new global::Music8.Pages.LoginPage(); }
+        private object Activate_7_EventsPage() { return new global::Music8.Pages.EventsPage(); }
 
-        private object Activate_8_MainPage() { return new global::Music8.Pages.MainPage(); }
+        private object Activate_8_LoginPage() { return new global::Music8.Pages.LoginPage(); }
 
-        private object Activate_9_NowPlaying() { return new global::Music8.Pages.NowPlaying(); }
+        private object Activate_9_MainPage() { return new global::Music8.Pages.MainPage(); }
+
+        private object Activate_10_NowPlaying() { return new global::Music8.Pages.NowPlaying(); }
 
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(string typeName)
@@ -181,39 +183,45 @@ namespace Music8.Music8_XamlTypeInfo
                 xamlType = userType;
                 break;
 
+            case "Music8.Pages.ArtistDetailPage":
+                userType = new global::Music8.Music8_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::Music8.Pages.ArtistDetailPage), GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_4_ArtistDetailPage;
+                xamlType = userType;
+                break;
+
             case "Music8.Common.LayoutAwarePage":
                 userType = new global::Music8.Music8_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::Music8.Common.LayoutAwarePage), GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_4_LayoutAwarePage;
+                userType.Activator = Activate_5_LayoutAwarePage;
                 xamlType = userType;
                 break;
 
             case "Music8.Pages.CollectionPage":
                 userType = new global::Music8.Music8_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::Music8.Pages.CollectionPage), GetXamlTypeByName("Music8.Common.LayoutAwarePage"));
-                userType.Activator = Activate_5_CollectionPage;
+                userType.Activator = Activate_6_CollectionPage;
                 xamlType = userType;
                 break;
 
             case "Music8.Pages.EventsPage":
                 userType = new global::Music8.Music8_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::Music8.Pages.EventsPage), GetXamlTypeByName("Music8.Common.LayoutAwarePage"));
-                userType.Activator = Activate_6_EventsPage;
+                userType.Activator = Activate_7_EventsPage;
                 xamlType = userType;
                 break;
 
             case "Music8.Pages.LoginPage":
                 userType = new global::Music8.Music8_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::Music8.Pages.LoginPage), GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_7_LoginPage;
+                userType.Activator = Activate_8_LoginPage;
                 xamlType = userType;
                 break;
 
             case "Music8.Pages.MainPage":
                 userType = new global::Music8.Music8_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::Music8.Pages.MainPage), GetXamlTypeByName("Music8.Common.LayoutAwarePage"));
-                userType.Activator = Activate_8_MainPage;
+                userType.Activator = Activate_9_MainPage;
                 xamlType = userType;
                 break;
 
             case "Music8.Pages.NowPlaying":
                 userType = new global::Music8.Music8_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::Music8.Pages.NowPlaying), GetXamlTypeByName("Music8.Common.LayoutAwarePage"));
-                userType.Activator = Activate_9_NowPlaying;
+                userType.Activator = Activate_10_NowPlaying;
                 xamlType = userType;
                 break;
 

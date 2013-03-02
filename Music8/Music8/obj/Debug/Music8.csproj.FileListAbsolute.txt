@@ -167,3 +167,7 @@ C:\Users\tmfin_000\Desktop\decibel\Music8\Music8\obj\Debug\ProjectArchitectures.
 C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Byteopia.Helpers.dll
 C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Byteopia.Helpers.pdb
 C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Byteopia.Helpers.pri
+C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Assets\highlight.png
+C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\obj\Debug\Pages\ArtistDetailPage.g.i.cs
+C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\obj\Debug\Pages\ArtistDetailPage.g.cs
+C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\obj\Debug\Pages\ArtistDetailPage.xaml

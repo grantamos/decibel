@@ -1,2 +1,3 @@
-﻿-Removal of item in now playing removes the first item like it (indexof), rather than the one clicked (since the datacontext points to the same address).
--Reorder of items needs propogate to songqueue.
+﻿-Reorder of items needs propogate to songqueue.
+-Addition of items to collection (getallsongs)
+-Fix grouping in details view

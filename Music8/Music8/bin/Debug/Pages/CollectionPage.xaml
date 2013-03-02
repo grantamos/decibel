@@ -10,7 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Margin="0,60,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -169,7 +169,7 @@
                   VerticalAlignment="Stretch">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="110" Width="350" Margin="6">
+                    <Grid Height="110" Width="450" Margin="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>

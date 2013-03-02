@@ -53,9 +53,16 @@ namespace Music8.Common
                 .ToList();
         }
 
+        public IEnumerable<IGrouping <string, GoogleMusicSong>> GetAlbums(GoogleMusicSong song)
+        {
+            return songs.Where(s => s.AlbumArtist == song.AlbumArtist)
+                .OrderBy(s => s.Album)
+                .GroupBy(s => s.Album);
+        }
+
         public List<GoogleMusicSong> GetSongs()
         {
-            return songs.ToList();
+            return songs.OrderBy(g => g.Title).ToList();
         }
     }
 }

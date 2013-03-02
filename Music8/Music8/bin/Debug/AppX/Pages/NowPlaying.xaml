@@ -9,13 +9,26 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <Grid>
+        <Image x:Name="artistBackground" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill" Opacity=".2"/>
+        <!--<Rectangle Width="360" VerticalAlignment="Stretch" HorizontalAlignment="Right">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Offset="0" Color="#00FFFFFF"/>
+                    <GradientStop Offset="1" Color="#55000000"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>-->
         <ListView x:ConnectionId='1' x:Name="nowPlayingList"
                   Width="360" HorizontalAlignment="Right"
-                  Margin="0,10,0,100" IsItemClickEnabled="True"
-                                                        
-                  SelectionMode="Single" >
+                  Margin="0,75,0,100" IsItemClickEnabled="False"
+                                                                      
+                  AllowDrop="True"
+                  SelectionMode="Single"
+                  CanReorderItems="True"
+                  ItemContainerStyle="{StaticResource ListViewItemStyle1}"
+                                              >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="80" Width="300" HorizontalAlignment="Stretch" Margin="6">
@@ -23,7 +36,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel VerticalAlignment="Center" Margin="10,0,0,0">
+                        <StackPanel VerticalAlignment="Center" Margin="10,0,0,0" DataContext="{Binding song}">
                             <TextBlock Text="{Binding Title}" Style="{StaticResource SubtitleTextStyle}" TextWrapping="NoWrap"/>
                             <TextBlock Text="{Binding AlbumArtist}" Style="{StaticResource SubtitleTextStyle}" FontSize="12" TextWrapping="NoWrap"/>
                             <TextBlock Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap">
@@ -32,7 +45,8 @@
                         </StackPanel>
                         <Button x:ConnectionId='2' Content="&#xE10A;" Grid.Column="1"
                                 Style="{StaticResource CustomButtonStyle}"
-                                                    HorizontalAlignment="Right"/>
+                                                    HorizontalAlignment="Right"
+                                Tag="{Binding}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
