@@ -32,7 +32,7 @@ namespace Music8.Pages
 
             Window.Current.SizeChanged += Window_SizeChanged;
 
-            NavigateContentFrame(typeof(Pages.CollectionPage), this);
+            NavigateContentFrame(typeof(Pages.CollectionExplorerPage), this);
 
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
         }
@@ -77,7 +77,7 @@ namespace Music8.Pages
         {
             RadioButton radioBtn = sender as RadioButton;
             if (radioBtn.Name == "collectionRadioButton")
-                NavigateContentFrame(typeof(Pages.CollectionPage), this);
+                NavigateContentFrame(typeof(Pages.CollectionExplorerPage), this);
             else if (radioBtn.Name == "eventsRadioButton")
                 NavigateContentFrame(typeof(Pages.EventsPage));
             else if (radioBtn.Name == "nowPlayingRadioButton")

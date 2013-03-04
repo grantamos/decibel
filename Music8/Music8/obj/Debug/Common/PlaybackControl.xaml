@@ -7,13 +7,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="100">
+    d:DesignHeight="70">
     <UserControl.Resources>
         <local:MediaElementStateConverter x:Name="MediaElementStateConverter"/>
         <local:TimeSpanConverter x:Name="TimeSpanConverter"/>
     </UserControl.Resources>
 
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="rootGrid">
+    <Grid HorizontalAlignment="Stretch" x:Name="rootGrid" Background="#f3f3f3">
+        <Border BorderThickness="0,1,0,0" BorderBrush="#a6a6a6"/>
         <MediaElement x:Name="mediaElement"/>
         <Grid x:Name="FilledGrid" Visibility="Visible" Margin="10" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>

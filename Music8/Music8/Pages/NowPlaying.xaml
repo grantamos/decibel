@@ -27,20 +27,19 @@
                   AllowDrop="True"
                   SelectionMode="Single"
                   CanReorderItems="True"
-                  ItemContainerStyle="{StaticResource ListViewItemStyle1}"
                   Drop="nowPlayingList_Drop_1">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="80" Width="300" HorizontalAlignment="Stretch" Margin="6">
+                    <Grid Width="300" HorizontalAlignment="Stretch" Margin="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel VerticalAlignment="Center" Margin="10,0,0,0" DataContext="{Binding song}">
-                            <TextBlock Text="{Binding Title}" Style="{StaticResource SubtitleTextStyle}" TextWrapping="NoWrap"/>
-                            <TextBlock Text="{Binding AlbumArtist}" Style="{StaticResource SubtitleTextStyle}" FontSize="12" TextWrapping="NoWrap"/>
-                            <TextBlock Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap">
-                                <Run Text="{Binding Duration}"/>
+                        <StackPanel Margin="5" DataContext="{Binding song}">
+                            <TextBlock Text="{Binding Title}" TextWrapping="NoWrap"/>
+                            <TextBlock Text="{Binding AlbumArtist}" FontSize="12" TextWrapping="NoWrap"/>
+                            <TextBlock TextWrapping="NoWrap">
+                                    <Run Text="{Binding DurationTimeSpan}"/>
                             </TextBlock>
                         </StackPanel>
                         <Button Content="&#xE10A;" Grid.Column="1"

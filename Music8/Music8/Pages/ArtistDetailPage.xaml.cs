@@ -62,22 +62,22 @@ namespace Music8.Pages
 
         private void Play_Artist(object sender, RoutedEventArgs e)
         {
-            App.songQueue.PlaySongs(App.collection.GetArtist((sender as Button).DataContext as GoogleMusicSong));
+            App.songQueue.PlaySongs(App.collection.GetArtistSongs((sender as Button).DataContext as GoogleMusicSong));
         }
 
         private void Add_Artist(object sender, RoutedEventArgs e)
         {
-            App.songQueue.AddSongs(App.collection.GetArtist((sender as Button).DataContext as GoogleMusicSong));
+            App.songQueue.AddSongs(App.collection.GetArtistSongs((sender as Button).DataContext as GoogleMusicSong));
         }
 
         private void Play_Album(object sender, RoutedEventArgs e)
         {
-            App.songQueue.PlaySongs(App.collection.GetAlbum((sender as Button).DataContext as GoogleMusicSong));
+            App.songQueue.PlaySongs(App.collection.GetAlbumSongs((sender as Button).DataContext as GoogleMusicSong));
         }
 
         private void Add_Album(object sender, RoutedEventArgs e)
         {
-            App.songQueue.AddSongs(App.collection.GetAlbum((sender as Button).DataContext as GoogleMusicSong));
+            App.songQueue.AddSongs(App.collection.GetAlbumSongs((sender as Button).DataContext as GoogleMusicSong));
         }
 
         private void Play_Song(object sender, RoutedEventArgs e)

@@ -157,6 +157,7 @@ namespace Byteopia.Music.GoogleMusicAPI
     {
         string albumart;
         string albumArtist;
+        string album;
 
         [DataMember(Name = "genre")]
         public string Genre { get; set; }
@@ -171,7 +172,15 @@ namespace Byteopia.Music.GoogleMusicAPI
         public string ArtistNorm { get; set; }
 
         [DataMember(Name = "album")]
-        public string Album { get; set; }
+        public string Album
+        {
+            get { return album; }
+            set
+            {
+                NotifyPropertyChanged("Album");
+                album = value;
+            }
+        }
 
         [DataMember(Name = "lastPlayed")]
         public double LastPlayed { get; set; }
@@ -205,6 +214,27 @@ namespace Byteopia.Music.GoogleMusicAPI
         [DataMember(Name = "totalTracks")]
         public int TotalTracks { get; set; }
 
+        public String AlbumDetailString
+        {
+            get
+            {
+                if (TotalTracks != 0 && !Genre.Equals(String.Empty))
+                {
+                    return String.Format("{0}, {1} tracks", Genre, TotalTracks);
+                }
+                else
+                {
+                    String r = "";
+                    if (Genre != "")
+                        r += Genre;
+                    if (TotalTracks != 0 && Genre != "")
+                        r += ", " + TotalTracks + " tracks";
+                    if (TotalTracks != 0 && Genre == "")
+                        return TotalTracks + " tracks";
+                    return r;
+                }
+            }
+        }
         [DataMember(Name = "name")]
         public string Name { get; set; }
 
@@ -228,6 +258,8 @@ namespace Byteopia.Music.GoogleMusicAPI
 
         [DataMember(Name = "durationMillis")]
         public long Duration { get; set; }
+
+        public String DurationTimeSpan { get { return TimeSpan.FromMilliseconds(this.Duration).ToString("g"); } set {} }
 
         [DataMember(Name = "albumArt")]
         public string AlbumArt { get; set; }
@@ -316,6 +348,14 @@ namespace Byteopia.Music.GoogleMusicAPI
         {
             return ID.GetHashCode();
         }
+
+        public TimeSpan DurationClean
+        {
+            get
+            {
+                return TimeSpan.FromMilliseconds(Duration);
+            }
+        }
     }
 
     [DataContract]
@@ -343,5 +383,15 @@ namespace Byteopia.Music.GoogleMusicAPI
     {
         [DataMember(Name = "results")]
         public GoogleMusicSearchResults Results { get; set; }
+    }
+
+    [DataContract]
+    public class GoogleMusicStatus
+    {
+        [DataMember(Name = "totalTracks")]
+        public int TotalTracks { get; set; }
+
+        [DataMember(Name = "availableTracks")]
+        public int AvailableTracks { get; set; }
     }
 }

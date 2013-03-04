@@ -114,10 +114,13 @@
       <DependentUpon>DetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Flyout.cs" />
-    <Compile Include="Common\GoogleMusicSongInstance.cs" />
+    <Compile Include="Common\ItemPlaybackUserControl.xaml.cs">
+      <DependentUpon>ItemPlaybackUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\LayoutAwarePage.cs" />
     <Compile Include="Common\Library.cs" />
     <Compile Include="Common\MediaElementStateConverter.cs" />
+    <Compile Include="Common\NullValueConverter.cs" />
     <Compile Include="Common\PlaybackControl.xaml.cs">
       <DependentUpon>PlaybackControl.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,9 @@
     <Compile Include="Common\TimeSpanConverter.cs" />
     <Compile Include="Pages\ArtistDetailPage.xaml.cs">
       <DependentUpon>ArtistDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CollectionExplorerPage.xaml.cs">
+      <DependentUpon>CollectionExplorerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CollectionPage.xaml.cs">
       <DependentUpon>CollectionPage.xaml</DependentUpon>
@@ -181,6 +187,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Common\ItemPlaybackUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Common\PlaybackControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,6 +200,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\ArtistDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CollectionExplorerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

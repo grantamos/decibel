@@ -16,29 +16,29 @@
     <AppXManifest Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-03-01T23:50:15.821</Modified>
+      <Modified>2013-03-04T07:40:16.770</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Music8.exe">
       <PackagePath>Music8.exe</PackagePath>
-      <Modified>2013-03-02T02:46:54.277</Modified>
+      <Modified>2013-03-04T09:15:04.580</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Music8.pdb">
       <PackagePath>Music8.pdb</PackagePath>
-      <Modified>2013-03-02T02:46:54.256</Modified>
+      <Modified>2013-03-04T09:15:04.558</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Byteopia.Music.GoogleMusicAPI\bin\Debug\GoogleMusicAPI.pdb">
       <PackagePath>GoogleMusicAPI.pdb</PackagePath>
-      <Modified>2013-02-18T07:01:43.220</Modified>
+      <Modified>2013-03-04T06:17:35.471</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Byteopia.Helpers\bin\Debug\Byteopia.Helpers.pdb">
       <PackagePath>Byteopia.Helpers.pdb</PackagePath>
-      <Modified>2013-02-18T04:07:36.206</Modified>
+      <Modified>2013-03-04T06:17:35.082</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Byteopia.Music.GoogleMusicAPI\bin\Debug\GoogleMusicAPI.dll">
       <PackagePath>GoogleMusicAPI.dll</PackagePath>
-      <Modified>2013-02-18T07:01:43.264</Modified>
+      <Modified>2013-03-04T06:17:35.493</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Microsoft.PlayerFramework.dll">
       <PackagePath>Microsoft.PlayerFramework.dll</PackagePath>
@@ -46,11 +46,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Byteopia.Music.GoogleMusicAPI\bin\Debug\Byteopia.Helpers.dll">
       <PackagePath>Byteopia.Helpers.dll</PackagePath>
-      <Modified>2013-02-18T04:07:36.258</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Microsoft.PlayerFramework.xml">
-      <PackagePath>Microsoft.PlayerFramework.xml</PackagePath>
-      <Modified>2013-02-18T02:41:56.608</Modified>
+      <Modified>2013-03-04T06:17:35.101</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\Assets\albumStack.png">
       <PackagePath>Assets\albumStack.png</PackagePath>
@@ -106,7 +102,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Byteopia.Music.GoogleMusicAPI\notes.txt">
       <PackagePath>GoogleMusicAPI\notes.txt</PackagePath>
-      <Modified>2013-02-18T02:41:55.611</Modified>
+      <Modified>2013-02-27T23:26:02.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\App.xaml">
       <PackagePath>App.xaml</PackagePath>
@@ -114,23 +110,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Common\CustomStyles.xaml">
       <PackagePath>Common\CustomStyles.xaml</PackagePath>
-      <Modified>2013-03-02T01:41:43.748</Modified>
+      <Modified>2013-03-04T08:54:36.975</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Common\DetailsPage.xaml">
       <PackagePath>Common\DetailsPage.xaml</PackagePath>
       <Modified>2012-12-19T22:43:40.135</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Common\ItemPlaybackUserControl.xaml">
+      <PackagePath>Common\ItemPlaybackUserControl.xaml</PackagePath>
+      <Modified>2013-03-04T09:06:24.401</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Common\PlaybackControl.xaml">
       <PackagePath>Common\PlaybackControl.xaml</PackagePath>
-      <Modified>2013-01-31T05:17:57.306</Modified>
+      <Modified>2013-03-04T04:39:34.989</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Common\StandardStyles.xaml">
       <PackagePath>Common\StandardStyles.xaml</PackagePath>
-      <Modified>2013-01-25T05:03:19.797</Modified>
+      <Modified>2013-03-04T04:59:58.509</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\ArtistDetailPage.xaml">
       <PackagePath>Pages\ArtistDetailPage.xaml</PackagePath>
-      <Modified>2013-03-02T02:46:51.016</Modified>
+      <Modified>2013-03-02T08:59:56.759</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\CollectionExplorerPage.xaml">
+      <PackagePath>Pages\CollectionExplorerPage.xaml</PackagePath>
+      <Modified>2013-03-04T09:03:36.913</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\CollectionPage.xaml">
       <PackagePath>Pages\CollectionPage.xaml</PackagePath>
@@ -146,15 +150,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\MainPage.xaml">
       <PackagePath>Pages\MainPage.xaml</PackagePath>
-      <Modified>2013-03-02T02:08:36.794</Modified>
+      <Modified>2013-03-04T04:44:13.604</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\NowPlaying.xaml">
       <PackagePath>Pages\NowPlaying.xaml</PackagePath>
-      <Modified>2013-03-01T23:23:54.833</Modified>
+      <Modified>2013-03-04T09:14:58.483</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2013-03-01T23:50:15.686</Modified>
+      <Modified>2013-03-04T07:40:16.710</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

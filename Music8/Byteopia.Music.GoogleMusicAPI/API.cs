@@ -92,18 +92,28 @@ namespace Byteopia.Music.GoogleMusicAPI
             return true;
         }
 
+        public async Task<int> GetTrackCount()
+        {
+            GoogleMusicStatus status = await client.GET<GoogleMusicStatus>(new Uri("https://play.google.com/music/services/getstatus"));
+            return status.TotalTracks;
+        }
+
         /// <summary>
         /// Gets all songs in music library
         /// </summary>
         /// <param name="continuationToken">Tells Google's servers where to pick up</param>
         /// <returns></returns>
-        public async void GetAllSongs()
+        public async void GetAllSongs(int pagesToFetch = -1)
         {
             GoogleMusicPlaylist playlist = null;
+            int pagesFetched = 0;
 
             // Loop until no more token to continue from
             while (true)
             {
+                if (pagesFetched == pagesToFetch)
+                    break;
+
                 String jsonString = "{\"continuationToken\":\"" + ((playlist == null) ? "" : playlist.ContToken) + "\"}";
                
                 HttpContent content = new FormUrlEncodedContent(new[]
@@ -116,8 +126,13 @@ namespace Byteopia.Music.GoogleMusicAPI
                 foreach (GoogleMusicSong song in playlist.Songs)
                   Tracks.Add(song);
 
+                if(this.ChunkAdded != null)
+                    this.ChunkAdded(Tracks);
+
                 if (String.IsNullOrEmpty(playlist.ContToken))
                     break;
+
+                pagesFetched++;
             }
         }
 
@@ -333,7 +348,7 @@ namespace Byteopia.Music.GoogleMusicAPI
 
         public bool NeedsAuth()
         {
-            return client.AuthorizationToken.Equals(String.Empty);
+            return client.AuthroizationToken.Equals(String.Empty);
         }
 
         public async void DeleteFile()
@@ -373,7 +388,7 @@ namespace Byteopia.Music.GoogleMusicAPI
             }
 
             this.Client = new GoogleHTTP();
-            this.Client.AuthorizationToken = tmp.Client.AuthorizationToken;
+            this.Client.AuthroizationToken = tmp.Client.AuthroizationToken;
             this.Client.Cookies = tmp.Client.Cookies;
             this.User = tmp.User;
             this.Pass = tmp.Pass;

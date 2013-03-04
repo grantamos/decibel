@@ -10,9 +10,11 @@ Assets\StoreLogo.png
 App.xaml
 Common\CustomStyles.xaml
 Common\DetailsPage.xaml
+Common\ItemPlaybackUserControl.xaml
 Common\PlaybackControl.xaml
 Common\StandardStyles.xaml
 Pages\ArtistDetailPage.xaml
+Pages\CollectionExplorerPage.xaml
 Pages\CollectionPage.xaml
 Pages\EventsPage.xaml
 Pages\LoginPage.xaml

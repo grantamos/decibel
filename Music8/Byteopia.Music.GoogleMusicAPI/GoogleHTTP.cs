@@ -31,11 +31,11 @@ namespace Byteopia.Music.GoogleMusicAPI
         /// </summary>
         ///
         [DataMember(Name="AuthToken")]
-        private String authorizationToken;
-        public System.String AuthorizationToken
+        private String authroizationToken;
+        public System.String AuthroizationToken
         {
-            get { return authorizationToken; }
-            set { authorizationToken = value; }
+            get { return authroizationToken; }
+            set { authroizationToken = value; }
         }
 
         [DataMember(Name = "AuthTokenIssueDate")]
@@ -76,7 +76,7 @@ namespace Byteopia.Music.GoogleMusicAPI
 
         public GoogleHTTP()
         {
-            authorizationToken = String.Empty;
+            authroizationToken = String.Empty;
 
             cookieContainer = new CookieContainer();
 
@@ -100,7 +100,7 @@ namespace Byteopia.Music.GoogleMusicAPI
             string CountTemplate = @"Auth=(?<AUTH>(.*?))$";
             Regex CountRegex = new Regex(CountTemplate, RegexOptions.IgnoreCase);
             string auth = CountRegex.Match(loginData).Groups["AUTH"].ToString();
-            authorizationToken = auth;
+            authroizationToken = auth;
 
             this.AuthTokenIssueDate = DateTime.Now;
         }
@@ -137,6 +137,7 @@ namespace Byteopia.Music.GoogleMusicAPI
         public async Task<String> POST(Uri address, HttpContent content = null)
         {
             SetAuthHeader();
+            RebuildCookieContainer();
 
             HttpResponseMessage responseMessage = await client.PostAsync(BuildGoogleRequest(address), content);
 
@@ -152,6 +153,7 @@ namespace Byteopia.Music.GoogleMusicAPI
         public async Task<HttpResponseMessage> GETResp(Uri address)
         {
             SetAuthHeader();
+            RebuildCookieContainer();
 
             HttpResponseMessage responseMessage = await client.GetAsync(BuildGoogleRequest(address));
 
@@ -170,6 +172,7 @@ namespace Byteopia.Music.GoogleMusicAPI
         public async Task<String> GET(Uri address)
         {
             SetAuthHeader();
+            RebuildCookieContainer();
 
             HttpResponseMessage responseMessage = await client.GetAsync(BuildGoogleRequest(address));
 
@@ -181,13 +184,20 @@ namespace Byteopia.Music.GoogleMusicAPI
             return await responseMessage.Content.ReadAsStringAsync();
         }
 
+        private void RebuildCookieContainer()
+        {
+            foreach (GoogleCookie gc in _cookies)
+                cookieContainer.Add(new Uri("https://play.google.com/music/play"), 
+                    new Cookie(gc.Key, gc.Value));
+        }
+
         /// <summary>
         /// Sets Google's auth header
         /// </summary>
         private void SetAuthHeader()
         {
-            if (!authorizationToken.Equals(String.Empty))
-                client.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse(String.Format("GoogleLogin auth={0}", authorizationToken));
+            if (!authroizationToken.Equals(String.Empty))
+                client.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse(String.Format("GoogleLogin auth={0}", authroizationToken));
         }
 
         public bool CheckForUpdatedAuth(HttpResponseMessage responseMessage)
@@ -198,7 +208,7 @@ namespace Byteopia.Music.GoogleMusicAPI
                 {
                     foreach (var v in header.Value)
                     {
-                        authorizationToken = v;
+                        authroizationToken = v;
                         return true;
                     }
                 }

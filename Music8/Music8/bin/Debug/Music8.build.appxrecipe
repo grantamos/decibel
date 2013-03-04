@@ -34,9 +34,6 @@
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Byteopia.Music.GoogleMusicAPI\bin\Debug\Byteopia.Helpers.dll">
       <PackagePath>Byteopia.Helpers.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Microsoft.PlayerFramework.xml">
-      <PackagePath>Microsoft.PlayerFramework.xml</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\Assets\albumStack.png">
       <PackagePath>Assets\albumStack.png</PackagePath>
     </AppxPackagedFile>
@@ -89,6 +86,9 @@
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Common\DetailsPage.xaml">
       <PackagePath>Common\DetailsPage.xaml</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Common\ItemPlaybackUserControl.xaml">
+      <PackagePath>Common\ItemPlaybackUserControl.xaml</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Common\PlaybackControl.xaml">
       <PackagePath>Common\PlaybackControl.xaml</PackagePath>
     </AppxPackagedFile>
@@ -97,6 +97,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\ArtistDetailPage.xaml">
       <PackagePath>Pages\ArtistDetailPage.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\CollectionExplorerPage.xaml">
+      <PackagePath>Pages\CollectionExplorerPage.xaml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Grant\Documents\GitHub\decibel\Music8\Music8\bin\Debug\Pages\CollectionPage.xaml">
       <PackagePath>Pages\CollectionPage.xaml</PackagePath>
