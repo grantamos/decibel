@@ -72,7 +72,7 @@ namespace Byteopia.Music.GoogleMusicAPI
             set { _cookies = value; }
         }
 
-        
+        private string rejectedReason;
 
         public GoogleHTTP()
         {
@@ -139,31 +139,38 @@ namespace Byteopia.Music.GoogleMusicAPI
             SetAuthHeader();
             RebuildCookieContainer();
 
-            HttpResponseMessage responseMessage = await client.PostAsync(BuildGoogleRequest(address), content);
+            HttpResponseMessage responseMessage = null;
+
+            try
+            {
+                responseMessage = await client.PostAsync(BuildGoogleRequest(address), content);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
 
             LastStatusCode = responseMessage.StatusCode;
 
             CheckForCookies(responseMessage, address);
             CheckForUpdatedAuth(responseMessage);
-           
+            CheckForRejection(responseMessage);
 
-            return await responseMessage.Content.ReadAsStringAsync();
+            String retnData = String.Empty;
+
+            try
+            {
+                retnData = await responseMessage.Content.ReadAsStringAsync();
+            }
+            catch (Exception e)
+            {
+                throw; // Bubble up
+            }
+
+            return retnData;
         }
 
-        public async Task<HttpResponseMessage> GETResp(Uri address)
-        {
-            SetAuthHeader();
-            RebuildCookieContainer();
-
-            HttpResponseMessage responseMessage = await client.GetAsync(BuildGoogleRequest(address));
-
-            LastStatusCode = responseMessage.StatusCode;
-
-            CheckForCookies(responseMessage, address);
-            CheckForUpdatedAuth(responseMessage);
-
-            return responseMessage;
-        }
+       
         /// <summary>
         /// GET request
         /// </summary>
@@ -174,14 +181,35 @@ namespace Byteopia.Music.GoogleMusicAPI
             SetAuthHeader();
             RebuildCookieContainer();
 
-            HttpResponseMessage responseMessage = await client.GetAsync(BuildGoogleRequest(address));
+            HttpResponseMessage responseMessage = null;
+
+            try
+            {
+                responseMessage = await client.GetAsync(BuildGoogleRequest(address));
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
 
             LastStatusCode = responseMessage.StatusCode;
 
             CheckForCookies(responseMessage, address);
             CheckForUpdatedAuth(responseMessage);
+            CheckForRejection(responseMessage);
 
-            return await responseMessage.Content.ReadAsStringAsync();
+            String retnData = String.Empty;
+
+            try
+            {
+                retnData = await responseMessage.Content.ReadAsStringAsync();
+            }
+            catch (Exception e)
+            {
+                throw; // Bubble up
+            }
+
+            return retnData;
         }
 
         private void RebuildCookieContainer()
@@ -216,6 +244,25 @@ namespace Byteopia.Music.GoogleMusicAPI
 
             return false;
         }
+
+        public void CheckForRejection(HttpResponseMessage responseMessage)
+        {
+            rejectedReason = String.Empty;
+
+            foreach (var header in responseMessage.Headers)
+            {
+                if (header.Key.Equals("X-Rejected-Reason"))
+                {
+                    foreach (var v in header.Value)
+                    {
+                        rejectedReason = v;
+                        break;
+                    }
+                }
+            }
+        }
+
+
         /// <summary>
         /// Checks response message for set-cookie, parses it, and saves
         /// This will allow us to save cookie to disk and perhaps reduce requests

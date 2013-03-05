@@ -57,7 +57,7 @@ namespace Byteopia.Music.GoogleMusicAPI
                         int j = cookie.IndexOf(';');
 
                         if (i == -1 || j == -1)
-                            throw new Exception("Invalid cookie format");
+                            continue; // throw new Exception("Invalid cookie format");
 
                         String value = cookie.Substring(i + 1, j - i - 1);
                         String key = cookie.Substring(0, i);
