@@ -69,6 +69,12 @@ namespace Byteopia.Music.GoogleMusicAPI
 
         GoogleCookieManager cookieManager;
 
+        internal GoogleCookieManager CookieManager
+        {
+            get { return cookieManager; }
+            set { cookieManager = value; }
+        }
+
         public GoogleHTTP()
         {
             authroizationToken = String.Empty;

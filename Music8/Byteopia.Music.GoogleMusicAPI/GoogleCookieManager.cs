@@ -30,6 +30,11 @@ namespace Byteopia.Music.GoogleMusicAPI
             }
         }
 
+        public void SetCookiesFromString(String str)
+        {
+            cookieContainer.SetCookies(new Uri(URI), str);
+        }
+
         public String GetCookies()
         {
             return cookieContainer.GetCookieHeader(new Uri(URI));
