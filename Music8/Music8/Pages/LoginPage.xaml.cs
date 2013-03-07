@@ -76,7 +76,7 @@ namespace Music8.Pages
 
         public async void DoLogin(string userName, string password, bool saveCredentials)
         {
-            bool loginSuccess = await App.googleAPI.Login(userName, password);
+            bool loginSuccess = await App.GoogleAPI.Login(userName, password);
 
             if (loginSuccess)
             {
@@ -87,8 +87,8 @@ namespace Music8.Pages
                     passwordVault.Add(credential);
                 }
 
-                await App.googleAPI.GetUserPlaylists();
-                App.googleAPI.GetAllSongs(1);
+                await App.GoogleAPI.GetUserPlaylists();
+                App.GoogleAPI.GetAllSongs(1);
 
                 if (!this.Frame.Navigate(typeof(Pages.MainPage)))
                 {

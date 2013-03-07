@@ -109,7 +109,7 @@
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\BooleanNegationConverter.cs" />
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Common\Collection.cs" />
+    <Compile Include="Music\Collection.cs" />
     <Compile Include="Common\DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
     </Compile>
@@ -118,14 +118,12 @@
       <DependentUpon>ItemPlaybackUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\LayoutAwarePage.cs" />
-    <Compile Include="Common\Library.cs" />
     <Compile Include="Common\MediaElementStateConverter.cs" />
     <Compile Include="Common\NullValueConverter.cs" />
     <Compile Include="Common\PlaybackControl.xaml.cs">
       <DependentUpon>PlaybackControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\SongQueue.cs" />
-    <Compile Include="Common\RichTextColumns.cs" />
+    <Compile Include="Music\SongQueue.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Common\TimeSpanConverter.cs" />
     <Compile Include="Pages\ArtistDetailPage.xaml.cs">
@@ -133,9 +131,6 @@
     </Compile>
     <Compile Include="Pages\CollectionExplorerPage.xaml.cs">
       <DependentUpon>CollectionExplorerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\CollectionPage.xaml.cs">
-      <DependentUpon>CollectionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EventsPage.xaml.cs">
       <DependentUpon>EventsPage.xaml</DependentUpon>
@@ -169,7 +164,6 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Common\ReadMe.txt" />
     <Content Include="Password.txt" />
     <Content Include="To-Do.txt" />
   </ItemGroup>
@@ -204,10 +198,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CollectionExplorerPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\CollectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

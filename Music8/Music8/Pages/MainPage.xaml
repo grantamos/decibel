@@ -29,7 +29,7 @@
                         <ContentThemeTransition/>
                     </TransitionCollection>
                 </StackPanel.ChildrenTransitions>
-                <RadioButton x:Name="collectionRadioButton" Content="collection" GroupName="mainGroup" 
+                <RadioButton x:Name="collectionRadioButton" Content="collection" GroupName="mainGroup"
                              Checked="RadioButton_Checked" IsChecked="True" Style="{StaticResource TextRadioButtonStyle}"
                              FontSize="30" PointerExited="RadioButton_PointerExited"/>
                 <RadioButton x:Name="eventsRadioButton" Content="events" GroupName="mainGroup" 

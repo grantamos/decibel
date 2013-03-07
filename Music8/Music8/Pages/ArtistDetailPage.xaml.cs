@@ -36,7 +36,7 @@ namespace Music8.Pages
         {
             GoogleMusicSong song = e.Parameter as GoogleMusicSong;
 
-            IEnumerable<IGrouping<string, GoogleMusicSong>> groupedItems = App.collection.GetAlbums(song);
+            IEnumerable<IGrouping<string, GoogleMusicSong>> groupedItems = App.Collection.GetAlbums(song);
             CollectionViewSource cvsSongs = new CollectionViewSource() { Source = groupedItems, IsSourceGrouped = true };
             
             this.artistGridView.SetBinding(ListView.ItemsSourceProperty, new Binding() { Source = cvsSongs });
@@ -62,32 +62,32 @@ namespace Music8.Pages
 
         private void Play_Artist(object sender, RoutedEventArgs e)
         {
-            App.songQueue.PlaySongs(App.collection.GetArtistSongs((sender as Button).DataContext as GoogleMusicSong));
+            App.SongQueue.PlaySongs(App.Collection.GetArtistSongs((sender as Button).DataContext as GoogleMusicSong));
         }
 
         private void Add_Artist(object sender, RoutedEventArgs e)
         {
-            App.songQueue.AddSongs(App.collection.GetArtistSongs((sender as Button).DataContext as GoogleMusicSong));
+            App.SongQueue.AddSongs(App.Collection.GetArtistSongs((sender as Button).DataContext as GoogleMusicSong));
         }
 
         private void Play_Album(object sender, RoutedEventArgs e)
         {
-            App.songQueue.PlaySongs(App.collection.GetAlbumSongs((sender as Button).DataContext as GoogleMusicSong));
+            App.SongQueue.PlaySongs(App.Collection.GetAlbumSongs((sender as Button).DataContext as GoogleMusicSong));
         }
 
         private void Add_Album(object sender, RoutedEventArgs e)
         {
-            App.songQueue.AddSongs(App.collection.GetAlbumSongs((sender as Button).DataContext as GoogleMusicSong));
+            App.SongQueue.AddSongs(App.Collection.GetAlbumSongs((sender as Button).DataContext as GoogleMusicSong));
         }
 
         private void Play_Song(object sender, RoutedEventArgs e)
         {
-            App.songQueue.PlaySong((sender as Button).DataContext as GoogleMusicSong);
+            App.SongQueue.PlaySong((sender as Button).DataContext as GoogleMusicSong);
         }
 
         private void Add_Song(object sender, RoutedEventArgs e)
         {
-            App.songQueue.AddSong((sender as Button).DataContext as GoogleMusicSong);
+            App.SongQueue.AddSong((sender as Button).DataContext as GoogleMusicSong);
         }
 
         private void GoBack(object sender, RoutedEventArgs e)

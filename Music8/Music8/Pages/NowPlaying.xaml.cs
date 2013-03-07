@@ -41,10 +41,10 @@ namespace Music8.Pages
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            this.nowPlayingList.SetBinding(ListView.ItemsSourceProperty, new Binding() { Source = App.songQueue.GetQueue() });
+            this.nowPlayingList.SetBinding(ListView.ItemsSourceProperty, new Binding() { Source = App.SongQueue.GetQueue() });
 
-            App.songQueue.SongChanged += songQueue_SongChanged;
-            this.nowPlayingList.SelectedIndex = App.songQueue.currentIndex;
+            App.SongQueue.SongChanged += songQueue_SongChanged;
+            this.nowPlayingList.SelectedIndex = App.SongQueue.currentIndex;
         }
 
         private void songQueue_SongChanged(GoogleMusicSongInstance songInstance, int index)
@@ -70,12 +70,12 @@ namespace Music8.Pages
         {
             GoogleMusicSongInstance song = (sender as Button).DataContext as GoogleMusicSongInstance;
 
-            App.songQueue.RemoveSong((nowPlayingList.ItemsSource as ObservableCollection<GoogleMusicSongInstance>).IndexOf(song));
+            App.SongQueue.RemoveSong((nowPlayingList.ItemsSource as ObservableCollection<GoogleMusicSongInstance>).IndexOf(song));
         }
 
         private void nowPlayingList_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            App.songQueue.ChangeSong(this.nowPlayingList.SelectedIndex);
+            App.SongQueue.ChangeSong(this.nowPlayingList.SelectedIndex);
         }
 
         private void nowPlayingList_Drop_1(object sender, DragEventArgs e)

@@ -157,7 +157,7 @@ namespace Music8.Common
         {
             this.song = song;
             this.ArtistName = song.Artist;
-            this.songs = App.collection.GetArtistSongs(song);
+            this.songs = App.Collection.GetArtistSongs(song);
             
             //var albumList = App.collection.albums.Where(album => album.ArtistName == song.Artist);
 
@@ -182,7 +182,7 @@ namespace Music8.Common
             this.song = song;
             this.ArtistName = song.Artist;
             this.AlbumName = song.Album;
-            this.songs = App.collection.GetAlbumSongs(song);
+            this.songs = App.Collection.GetAlbumSongs(song);
 
             TimeSpan duration = new TimeSpan();
             foreach(GoogleMusicSong songItem in this.songs)

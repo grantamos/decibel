@@ -23,8 +23,8 @@ namespace Music8.Common
         {
             this.InitializeComponent();
             this.DataContext = selectedSong;
-            albumListView.ItemsSource = App.googleAPI.Tracks.GroupBy(song => song.AlbumArtist).Select(song => song.First()).Where(song => song.AlbumArtist == selectedSong.AlbumArtist);
-            songListView.ItemsSource = App.googleAPI.Tracks.Where(song => song.AlbumArtist == selectedSong.AlbumArtist && song.Album == selectedSong.Album).OrderBy(song => song.Track);
+            albumListView.ItemsSource = App.GoogleAPI.Tracks.GroupBy(song => song.AlbumArtist).Select(song => song.First()).Where(song => song.AlbumArtist == selectedSong.AlbumArtist);
+            songListView.ItemsSource = App.GoogleAPI.Tracks.Where(song => song.AlbumArtist == selectedSong.AlbumArtist && song.Album == selectedSong.Album).OrderBy(song => song.Track);
         }
     }
 }

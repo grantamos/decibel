@@ -26,7 +26,7 @@ namespace Music8.Common
         {
             this.InitializeComponent();
             this.mediaElement.CurrentStateChanged += mediaElement_CurrentStateChanged;
-            songList.ItemsSource = App.googleAPI.Tracks;
+            songList.ItemsSource = App.GoogleAPI.Tracks;
             //SetBackground("http://blog.rhapsody.com/kse%20album%20art.jpg");
         }
 
@@ -85,19 +85,19 @@ namespace Music8.Common
 
         private void Previous_Click(object sender, RoutedEventArgs e)
         {
-            App.songQueue.PreviousSong();
+            App.SongQueue.PreviousSong();
         }
 
         private async void Play_Click(object sender, RoutedEventArgs e)
         {
             if (mediaElement.CurrentState == MediaElementState.Playing)
             {
-                App.songQueue.Pause();
+                App.SongQueue.Pause();
                 playButton.Style = (Style)Application.Current.Resources["MyPlayAppBarButtonStyle"];
             }
             else
             {
-                bool didPlay = await App.songQueue.Play();
+                bool didPlay = await App.SongQueue.Play();
                 if (didPlay)
                     playButton.Style = (Style)Application.Current.Resources["MyPauseAppBarButtonStyle"];
             }
@@ -105,7 +105,7 @@ namespace Music8.Common
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
-            App.songQueue.NextSong();
+            App.SongQueue.NextSong();
         }
 
         private void Queue_Click(object sender, RoutedEventArgs e)

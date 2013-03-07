@@ -28,22 +28,22 @@ namespace Music8.Common
         {
             Button btn = sender as Button;
             if (btn.DataContext.GetType() == typeof(Artist))
-                App.songQueue.PlaySongs(App.collection.GetArtistSongs((btn.DataContext as Artist).song));
+                App.SongQueue.PlaySongs(App.Collection.GetArtistSongs((btn.DataContext as Artist).song));
             else if (btn.DataContext.GetType() == typeof(Album))
-                App.songQueue.PlaySongs(App.collection.GetAlbumSongs((btn.DataContext as Album).song));
+                App.SongQueue.PlaySongs(App.Collection.GetAlbumSongs((btn.DataContext as Album).song));
             else if (btn.DataContext.GetType() == typeof(GoogleMusicSong))
-                App.songQueue.PlaySong(btn.DataContext as GoogleMusicSong);
+                App.SongQueue.PlaySong(btn.DataContext as GoogleMusicSong);
         }
 
         private void AddToNowPlaying(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             if (btn.DataContext.GetType() == typeof(Artist))
-                App.songQueue.AddSongs(App.collection.GetArtistSongs((btn.DataContext as Artist).song));
+                App.SongQueue.AddSongs(App.Collection.GetArtistSongs((btn.DataContext as Artist).song));
             else if (btn.DataContext.GetType() == typeof(Album))
-                App.songQueue.AddSongs(App.collection.GetAlbumSongs((btn.DataContext as Album).song));
+                App.SongQueue.AddSongs(App.Collection.GetAlbumSongs((btn.DataContext as Album).song));
             else if (btn.DataContext.GetType() == typeof(GoogleMusicSong))
-                App.songQueue.AddSong(btn.DataContext as GoogleMusicSong);
+                App.SongQueue.AddSong(btn.DataContext as GoogleMusicSong);
         }
 
         private void AddToPlaylist(object sender, RoutedEventArgs e)

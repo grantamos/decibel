@@ -62,7 +62,7 @@ namespace Music8.Common
             GoogleMusicSongInstance songInstance = queue.ElementAt(index);
 
             mediaElement.DataContext = songInstance;
-            String url = await App.googleAPI.GetStreamURL(songInstance.song);
+            String url = await App.GoogleAPI.GetStreamURL(songInstance.song);
             if (url == String.Empty)
                 return;
 

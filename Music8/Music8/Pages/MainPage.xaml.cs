@@ -27,8 +27,8 @@ namespace Music8.Pages
         {
             this.InitializeComponent();
             
-            App.songQueue = new SongQueue(playbackControl.GetMediaElement());
-            App.collection = new Collection(App.googleAPI.Tracks);
+            App.SongQueue = new SongQueue(playbackControl.GetMediaElement());
+            App.Collection = new Collection(App.GoogleAPI.Tracks);
 
             Window.Current.SizeChanged += Window_SizeChanged;
 
@@ -125,10 +125,9 @@ namespace Music8.Pages
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Type type = ContentFrame.CurrentSourcePageType;
-            if (type == typeof(Pages.CollectionPage) && !searchTextBox.Text.Equals("Search...", StringComparison.OrdinalIgnoreCase))
+            if (type == typeof(Pages.CollectionExplorerPage) && !searchTextBox.Text.Equals("Search...", StringComparison.OrdinalIgnoreCase))
             {
-                (ContentFrame.Content as CollectionPage).filterString = searchTextBox.Text;
-                (ContentFrame.Content as CollectionPage).songs_CollectionChanged(null);
+                
             }
         }
 

@@ -25,10 +25,37 @@ namespace Music8
     /// </summary>
     sealed partial class App : Application
     {
-        public static Byteopia.Music.GoogleMusicAPI.API googleAPI = new Byteopia.Music.GoogleMusicAPI.API();
-        public static Byteopia.Music.Zune.API zuneAPI = new Byteopia.Music.Zune.API();
-        public static SongQueue songQueue;
-        public static Collection collection;
+        private static Byteopia.Music.GoogleMusicAPI.API googleAPI = new Byteopia.Music.GoogleMusicAPI.API();
+
+        public static Byteopia.Music.GoogleMusicAPI.API GoogleAPI
+        {
+            get { return App.googleAPI; }
+            set { App.googleAPI = value; }
+        }
+
+        private static Byteopia.Music.Zune.API zuneAPI = new Byteopia.Music.Zune.API();
+
+        public static Byteopia.Music.Zune.API ZuneAPI
+        {
+            get { return App.zuneAPI; }
+            set { App.zuneAPI = value; }
+        }
+
+        private static SongQueue songQueue;
+
+        public static SongQueue SongQueue
+        {
+            get { return App.songQueue; }
+            set { App.songQueue = value; }
+        }
+
+        private static Collection collection;
+
+        public static Collection Collection
+        {
+            get { return App.collection; }
+            set { App.collection = value; }
+        }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -37,14 +64,6 @@ namespace Music8
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
-            this.Resuming += App_Resuming;
-        }
-
-        void App_Resuming(object sender, object e)
-        {
-            Debug.WriteLine("**RES**");
-            App.googleAPI.DeseralizeSession();
         }
 
         /// <summary>
@@ -57,9 +76,6 @@ namespace Music8
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
-            Debug.WriteLine("**LAUNCH**");
-            
-        
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -101,8 +117,6 @@ namespace Music8
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
-
-            App.googleAPI.SeralizeSession();
 
             deferral.Complete();
         }
