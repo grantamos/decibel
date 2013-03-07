@@ -71,6 +71,9 @@ namespace Byteopia.Music.GoogleMusicAPI
         /// <returns></returns>
         public async Task<Boolean> Login(String email, String password)
         {
+            if (this.DeseralizeSession())
+                return true;
+ 
             HttpContent content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("service", "sj"), // skyjam
