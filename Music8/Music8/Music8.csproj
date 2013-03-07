@@ -229,15 +229,34 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CommonDX">
+      <HintPath>..\..\..\..\Downloads\Samples\Win8\CommonDX\bin\Debug\CommonDX.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.PlayerFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Microsoft.PlayerFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>..\..\..\..\Downloads\Bin\Standard-winrt\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1">
+      <HintPath>..\..\..\..\Downloads\Bin\Standard-winrt\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>..\..\..\..\Downloads\Bin\Standard-winrt\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>..\..\..\..\Downloads\Bin\Standard-winrt\SharpDX.DXGI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Byteopia.Music.GoogleMusicAPI\Byteopia.Music.GoogleMusicAPI.csproj">
       <Project>{645da80f-fe08-45f8-a0ef-27c23d11e2fa}</Project>
       <Name>Byteopia.Music.GoogleMusicAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Byteopia.Music.Zune\Byteopia.Music.Zune.csproj">
+      <Project>{933ecccb-f3da-48d9-91f8-44223ac324ef}</Project>
+      <Name>Byteopia.Music.Zune</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
