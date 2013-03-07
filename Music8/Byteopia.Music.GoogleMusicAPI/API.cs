@@ -57,6 +57,7 @@ namespace Byteopia.Music.GoogleMusicAPI
         public API()
         {
             client = new GoogleHTTP();
+            client.CookiesChanged += client_CookiesChanged;
         }
 
         public ObservableCollection<GoogleMusicSong> Tracks = new ObservableCollection<GoogleMusicSong>();
@@ -88,6 +89,8 @@ namespace Byteopia.Music.GoogleMusicAPI
 
             // Hit the servers so our cookie container can store the cookies
             await HitForSessionCookies();
+
+            await this.SeralizeSession();
 
             return true;
         }
@@ -345,6 +348,11 @@ namespace Byteopia.Music.GoogleMusicAPI
             return client.AuthroizationToken.Equals(String.Empty);
         }
 
+        void client_CookiesChanged(object sender, EventArgs e)
+        {
+            this.SeralizeSession();
+        }
+
         public async void DeleteFile()
         {
             var dumpFile = await ApplicationData.Current.RoamingFolder.CreateFileAsync(_apiFileName,
@@ -399,7 +407,7 @@ namespace Byteopia.Music.GoogleMusicAPI
             }
             catch
             {
-                throw;
+                //throw;
                 return false;
             }
 

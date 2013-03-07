@@ -28,16 +28,20 @@ namespace Byteopia.Music.GoogleMusicAPI
             cookieContainer = new CookieContainer();
         }
 
-        public void HandleResponse(HttpResponseMessage msg)
+        public bool HandleResponse(HttpResponseMessage msg)
         {
+            bool cookiesChanged = false;
             IEnumerable<String> cookies;
             if (msg.Headers.TryGetValues("Set-Cookie", out cookies))
             {
                 foreach (String cookie in cookies)
                 {
                     cookieContainer.SetCookies(new Uri(URI), cookie);
+                    cookiesChanged = true;
                 }
             }
+
+            return cookiesChanged;
         }
 
         public void SetCookiesFromList(List<Cookie> cookies)

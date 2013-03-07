@@ -74,6 +74,8 @@ namespace Byteopia.Music.GoogleMusicAPI
             set { cookieManager = value; }
         }
 
+        public event EventHandler CookiesChanged;
+
         public GoogleHTTP()
         {
             authroizationToken = String.Empty;
@@ -155,7 +157,9 @@ namespace Byteopia.Music.GoogleMusicAPI
 
             LastStatusCode = responseMessage.StatusCode;
 
-            cookieManager.HandleResponse(responseMessage);
+            if (cookieManager.HandleResponse(responseMessage))
+                if (CookiesChanged != null)
+                    CookiesChanged(this, new EventArgs());
 
             //CheckForCookies(responseMessage, address);
             CheckForUpdatedAuth(responseMessage);
@@ -203,7 +207,9 @@ namespace Byteopia.Music.GoogleMusicAPI
 
             LastStatusCode = responseMessage.StatusCode;
 
-            cookieManager.HandleResponse(responseMessage);
+            if (cookieManager.HandleResponse(responseMessage))
+                if (CookiesChanged != null)
+                    CookiesChanged(this, new EventArgs());
 
             //CheckForCookies(responseMessage, address);
             CheckForUpdatedAuth(responseMessage);
