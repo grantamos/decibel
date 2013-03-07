@@ -337,13 +337,7 @@ namespace Byteopia.Music.GoogleMusicAPI
         public async Task<bool> HitForSessionCookies()
         {
             String hitForCookies = await client.POST(new Uri("https://play.google.com/music/listen?hl=en&u=0"));
-            client.AgeCookies(TimeSpan.FromDays(1.0));
             return true;
-        }
-
-        public bool NeedsCookies()
-        {
-            return client.GetXtCookie().Equals(String.Empty) || client.CookiesHaveExpired();
         }
 
         public bool NeedsAuth()
@@ -370,34 +364,11 @@ namespace Byteopia.Music.GoogleMusicAPI
 
         public async Task<bool> SeralizeSession()
         {
-            await RoamingStorage.SaveObjectToRoamingFolder<API>(_apiFileName, this);
             return true;
         }
 
         public async Task<bool> DeseralizeSession()
         {
-            API tmp = null;
-
-            try
-            {
-                tmp = await RoamingStorage.GetObjectFromRoamingFolder<API>(_apiFileName);
-            }
-            catch
-            {
-                return false;
-            }
-
-            this.Client = new GoogleHTTP();
-            this.Client.AuthroizationToken = tmp.Client.AuthroizationToken;
-            this.Client.Cookies = tmp.Client.Cookies;
-            this.User = tmp.User;
-            this.Pass = tmp.Pass;
-
-            foreach (GoogleCookie cookie in this.Client.Cookies)
-            {
-                client.AddGoogleCookieToContainer(cookie);
-            }
-
             return true;
         }
     }

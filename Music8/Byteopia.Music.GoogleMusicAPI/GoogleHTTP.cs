@@ -48,11 +48,6 @@ namespace Byteopia.Music.GoogleMusicAPI
         }
 
         /// <summary>
-        /// This is used with HttpClient to store cookies
-        /// </summary>
-        private CookieContainer cookieContainer;
-
-        /// <summary>
         /// The status code from the last POST\GET request
         /// </summary>
         private HttpStatusCode lastStatusCode;
@@ -63,32 +58,30 @@ namespace Byteopia.Music.GoogleMusicAPI
             set { lastStatusCode = value; }
         }
 
-        private List<GoogleCookie> _cookies;
-
-        [DataMember(Name="Cookies")]
-        public List<GoogleCookie> Cookies
-        {
-            get { return _cookies; }
-            set { _cookies = value; }
-        }
 
         private string rejectedReason;
+
+        public string RejectedReason
+        {
+            get { return rejectedReason; }
+            set { rejectedReason = value; }
+        }
+
+        GoogleCookieManager cookieManager;
 
         public GoogleHTTP()
         {
             authroizationToken = String.Empty;
 
-            cookieContainer = new CookieContainer();
-
-            HttpClientHandler CookieHandler = new HttpClientHandler()
+            HttpClientHandler handler = new HttpClientHandler
             {
-                UseCookies = true,
-                CookieContainer = cookieContainer,
+                UseCookies = false,
+                AllowAutoRedirect = false
             };
 
-            client = new HttpClient(CookieHandler as HttpMessageHandler);
 
-            _cookies = new List<GoogleCookie>();
+            client = new HttpClient(handler);
+            cookieManager = new GoogleCookieManager();
         }
 
         /// <summary>
@@ -137,13 +130,18 @@ namespace Byteopia.Music.GoogleMusicAPI
         public async Task<String> POST(Uri address, HttpContent content = null)
         {
             SetAuthHeader();
-            RebuildCookieContainer();
+            //RebuildCookieContainer();
 
             HttpResponseMessage responseMessage = null;
+            HttpRequestMessage requestMessage = null;
 
             try
             {
-                responseMessage = await client.PostAsync(BuildGoogleRequest(address), content);
+                String reqUri = BuildGoogleRequest(address).ToString();
+                requestMessage = new HttpRequestMessage(HttpMethod.Post, reqUri);
+                requestMessage.Content = content;
+                requestMessage.Headers.Add("Cookie", cookieManager.GetCookies());
+                responseMessage = await client.SendAsync(requestMessage);
             }
             catch (Exception e)
             {
@@ -152,7 +150,9 @@ namespace Byteopia.Music.GoogleMusicAPI
 
             LastStatusCode = responseMessage.StatusCode;
 
-            CheckForCookies(responseMessage, address);
+            cookieManager.HandleResponse(responseMessage);
+
+            //CheckForCookies(responseMessage, address);
             CheckForUpdatedAuth(responseMessage);
             CheckForRejection(responseMessage);
 
@@ -179,13 +179,17 @@ namespace Byteopia.Music.GoogleMusicAPI
         public async Task<String> GET(Uri address)
         {
             SetAuthHeader();
-            RebuildCookieContainer();
+            //RebuildCookieContainer();
 
             HttpResponseMessage responseMessage = null;
+            HttpRequestMessage requestMessage = null;
 
             try
             {
-                responseMessage = await client.GetAsync(BuildGoogleRequest(address));
+                String reqUri = BuildGoogleRequest(address).ToString();
+                requestMessage = new HttpRequestMessage(HttpMethod.Get, reqUri);
+                requestMessage.Headers.Add("Cookie", cookieManager.GetCookies());
+                responseMessage = await client.SendAsync(requestMessage);
             }
             catch (Exception e)
             {
@@ -194,7 +198,9 @@ namespace Byteopia.Music.GoogleMusicAPI
 
             LastStatusCode = responseMessage.StatusCode;
 
-            CheckForCookies(responseMessage, address);
+            cookieManager.HandleResponse(responseMessage);
+
+            //CheckForCookies(responseMessage, address);
             CheckForUpdatedAuth(responseMessage);
             CheckForRejection(responseMessage);
 
@@ -212,13 +218,7 @@ namespace Byteopia.Music.GoogleMusicAPI
             return retnData;
         }
 
-        private void RebuildCookieContainer()
-        {
-            foreach (GoogleCookie gc in _cookies)
-                cookieContainer.Add(new Uri("https://play.google.com/music/play"), 
-                    new Cookie(gc.Key, gc.Value));
-        }
-
+    
         /// <summary>
         /// Sets Google's auth header
         /// </summary>
@@ -264,53 +264,6 @@ namespace Byteopia.Music.GoogleMusicAPI
 
 
         /// <summary>
-        /// Checks response message for set-cookie, parses it, and saves
-        /// This will allow us to save cookie to disk and perhaps reduce requests
-        /// </summary>
-        /// <param name="responseMessage"></param>
-        private void CheckForCookies(HttpResponseMessage responseMessage, Uri address)
-        {
-            List<GoogleCookie> cookies = GoogleCookie.Parse(responseMessage);
-           // _cookies.AddRange(cookies);
-            //return;
-            foreach (GoogleCookie c in cookies)
-            {
-                GoogleCookie l = null;
-                if ((l = LocalCookiesContains(c.Key)) != null)
-                {
-                    l.Value = c.Value;
-                }
-                else
-                    _cookies.Add(c);
-            }
-
-            CookieCollection cc = cookieContainer.GetCookies(address);
-
-            foreach (Cookie c in cc)
-            {
-                c.Expired = true;
-                c.Expires = DateTime.Now.Subtract(TimeSpan.FromDays(1));
-                int k = 0;
-            }
-
-            int bp = 0;
-        }
-
-        public void AgeCookies(TimeSpan span)
-        {
-            foreach (GoogleCookie cook in _cookies)
-                cook.Expire.Add(span);
-        }
-
-        private GoogleCookie LocalCookiesContains(String key)
-        {
-            foreach (GoogleCookie c in _cookies)
-                if (c.Key.Equals(key))
-                    return c;
-
-            return null;
-        }
-        /// <summary>
         /// Append xt cookie value to each request
         /// </summary>
         /// <param name="uri"></param>
@@ -337,25 +290,11 @@ namespace Byteopia.Music.GoogleMusicAPI
         {
             // Get the last one
             String xt = "";
-            foreach (GoogleCookie cook in Cookies)
-                if (cook.Key.Equals("xt"))
+            foreach (Cookie cook in cookieManager.GetCookiesList())
+                if (cook.Name.Equals("xt"))
                     xt = cook.Value;
 
             return xt;
-        }
-        public bool CookiesHaveExpired()
-        {
-            foreach (GoogleCookie cook in _cookies)
-            {
-                if (DateTime.Now > cook.Expire)
-                    return true;
-            }
-            return false;
-        }
-
-        public void AddGoogleCookieToContainer(GoogleCookie cookie)
-        {
-            cookieContainer.Add(new Uri("http://play.google.com"), new Cookie(cookie.Key, cookie.Value));
         }
     }
 }
