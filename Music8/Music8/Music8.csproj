@@ -219,24 +219,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CommonDX">
-      <HintPath>..\..\..\..\Downloads\Samples\Win8\CommonDX\bin\Debug\CommonDX.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.PlayerFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Microsoft.PlayerFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX">
-      <HintPath>..\..\..\..\Downloads\Bin\Standard-winrt\SharpDX.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct2D1">
-      <HintPath>..\..\..\..\Downloads\Bin\Standard-winrt\SharpDX.Direct2D1.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D11">
-      <HintPath>..\..\..\..\Downloads\Bin\Standard-winrt\SharpDX.Direct3D11.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.DXGI">
-      <HintPath>..\..\..\..\Downloads\Bin\Standard-winrt\SharpDX.DXGI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
