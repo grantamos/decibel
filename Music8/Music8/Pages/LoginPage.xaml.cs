@@ -87,8 +87,8 @@ namespace Music8.Pages
                     passwordVault.Add(credential);
                 }
 
-                App.googleAPI.GetUserPlaylists();
-                App.googleAPI.GetAllSongs();
+                await App.googleAPI.GetUserPlaylists();
+                App.googleAPI.GetAllSongs(1);
 
                 if (!this.Frame.Navigate(typeof(Pages.MainPage)))
                 {
