@@ -18,7 +18,6 @@ namespace Byteopia.Music.GoogleMusicAPI
     /// Wraps an HttpClient for use with Google requests
     /// </summary>
     ///
-    [DataContract]
     public class GoogleHTTP
     {
         /// <summary>
@@ -69,7 +68,7 @@ namespace Byteopia.Music.GoogleMusicAPI
 
         GoogleCookieManager cookieManager;
 
-        internal GoogleCookieManager CookieManager
+        public GoogleCookieManager CookieManager
         {
             get { return cookieManager; }
             set { cookieManager = value; }

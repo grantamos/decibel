@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Byteopia.Music.GoogleMusicAPI
 {
-    class GoogleCookieManager
+    public class GoogleCookieManager
     {
         public static String URI = "https://play.google.com/music/";
-
         private CookieContainer cookieContainer;
+
+        [DataMember(Name = "Cookies")]
+        public IEnumerable<Cookie> Cookies
+        {
+            get
+            {
+                return GetCookiesList();
+            }
+        }
+
         public GoogleCookieManager()
         {
             cookieContainer = new CookieContainer();
@@ -21,18 +31,21 @@ namespace Byteopia.Music.GoogleMusicAPI
         public void HandleResponse(HttpResponseMessage msg)
         {
             IEnumerable<String> cookies;
-            if(msg.Headers.TryGetValues("Set-Cookie", out cookies))
+            if (msg.Headers.TryGetValues("Set-Cookie", out cookies))
             {
                 foreach (String cookie in cookies)
                 {
-                    cookieContainer.SetCookies(new Uri(URI), cookie) ;
+                    cookieContainer.SetCookies(new Uri(URI), cookie);
                 }
             }
         }
 
-        public void SetCookiesFromString(String str)
+        public void SetCookiesFromList(List<Cookie> cookies)
         {
-            cookieContainer.SetCookies(new Uri(URI), str);
+            if (cookies == null) return;
+    
+            foreach (Cookie c in cookies)
+                cookieContainer.Add(new Uri(URI), c);
         }
 
         public String GetCookies()

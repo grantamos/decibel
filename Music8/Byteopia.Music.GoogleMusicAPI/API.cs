@@ -362,13 +362,48 @@ namespace Byteopia.Music.GoogleMusicAPI
             return true;
         }
 
+
         public async Task<bool> SeralizeSession()
         {
+            String googleClient = String.Empty;
+
+            try
+            {
+                googleClient = JSON.SeralizeObject<Session>(new Session()
+                {
+                     AuthToken = client.AuthroizationToken,
+                     Cookies = client.CookieManager.GetCookiesList()
+                });
+
+                Settings.SetSerializedValue("session", googleClient, true);
+            }
+            catch
+            { 
+                throw;
+                return false; 
+            }
+
             return true;
         }
 
-        public async Task<bool> DeseralizeSession()
+        public bool DeseralizeSession()
         {
+            Session tmp = null;
+            try
+            {
+                tmp = JSON.DeserializeObject<Session>(Settings.GetSerializedStringValue("session", true));
+
+                this.client.AuthroizationToken = tmp.AuthToken;
+                this.Client.CookieManager.SetCookiesFromList(tmp.Cookies);
+                
+            }
+            catch
+            {
+                throw;
+                return false;
+            }
+
+
             return true;
         }
     }

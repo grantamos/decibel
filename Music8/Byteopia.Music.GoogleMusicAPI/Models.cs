@@ -394,4 +394,14 @@ namespace Byteopia.Music.GoogleMusicAPI
         [DataMember(Name = "availableTracks")]
         public int AvailableTracks { get; set; }
     }
+
+    [DataContract]
+    public class Session
+    {
+        [DataMember(Name = "AuthToken")]
+        public String AuthToken { get; set; }
+
+        [DataMember(Name = "Cookies")]
+        public List<Cookie> Cookies { get; set; }
+    }
 }
