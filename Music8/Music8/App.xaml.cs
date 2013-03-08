@@ -57,6 +57,8 @@ namespace Music8
             set { App.collection = value; }
         }
 
+        public static String APP_NAME = "decibel";
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
