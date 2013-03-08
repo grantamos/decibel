@@ -21,7 +21,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="All Artists" FontSize="18" FontWeight="Normal"/>
+                <TextBlock Text="all artists" FontSize="18" FontWeight="Normal"/>
                 <Border BorderThickness="0,1,0,0" BorderBrush="#a6a6a6" HorizontalAlignment="Stretch"/>
             </StackPanel>
 
@@ -48,7 +48,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical">
-                <TextBlock x:Name="AlbumListHeader" Text="All Albums" FontSize="18" FontWeight="Normal"/>
+                <TextBlock x:Name="AlbumListHeader" Text="all albums" FontSize="18" FontWeight="Normal"/>
                 <Border BorderThickness="0,1,0,0" BorderBrush="#a6a6a6" HorizontalAlignment="Stretch"/>
             </StackPanel>
 
@@ -59,7 +59,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="10" Width="100">
-                            <Image Source="{Binding song.ArtURL}" Width="100" Height="100"/>
+                            <Image Source="{Binding ArtURL}" Width="100" Height="100"/>
                             <TextBlock Text="{Binding AlbumName}" FontSize="14" TextWrapping="NoWrap"/>
                             <TextBlock Text="{Binding ArtistName}" FontSize="12" TextWrapping="NoWrap"/>
                         </StackPanel>
@@ -78,7 +78,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical">
-                <TextBlock x:Name="SongListHeader" Text="All Songs" FontSize="18" FontWeight="Normal"/>
+                <TextBlock x:Name="SongListHeader" Text="all songs" FontSize="18" FontWeight="Normal"/>
                 <Border BorderThickness="0,1,0,0" BorderBrush="#a6a6a6" HorizontalAlignment="Stretch"/>
             </StackPanel>
 

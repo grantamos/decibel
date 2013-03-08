@@ -1,4 +1,5 @@
 ﻿using Music8.Common;
+using Music8.Music;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,20 +42,12 @@ namespace Music8
             set { App.zuneAPI = value; }
         }
 
-        private static SongQueue songQueue;
+        private static MusicLibrary musicLibrary = new MusicLibrary();
 
-        public static SongQueue SongQueue
+        public static MusicLibrary MusicLibrary
         {
-            get { return App.songQueue; }
-            set { App.songQueue = value; }
-        }
-
-        private static Collection collection;
-
-        public static Collection Collection
-        {
-            get { return App.collection; }
-            set { App.collection = value; }
+            get { return App.musicLibrary; }
+            set { App.musicLibrary = value; }
         }
 
         public static String APP_NAME = "decibel";

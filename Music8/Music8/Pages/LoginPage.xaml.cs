@@ -95,7 +95,7 @@ namespace Music8.Pages
             if (await DoLoginWork(userName, userPassword))
             {
                 prLoading.IsActive = false;
-                Frame.Navigate(typeof(Pages.MainPage));
+                Frame.Navigate(typeof(Pages.LoadingPage));
             }
             else
             {

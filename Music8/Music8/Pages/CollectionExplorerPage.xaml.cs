@@ -1,4 +1,5 @@
-﻿using Music8.Common;
+﻿using Byteopia.Music.GoogleMusicAPI;
+using Music8.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,56 +23,50 @@ namespace Music8.Pages
     /// </summary>
     public sealed partial class CollectionExplorerPage : Page
     {
-        CollectionViewSource cvsArtists, cvsAlbums, cvsSongs;
-
         public CollectionExplorerPage()
         {
             this.InitializeComponent();
+
+            this.Loaded += CollectionExplorerPage_Loaded;
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        void CollectionExplorerPage_Loaded(object sender, RoutedEventArgs e)
         {
-            cvsArtists = new CollectionViewSource { Source = App.Collection.artists };
-            cvsAlbums = new CollectionViewSource { Source = App.Collection.albums };
-            cvsSongs = new CollectionViewSource { Source = App.Collection.songs };
-
-            this.ArtistListView.SetBinding(ListView.ItemsSourceProperty, new Binding() { Source = cvsArtists });
-            this.AlbumListView.SetBinding(ListView.ItemsSourceProperty, new Binding() { Source = cvsAlbums });
-            this.SongListView.SetBinding(ListView.ItemsSourceProperty, new Binding() { Source = cvsSongs });
+            AllData();
 
             this.ArtistListView.SelectedIndex = -1;
             this.AlbumListView.SelectedIndex = -1;
 
-            //this.AlbumListHeader.Text = "Albums";
-            //this.SongListHeader.Text = "Songs";
         }
+
+        private void AllData()
+        {
+            this.ArtistListView.ItemsSource = App.MusicLibrary.Artists;
+            this.AlbumListView.ItemsSource = App.MusicLibrary.Albums;
+            this.SongListView.ItemsSource = App.MusicLibrary.Tracks;
+
+            this.AlbumListHeader.Text = "all artists";
+            this.SongListHeader.Text = "all songs";
+        }
+
 
         private void ArtistListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(e.AddedItems.Count > 0)
+            if (e.AddedItems.Count != 0)
             {
-                Artist artist = e.AddedItems.First() as Artist;
-                object item = ArtistListView.ItemContainerGenerator.ContainerFromItem(artist);
-
+                var z = this.AlbumListView.SelectedItems;
+                Music8.Music.MusicLibrary.Artist artist = e.AddedItems.First() as Music8.Music.MusicLibrary.Artist;
                 String artistName = artist.ArtistName;
                 this.AlbumListHeader.Text = artistName;
-                this.SongListHeader.Text = "Songs by " + artistName;
-                cvsAlbums.Source = App.Collection.albums.Where(s => s.ArtistName == artistName).OrderBy(s => s.AlbumName);
-                cvsSongs.Source = App.Collection.songs.Where(s => s.Artist == artistName).OrderBy(s => s.Title);
+                this.SongListHeader.Text = "songs by " + artistName;
+
+                
+                this.SongListView.ItemsSource = e.AddedItems.SelectMany(c => (c as Music8.Music.MusicLibrary.Artist).Songs);
+
+                this.AlbumListView.ItemsSource = e.AddedItems.SelectMany(c => (c as Music8.Music.MusicLibrary.Artist).Albums);
             }
             else
-            {
-                this.AlbumListHeader.Text = "All Albums";
-                cvsAlbums.Source = App.Collection.albums.OrderBy(s => s.AlbumName);
-
-                this.SongListHeader.Text = "All Songs";
-                this.cvsSongs.Source = App.Collection.songs.OrderBy(s => s.Title);
-            }
+                AllData();
 
             this.AlbumListView.SelectedIndex = -1;
             this.SongListView.SelectedIndex = -1;
@@ -79,7 +74,7 @@ namespace Music8.Pages
 
         private void AlbumListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(e.AddedItems.Count() > 0)
+            /*if(e.AddedItems.Count() > 0)
             {
                 String albumName = (e.AddedItems.First() as Album).AlbumName;
                 this.SongListHeader.Text = albumName;
@@ -97,7 +92,7 @@ namespace Music8.Pages
                 this.cvsSongs.Source = App.Collection.songs.OrderBy(s => s.Title);
             }
 
-            this.SongListView.SelectedIndex = -1;
+            this.SongListView.SelectedIndex = -1;*/
         }
     }
 }

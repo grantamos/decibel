@@ -10,7 +10,8 @@
     <SolidColorBrush x:Key="AppBarItemPointerOverForegroundThemeBrush" Color="#6cc5c9"/>
     <SolidColorBrush x:Key="ApplicationSecondaryForegroundThemeBrush" Color="#808080"/>
     <SolidColorBrush x:Key="ApplicationPressedForegroundThemeBrush" Color="#343434"/>
-    <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBackgroundThemeBrush" Color="DodgerBlue"/>
+    <SolidColorBrush x:Key="
+                     SelectedPointerOverBackgroundThemeBrush" Color="DodgerBlue"/>
     <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBorderThemeBrush" Color="DodgerBlue"/>
     <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="DodgerBlue"/>
     <SolidColorBrush x:Key="ListViewItemSelectedForegroundThemeBrush" Color="White"/>

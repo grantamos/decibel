@@ -85,27 +85,27 @@ namespace Music8.Common
 
         private void Previous_Click(object sender, RoutedEventArgs e)
         {
-            App.SongQueue.PreviousSong();
+           
         }
 
         private async void Play_Click(object sender, RoutedEventArgs e)
         {
             if (mediaElement.CurrentState == MediaElementState.Playing)
             {
-                App.SongQueue.Pause();
+                //App.SongQueue.Pause();
                 playButton.Style = (Style)Application.Current.Resources["MyPlayAppBarButtonStyle"];
             }
             else
             {
-                bool didPlay = await App.SongQueue.Play();
-                if (didPlay)
-                    playButton.Style = (Style)Application.Current.Resources["MyPauseAppBarButtonStyle"];
+               // bool didPlay = await App.SongQueue.Play();
+                //if (didPlay)
+                    //playButton.Style = (Style)Application.Current.Resources["MyPauseAppBarButtonStyle"];
             }
         }
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
-            App.SongQueue.NextSong();
+            //App.SongQueue.NextSong();
         }
 
         private void Queue_Click(object sender, RoutedEventArgs e)
