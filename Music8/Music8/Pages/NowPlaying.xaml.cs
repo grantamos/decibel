@@ -97,5 +97,10 @@ namespace Music8.Pages
             ImageFadeIn.Begin();
             ImageZoomIn.Begin();
         }
+
+        private void backButton_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

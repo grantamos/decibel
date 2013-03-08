@@ -122,6 +122,7 @@
     <Compile Include="Common\PlaybackControl.xaml.cs">
       <DependentUpon>PlaybackControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\RichTextColumns.cs" />
     <Compile Include="Music\Album.cs" />
     <Compile Include="Music\Artist.cs" />
     <Compile Include="Music\MusicLibrary.cs" />
@@ -166,6 +167,7 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Common\ReadMe.txt" />
     <Content Include="Password.txt" />
     <Content Include="To-Do.txt" />
   </ItemGroup>

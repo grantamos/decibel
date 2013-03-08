@@ -53,7 +53,7 @@ namespace Music8.Pages
                 NavigateContentFrame(typeof(Pages.EventsPage));
             else if (radioBtn.Name == "nowPlayingRadioButton")
             {
-                NavigateContentFrame(typeof(Pages.NowPlaying));
+                Frame.Navigate(typeof(NowPlaying));
             }
         }
 

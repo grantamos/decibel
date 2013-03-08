@@ -54,20 +54,44 @@
 
         </Storyboard>
     </Page.Resources>
-    <Grid>
-        <Image x:Name="artistBackground" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill" Opacity=".2" Source="http://24.media.tumblr.com/2ee291f9b4538231ebae421fdce980f5/tumblr_meur5qgkxT1rlcqyso1_500.png">
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="450"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Image Name="artistBackground" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Stretch="UniformToFill" >
             <Image.RenderTransform>
                 <ScaleTransform x:Name="scale"></ScaleTransform>
             </Image.RenderTransform>
+            
         </Image>
 
+
+        <Button Grid.Column="0" Content="Button" HorizontalAlignment="Left" Click="GoBack" Style="{StaticResource BackButtonStyle}"/>
+
+        <StackPanel  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Margin="40, 0, 0, 0" Background="Transparent">
+            <TextBlock Style="{StaticResource HeaderTextStyle}" Text="Test" Grid.ColumnSpan="2" Foreground="White" Margin="0, 10, 0, 0"/>
+            <TextBlock Style="{StaticResource SubheaderTextStyle}" Text="albym by artist"  Foreground="White" Margin="0, 5, 0, 0"/>
+            <TextBlock Style="{StaticResource ItemTextStyle}" Text="0:55/3:43" Foreground="White" Margin="0, 5, 0, 0"/>
+        </StackPanel>
+        
+        
         <ListView x:Name="nowPlayingList"
                   Width="450" HorizontalAlignment="Right"
-                  Margin="0,0,0,70" IsItemClickEnabled="False"
+                  IsItemClickEnabled="False"
                   AllowDrop="True"
                   SelectionMode="Single"
                   CanReorderItems="True"
                   Background="#FFC6C6C6"
+                  Grid.RowSpan="3"
+                  Grid.Column="2"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -91,5 +115,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
     </Grid>
 </common:LayoutAwarePage>
