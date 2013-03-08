@@ -8,6 +8,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -63,8 +64,7 @@ namespace Music8.Pages
             }
             else
             {
-                bool hasSession = await App.GoogleAPI.Login("", "", true);
-                if (hasSession)
+                if (App.GoogleAPI.HasSession())
                 {
                     await LoginAndLoad("", "");
                 }
@@ -96,6 +96,13 @@ namespace Music8.Pages
             {
                 prLoading.IsActive = false;
                 Frame.Navigate(typeof(Pages.MainPage));
+            }
+            else
+            {
+                MessageDialog dia = new MessageDialog("error logging in, please try again.", "login error");
+                await dia.ShowAsync();
+                btnLogin.IsEnabled = true;
+                prLoading.IsActive = false;
             }
         }
 
