@@ -29,7 +29,7 @@
                 <Button Style="{StaticResource MySkipAheadAppBarButtonStyle}" Click="Next_Click"/>
                 <Button Style="{StaticResource ListAppBarButtonStyle}" Click="Queue_Click"/>
             </StackPanel>
-            <Border Grid.Column="0" BorderBrush="DarkGray" BorderThickness="1"  Margin="0, 0, 0, 10" Width="50" Height="50">
+            <Border Grid.Column="0" BorderBrush="DarkGray" BorderThickness="1"  Margin="0, 0, 0, 10" Width="50" Height="50" Opacity="0">
                 <Image  Source="{Binding ElementName=mediaElement, Path=DataContext.ArtURL, Mode=OneWay}"  />
             </Border>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center"
@@ -49,10 +49,11 @@
                             Minimum="0" Maximum="{Binding ElementName=mediaElement, Path=NaturalDuration, Mode=OneWay, Converter={StaticResource TimeSpanConverter}}"
                             HorizontalAlignment="Stretch" VerticalAlignment="Center"
                                  Foreground="DodgerBlue" Margin="0,-10,0,0" />
+                    <TextBlock Style="{StaticResource CaptionTextStyle}" Text="{Binding ElementName=mediaElement, Path=Position.ToString, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0"/>
+                    <TextBlock Style="{StaticResource CaptionTextStyle}" Text="{Binding ElementName=mediaElement, Path=NaturalDuration.ToString, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,0,0"/>
                 </Grid>
                 <Grid Grid.Column="0">
-                    <TextBlock Text="{Binding ElementName=mediaElement, Path=Position.ToString, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0"/>
-                    <TextBlock Text="{Binding ElementName=mediaElement, Path=NaturalDuration.ToString, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,0,0"/>
+                   
                 </Grid>
             </StackPanel>
         </Grid>

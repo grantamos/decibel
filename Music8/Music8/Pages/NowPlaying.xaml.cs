@@ -25,47 +25,77 @@ namespace Music8.Pages
     /// </summary>
     public sealed partial class NowPlaying : Music8.Common.LayoutAwarePage
     {
+        List<Uri> ImageList;
+        Random random;
+
         public NowPlaying()
         {
             this.InitializeComponent();
+
+            this.Loaded += NowPlaying_Loaded;
+
+            random = new Random(DateTime.Now.Millisecond);
+
+            ImageFadeIn.Completed += ImageFadeIn_Completed;
+            ImageZoomIn.Completed += ImageZoomIn_Completed;
+         
+            ImageFadeOut.Completed += ImageFadeOut_Completed;
         }
 
-        /// <summary>
-        /// Populates the page with content passed during navigation.  Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="navigationParameter">The parameter value passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested.
-        /// </param>
-        /// <param name="pageState">A dictionary of state preserved by this page during an earlier
-        /// session.  This will be null the first time a page is visited.</param>
-        protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
+        void ImageFadeOut_Completed(object sender, object e)
         {
-           
+            scale.ScaleX = scale.ScaleY = 1;
+            GetImage();
         }
 
-       
-
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
-        protected override void SaveState(Dictionary<String, Object> pageState)
+        void ImageZoomIn_Completed(object sender, object e)
         {
+            ImageFadeOut.BeginTime = TimeSpan.FromSeconds(0);
+            ImageFadeOut.Begin();
         }
 
-        private void Remove_Song(object sender, RoutedEventArgs e)
+        void ImageFadeIn_Completed(object sender, object e)
         {
-   
+            ImageZoomIn.BeginTime = TimeSpan.FromSeconds(0);
+            ImageZoomIn.Begin();
         }
 
-        private void nowPlayingList_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        void NowPlaying_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            nowPlayingList.ItemsSource = App.MusicLibrary.Queue.Songs;
+            SetImage();
         }
 
-  
+        private async System.Threading.Tasks.Task SetImage()
+        {
+            if (App.MusicLibrary.Queue.CurrentSong != null)
+            {
+                ImageList = await App.ZuneAPI.GetArtistImages(App.MusicLibrary.Queue.CurrentSong.Artist);
+                GetImage();
+            }
+        }
+
+        private void GetImage()
+        {
+            if (ImageList.Count > 0)
+            {
+                BitmapImage img = (ImageList != null && ImageList.Count > 0) ? new BitmapImage(ImageList[random.Next(0, ImageList.Count)]) : null;
+                if (img != null)
+                    artistBackground.Source = img;
+                else
+                {
+
+                }
+               
+                ImageFadeIn.BeginTime = TimeSpan.FromSeconds(0);
+                ImageFadeIn.Begin();
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ImageFadeIn.Begin();
+            ImageZoomIn.Begin();
+        }
     }
 }

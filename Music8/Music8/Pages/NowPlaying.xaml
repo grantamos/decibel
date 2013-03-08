@@ -9,33 +9,74 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Storyboard x:Name="Reset" Storyboard.TargetName="scale" Duration="0:0:1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleX" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
 
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleY" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="ImageFadeOut" Storyboard.TargetName="artistBackground">
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" >
+            <EasingDoubleKeyFrame KeyTime="0" Value=".2" />
+            <EasingDoubleKeyFrame KeyTime="0:0:5" Value="0" /> 
+        </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="ImageFadeIn" Storyboard.TargetName="artistBackground">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:5" Value=".2" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="ImageZoomIn" Storyboard.TargetName="scale" Duration="0:1:30">
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleX" >
+                <EasingDoubleKeyFrame KeyTime="5" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:15" Value="1" />
+
+ 
+                <EasingDoubleKeyFrame KeyTime="0:0:15" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:1:30" Value="1.8" />
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleY" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:15" Value="1" />
+
+                <EasingDoubleKeyFrame KeyTime="0:0:15" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:1:30" Value="1.8" />
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+    </Page.Resources>
     <Grid>
-        <Image x:Name="artistBackground" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill" Opacity=".2"/>
-        <!--<Rectangle Width="360" VerticalAlignment="Stretch" HorizontalAlignment="Right">
-            <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop Offset="0" Color="#00FFFFFF"/>
-                    <GradientStop Offset="1" Color="#55000000"/>
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>-->
+        <Image x:Name="artistBackground" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill" Opacity=".2" Source="http://24.media.tumblr.com/2ee291f9b4538231ebae421fdce980f5/tumblr_meur5qgkxT1rlcqyso1_500.png">
+            <Image.RenderTransform>
+                <ScaleTransform x:Name="scale"></ScaleTransform>
+            </Image.RenderTransform>
+        </Image>
+
         <ListView x:Name="nowPlayingList"
-                  Width="360" HorizontalAlignment="Right"
-                  Margin="0,75,0,100" IsItemClickEnabled="False"
-                  
+                  Width="450" HorizontalAlignment="Right"
+                  Margin="0,0,0,70" IsItemClickEnabled="False"
                   AllowDrop="True"
                   SelectionMode="Single"
                   CanReorderItems="True"
+                  Background="#FFC6C6C6"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="300" HorizontalAlignment="Stretch" Margin="6">
+                    <Grid Width="300" HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Margin="5" DataContext="{Binding song}">
+                        <StackPanel Margin="5">
                             <TextBlock Text="{Binding Title}" TextWrapping="NoWrap"/>
                             <TextBlock Text="{Binding AlbumArtist}" FontSize="12" TextWrapping="NoWrap"/>
                             <TextBlock TextWrapping="NoWrap">
@@ -44,8 +85,8 @@
                         </StackPanel>
                         <Button Content="&#xE10A;" Grid.Column="1"
                                 Style="{StaticResource CustomButtonStyle}"
-                                Click="Remove_Song" HorizontalAlignment="Right"
-                                Tag="{Binding}"/>
+                               HorizontalAlignment="Right"
+                                Tag="{Binding}" Click="Button_Click_1" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

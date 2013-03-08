@@ -10,7 +10,24 @@ namespace Music8.Music
     public class NowPlayingQueue
     {
         List<GoogleMusicSong> queue;
+
+        public List<GoogleMusicSong> Songs
+        {
+            get { return queue; }
+            set { queue = value; }
+        }
         int index;
+
+        public int CurrentIndex
+        {
+            get { return index; }
+            set { index = value; }
+        }
+
+        public GoogleMusicSong CurrentSong
+        {
+            get { return queue[index]; }
+        }
 
         public NowPlayingQueue()
         {
