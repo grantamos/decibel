@@ -26,13 +26,14 @@ namespace Music8.Common
 
         private void Play(object sender, RoutedEventArgs e)
         {
-           /* Button btn = sender as Button;
-            if (btn.DataContext.GetType() == typeof(Artist))
-                App.SongQueue.PlaySongs(App.Collection.GetArtistSongs((btn.DataContext as Artist).song));
-            else if (btn.DataContext.GetType() == typeof(Album))
-                App.SongQueue.PlaySongs(App.Collection.GetAlbumSongs((btn.DataContext as Album).song));
-            else if (btn.DataContext.GetType() == typeof(GoogleMusicSong))
-                App.SongQueue.PlaySong(btn.DataContext as GoogleMusicSong);*/
+            Button btn = sender as Button;
+            GoogleMusicSong song = (btn.DataContext as GoogleMusicSong);
+
+            if(btn == null || song == null)
+                return;
+
+            if (btn.DataContext.GetType() == typeof(GoogleMusicSong))
+                App.MusicLibrary.PlaySong(song);
         }
 
         private void AddToNowPlaying(object sender, RoutedEventArgs e)

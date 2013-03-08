@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace Music8.Music
 {
@@ -25,10 +26,20 @@ namespace Music8.Music
         List<GoogleMusicSong> baseTracks;
         List<Artist> baseArtist;
         List<Album> baseAlbum;
+        NowPlayingQueue queue;
+        private MediaElement mediaElement;
+
+        public MediaElement MediaElement
+        {
+            get { return mediaElement; }
+            set { mediaElement = value; }
+        }
 
         public MusicLibrary()
         {
             PagesToLoad = 2;
+
+            queue = new NowPlayingQueue();
         }
 
         public List<GoogleMusicSong> Tracks
@@ -73,11 +84,65 @@ namespace Music8.Music
             }
         }
 
-        public async void FetchFullLibrary()
+        public bool Shuffle
+        {
+            get;
+            set;
+        }
+
+        public enum REPEAT_MODE : int
+        {
+            NONE = 0,
+            ONCE = 1,
+            ALL = 1
+        };
+
+        public REPEAT_MODE Repeat
+        {
+            get;
+            set;
+        }
+
+        public NowPlayingQueue Queue
+        {
+            get
+            {
+                return queue;
+            }
+            set
+            {
+                queue = value;
+            }
+        }
+
+        public async Task<bool> FetchFullLibrary()
         {
             await App.GoogleAPI.GetUserPlaylists();
 
             App.GoogleAPI.GetAllSongs(PagesToLoad);
+
+            return true;
+        }
+
+        public void NextTrack()
+        {
+            PlaySong(Queue.NextTrack());
+        }
+
+        public void PrevTrack()
+        {
+            PlaySong(Queue.PrevTrack());
+        }
+
+        public async void PlaySong(GoogleMusicSong song)
+        {
+            Queue.Add(song);
+            String streamURL = await App.GoogleAPI.GetStreamURL(song);
+            if (!streamURL.Equals(string.Empty) && App.GoogleAPI.Client.LastStatusCode != System.Net.HttpStatusCode.Forbidden)
+            {
+                mediaElement.DataContext = song;
+                mediaElement.Source = new Uri(streamURL);
+            }
         }
     }
 }

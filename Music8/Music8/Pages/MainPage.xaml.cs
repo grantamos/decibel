@@ -30,6 +30,8 @@ namespace Music8.Pages
             Window.Current.SizeChanged += Window_SizeChanged;
 
             this.Loaded += MainPage_Loaded;
+
+            App.MusicLibrary.MediaElement = playbackControl.GetMediaElement();
         }
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)

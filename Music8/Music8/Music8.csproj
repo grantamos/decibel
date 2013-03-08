@@ -127,6 +127,7 @@
     <Compile Include="Music\MusicLibrary.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Common\TimeSpanConverter.cs" />
+    <Compile Include="Music\NowPlayingQueue.cs" />
     <Compile Include="Pages\CollectionExplorerPage.xaml.cs">
       <DependentUpon>CollectionExplorerPage.xaml</DependentUpon>
     </Compile>

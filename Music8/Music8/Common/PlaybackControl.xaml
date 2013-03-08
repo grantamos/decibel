@@ -16,7 +16,7 @@
     <Grid HorizontalAlignment="Stretch" x:Name="rootGrid" Background="#f3f3f3">
         <Border BorderThickness="0,1,0,0" BorderBrush="#a6a6a6"/>
         <MediaElement x:Name="mediaElement"/>
-        <Grid x:Name="FilledGrid" Visibility="Visible" Margin="10" VerticalAlignment="Bottom">
+        <Grid x:Name="FilledGrid" Visibility="Visible" Margin="0, 10, 0, 0" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -29,6 +29,9 @@
                 <Button Style="{StaticResource MySkipAheadAppBarButtonStyle}" Click="Next_Click"/>
                 <Button Style="{StaticResource ListAppBarButtonStyle}" Click="Queue_Click"/>
             </StackPanel>
+            <Border Grid.Column="0" BorderBrush="DarkGray" BorderThickness="1"  Margin="0, 0, 0, 10" Width="50" Height="50">
+                <Image  Source="{Binding ElementName=mediaElement, Path=DataContext.ArtURL, Mode=OneWay}"  />
+            </Border>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center"
                         VerticalAlignment="Center" Grid.ColumnSpan="2" Width="300"
                         Visibility="{Binding ElementName=mediaElement, Path=CurrentState, Converter={StaticResource MediaElementStateConverter}, Mode=OneWay}">
@@ -47,7 +50,7 @@
                             HorizontalAlignment="Stretch" VerticalAlignment="Center"
                                  Foreground="DodgerBlue" Margin="0,-10,0,0" />
                 </Grid>
-                <Grid>
+                <Grid Grid.Column="0">
                     <TextBlock Text="{Binding ElementName=mediaElement, Path=Position.ToString, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0"/>
                     <TextBlock Text="{Binding ElementName=mediaElement, Path=NaturalDuration.ToString, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,0,0"/>
                 </Grid>
