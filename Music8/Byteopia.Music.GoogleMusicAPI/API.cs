@@ -63,6 +63,11 @@ namespace Byteopia.Music.GoogleMusicAPI
         public ObservableCollection<GoogleMusicSong> Tracks = new ObservableCollection<GoogleMusicSong>();
         public ObservableCollection<GoogleMusicPlaylist> Playlists = new ObservableCollection<GoogleMusicPlaylist>();
 
+        public bool HasSession()
+        {
+            return this.DeseralizeSession(); 
+        }
+
         /// <summary>
         /// Login via email and pw
         /// </summary>
@@ -71,9 +76,10 @@ namespace Byteopia.Music.GoogleMusicAPI
         /// <returns></returns>
         public async Task<Boolean> Login(String email, String password)
         {
-            if (this.DeseralizeSession())
+            bool hasSession = this.DeseralizeSession();
+            if (hasSession)
                 return true;
- 
+
             HttpContent content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("service", "sj"), // skyjam
