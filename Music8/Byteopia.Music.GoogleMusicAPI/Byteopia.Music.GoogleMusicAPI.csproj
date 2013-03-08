@@ -106,6 +106,7 @@
     <Compile Include="API.cs" />
     <Compile Include="GoogleCookieManager.cs" />
     <Compile Include="GoogleHTTP.cs" />
+    <Compile Include="SmartObservableCollection.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

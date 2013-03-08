@@ -24,8 +24,10 @@ namespace Byteopia.Music.GoogleMusicAPI
     [DataContract]
     public class API
     {
-        public delegate void NotifyChunkAdded(ObservableCollection<GoogleMusicSong> songs);
-        public event NotifyChunkAdded ChunkAdded;
+        public delegate void NotifyChunkAdded(IEnumerable<GoogleMusicSong> songs);
+        public event NotifyChunkAdded GetAllSongsChunkAdded;
+
+        public event EventHandler GetAllSongsComplete;
 
         GoogleHTTP client;
 
@@ -60,7 +62,7 @@ namespace Byteopia.Music.GoogleMusicAPI
             client.CookiesChanged += client_CookiesChanged;
         }
 
-        public ObservableCollection<GoogleMusicSong> Tracks = new ObservableCollection<GoogleMusicSong>();
+        public SmartObservableCollection<GoogleMusicSong> Tracks = new SmartObservableCollection<GoogleMusicSong>();
         public ObservableCollection<GoogleMusicPlaylist> Playlists = new ObservableCollection<GoogleMusicPlaylist>();
 
         public bool HasSession()
@@ -106,7 +108,7 @@ namespace Byteopia.Music.GoogleMusicAPI
 
         public async Task<int> GetTrackCount()
         {
-            GoogleMusicStatus status = await client.GET<GoogleMusicStatus>(new Uri("https://play.google.com/music/services/getstatus"));
+            GoogleMusicStatus status = await client.POST<GoogleMusicStatus>(new Uri("https://play.google.com/music/services/getstatus"));
             return status.TotalTracks;
         }
 
@@ -135,17 +137,19 @@ namespace Byteopia.Music.GoogleMusicAPI
 
                 playlist = await client.POST<GoogleMusicPlaylist>(new Uri("https://play.google.com/music/services/loadalltracks"), content);
 
-                foreach (GoogleMusicSong song in playlist.Songs)
-                  Tracks.Add(song);
+                Tracks.AddRange(playlist.Songs);
 
-                if(this.ChunkAdded != null)
-                    this.ChunkAdded(Tracks);
+                if(this.GetAllSongsChunkAdded != null)
+                    this.GetAllSongsChunkAdded(playlist.Songs);
 
                 if (String.IsNullOrEmpty(playlist.ContToken))
                     break;
 
                 pagesFetched++;
             }
+
+            if (this.GetAllSongsComplete != null)
+                this.GetAllSongsComplete(this, new EventArgs());
         }
 
         /// <summary>
@@ -378,7 +382,6 @@ namespace Byteopia.Music.GoogleMusicAPI
         {
             return true;
         }
-
 
         public async Task<bool> SeralizeSession()
         {
