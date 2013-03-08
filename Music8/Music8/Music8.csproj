@@ -122,6 +122,8 @@
     <Compile Include="Common\PlaybackControl.xaml.cs">
       <DependentUpon>PlaybackControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Music\Album.cs" />
+    <Compile Include="Music\Artist.cs" />
     <Compile Include="Music\MusicLibrary.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Common\TimeSpanConverter.cs" />

@@ -22,108 +22,13 @@ namespace Music8.Music
             set;
         }
 
-        public class Artist
-        {
-            public String ArtistName { get; set; }
-            private List<GoogleMusicSong> songs = null;
-            List<Album> albums = null;
-
-            public String Details
-            {
-                get
-                {
-                    return this.Songs.Count + " Song" + (this.Songs.Count > 1 ? "s" : "") + ", " + Duration;
-                }
-                set
-                {
-
-                }
-            }
-
-            public List<Album> Albums
-            {
-                get
-                {
-                    if(albums == null)
-                        albums = App.GoogleAPI.Tracks.Where(z => z.AlbumArtist == this.ArtistName).Select(g => new Album
-                        {
-                            AlbumName = g.Album,
-                            ArtistName = g.AlbumArtist,
-                            ArtURL = g.ArtURL
-                        }).GroupBy(g => g.AlbumName).Select(g => g.First()).ToList();
-
-                    return albums;
-                }
-                set
-                {
-
-                }
-            }
-
-            public List<GoogleMusicSong> Songs
-            {
-                get
-                {
-                    if (songs == null)
-                        songs = App.GoogleAPI.Tracks.Where(z => z.AlbumArtist == ArtistName).ToList();
-
-                    return songs;
-                }
-            }
-
-            public TimeSpan Duration
-            {
-                get
-                {
-                    return TimeSpan.FromMilliseconds(Songs.Sum(g => g.Duration));
-                }
-                set
-                {
-
-                }
-            }
-        }
-
-        public class Album
-        {
-            public String ArtistName { get; set; }
-            public String AlbumName { get; set; }
-            public String ArtURL { get; set; }
-
-            private List<GoogleMusicSong> songs = null;
-
-            public TimeSpan Duration
-            {
-                get
-                {
-                    return TimeSpan.FromMilliseconds(Songs.Sum(g => g.Duration));
-                }
-                set
-                {
-
-                }
-            }
-
-
-            public List<GoogleMusicSong> Songs
-            {
-                 get
-                {
-                    if(songs == null)
-                        songs = App.GoogleAPI.Tracks.Where(z => z.AlbumArtist == ArtistName).ToList();
-
-                    return songs;
-                }
-            }
-        }
-
         List<GoogleMusicSong> baseTracks;
         List<Artist> baseArtist;
         List<Album> baseAlbum;
 
         public MusicLibrary()
         {
-            PagesToLoad = 1;
+            PagesToLoad = 2;
         }
 
         public List<GoogleMusicSong> Tracks
