@@ -11,18 +11,17 @@
     mc:Ignorable="d">
 
     <Grid>
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="/Assets/background6.jpg"/>
-        </Grid.Background>-->
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                 <GradientStop Color="#e6e6e6" Offset="0"/>
                 <GradientStop Color="#f2f2f2" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
+        
         <Frame x:Name="ContentFrame"/>
 
         <Grid Height="60" VerticalAlignment="Top">
+            
             <StackPanel x:Name="NavigationHeader" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 20 0 0">
                 <StackPanel.ChildrenTransitions>
                     <TransitionCollection>
@@ -39,15 +38,7 @@
                              Checked="RadioButton_Checked" Style="{StaticResource TextRadioButtonStyle}"
                              FontSize="30" PointerExited="RadioButton_PointerExited" Unchecked="nowPlayingRadioButton_Unchecked"/>
             </StackPanel>
-            <TextBox x:Name="searchTextBox" Width="300" VerticalAlignment="Bottom"
-                     HorizontalAlignment="Right"
-                     Margin="0,20,60,0"
-                     GotFocus="OnSearchTextBoxGotFocus"
-                     LostFocus="OnSearchTextBoxLostFocus"
-                     Text="Search..."
-                     TextChanged="searchTextBox_TextChanged"
-                     BorderThickness="1"/>
-            <Image x:Name="Logo" Source="/Assets/Logo.png" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="30" Margin="15,20,15,0"/>
+            <Image x:Name="Logo" Source="/Assets/Logo.png" VerticalAlignment="Center" HorizontalAlignment="Right" Height="30" Margin="15,20,15,0"/>
         </Grid>
         <common:PlaybackControl Height="70" x:Name="playbackControl"
                                 HorizontalAlignment="Stretch"
@@ -78,5 +69,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        
     </Grid>
 </common:LayoutAwarePage>

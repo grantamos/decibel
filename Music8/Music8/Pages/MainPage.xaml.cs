@@ -26,23 +26,13 @@ namespace Music8.Pages
         public MainPage()
         {
             this.InitializeComponent();
-            
+
             App.SongQueue = new SongQueue(playbackControl.GetMediaElement());
             App.Collection = new Collection(App.GoogleAPI.Tracks);
 
             Window.Current.SizeChanged += Window_SizeChanged;
 
             NavigateContentFrame(typeof(Pages.CollectionExplorerPage), this);
-
-            Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
-        }
-
-        private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
-        {
-            if (searchTextBox.FocusState == Windows.UI.Xaml.FocusState.Keyboard)
-                return;
-            OnSearchTextBoxGotFocus(null, null);
-            searchTextBox.Focus(FocusState.Keyboard);
         }
 
         void Window_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
@@ -104,41 +94,6 @@ namespace Music8.Pages
         private void nowPlayingRadioButton_Unchecked(object sender, RoutedEventArgs e)
         {
             playbackControl.Collapse();
-        }
-
-        private void OnSearchTextBoxGotFocus(object sender, RoutedEventArgs e)
-        {
-            if (searchTextBox.Text.Equals("Search...", StringComparison.OrdinalIgnoreCase))
-            {
-                searchTextBox.Text = string.Empty;
-            }
-        }
-
-        private void OnSearchTextBoxLostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(searchTextBox.Text))
-            {
-                searchTextBox.Text = "Search...";
-            }
-        }
-
-        private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Type type = ContentFrame.CurrentSourcePageType;
-            if (type == typeof(Pages.CollectionExplorerPage) && !searchTextBox.Text.Equals("Search...", StringComparison.OrdinalIgnoreCase))
-            {
-                
-            }
-        }
-
-        public void showDetailFlyout(GoogleMusicSong song)
-        {
-            Flyout flyout = new Flyout();
-            flyout.FlyoutWidth = (int) Window.Current.Bounds.Width / 2;
-            flyout.FlyoutHeight = (int)(Window.Current.Bounds.Height * .8);
-            flyout.FlyoutLeft = (int)Window.Current.Bounds.Width / 4;
-            flyout.FlyoutTop = (int)(Window.Current.Bounds.Height / 10);
-            flyout.ShowFlyout(new DetailsPage(song));
         }
     }
 }
