@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Security.Credentials;
@@ -27,74 +28,80 @@ namespace Music8.Pages
         public LoginPage()
         {
             this.InitializeComponent();
+
+            this.Loaded += LoginPage_Loaded;
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        void LoginPage_Loaded(object sender, RoutedEventArgs e)
         {
-            string userName, password;
-            bool saveCredentials = false;
-            PasswordCredential credential = null;
+            Login();
+        }
 
-            AnimationLibrary.AnimateOpacity(this.background, 1.0, 2.0);
-            AnimationLibrary.AnimateX(this.logo, -275, 0.5);
+        public async void Login()
+        {
+            PasswordCredential credential = null;
 
             try
             {
                 var passwordVault = new PasswordVault();
-                credential = passwordVault.FindAllByResource("Music8")[0];
-                credential = passwordVault.Retrieve("Music8", credential.UserName);
+                credential = passwordVault.FindAllByResource(App.APP_NAME)[0];
+                credential = passwordVault.Retrieve(App.APP_NAME, credential.UserName);
             }
-            catch (Exception exception) { }
-
-            if (credential == null)
+            catch
             {
-                CredentialPickerOptions credPickerOptions = new CredentialPickerOptions();
-                credPickerOptions.Message = "Enter your Google Music credentials";
-                credPickerOptions.Caption = "Login to Music8";
-                credPickerOptions.TargetName = ".";
-                credPickerOptions.AlwaysDisplayDialog = true;
-                credPickerOptions.AuthenticationProtocol = AuthenticationProtocol.Basic;
-                var credPickerResults = await CredentialPicker.PickAsync(credPickerOptions);
 
-                userName = credPickerResults.CredentialUserName;
-                password = credPickerResults.CredentialPassword;
-                saveCredentials = credPickerResults.CredentialSaveOption == CredentialSaveOption.Selected;
+            }
+
+            if (credential != null)
+            {
+                btnLogin.IsEnabled = false;
+
+                tbUserEmail.Text = credential.UserName;
+                tbUserPassword.Password = credential.Password;
+
+                await LoginAndLoad(credential.UserName, credential.Password);
             }
             else
             {
-                userName = credential.UserName;
-                password = credential.Password;
+                bool hasSession = await App.GoogleAPI.Login("", "", true);
+                if (hasSession)
+                {
+                    await LoginAndLoad("", "");
+                }
             }
-
-            DoLogin(userName, password, saveCredentials);
         }
 
-        public async void DoLogin(string userName, string password, bool saveCredentials)
+
+        private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            bool loginSuccess = await App.GoogleAPI.Login(userName, password);
+            btnLogin.IsEnabled = false;
 
-            if (loginSuccess)
+            String userName = tbUserEmail.Text;
+            String userPassword = tbUserPassword.Password;
+
+            if (cbSaveCreds.IsChecked.Value)
             {
-                if (saveCredentials)
-                {
-                    var passwordVault = new PasswordVault();
-                    var credential = new PasswordCredential("Music8", userName, password);
-                    passwordVault.Add(credential);
-                }
-
-                await App.GoogleAPI.GetUserPlaylists();
-                App.GoogleAPI.GetAllSongs(1);
-
-                if (!this.Frame.Navigate(typeof(Pages.MainPage)))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
+                var passwordVault = new PasswordVault();
+                var credential = new PasswordCredential(App.APP_NAME, userName, userPassword);
+                passwordVault.Add(credential);
             }
+
+            await LoginAndLoad(userName, userPassword);
+        }
+
+        private async Task LoginAndLoad(String userName, String userPassword)
+        {
+            prLoading.IsActive = true;
+            if (await DoLoginWork(userName, userPassword))
+            {
+                prLoading.IsActive = false;
+                Frame.Navigate(typeof(Pages.MainPage));
+            }
+        }
+
+        private async Task<bool> DoLoginWork(String userName = "", String userPassword = "")
+        {
+            return await App.GoogleAPI.Login(userName, userPassword);
         }
     }
 }
