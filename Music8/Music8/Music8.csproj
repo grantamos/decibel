@@ -129,6 +129,9 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Common\TimeSpanConverter.cs" />
     <Compile Include="Music\NowPlayingQueue.cs" />
+    <Compile Include="NowPlayingCanvas.xaml.cs">
+      <DependentUpon>NowPlayingCanvas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CollectionExplorerPage.xaml.cs">
       <DependentUpon>CollectionExplorerPage.xaml</DependentUpon>
     </Compile>
@@ -197,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="NowPlayingCanvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CollectionExplorerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -232,6 +239,10 @@
     <ProjectReference Include="..\Byteopia.Music.GoogleMusicAPI\Byteopia.Music.GoogleMusicAPI.csproj">
       <Project>{645da80f-fe08-45f8-a0ef-27c23d11e2fa}</Project>
       <Name>Byteopia.Music.GoogleMusicAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Byteopia.Music.Lastfm\Byteopia.Music.Lastfm.csproj">
+      <Project>{9ed56221-edac-41e8-90ef-464ccb4c8048}</Project>
+      <Name>Byteopia.Music.Lastfm</Name>
     </ProjectReference>
     <ProjectReference Include="..\Byteopia.Music.Zune\Byteopia.Music.Zune.csproj">
       <Project>{933ecccb-f3da-48d9-91f8-44223ac324ef}</Project>
