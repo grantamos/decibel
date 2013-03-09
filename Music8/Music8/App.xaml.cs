@@ -50,6 +50,14 @@ namespace Music8
             set { App.musicLibrary = value; }
         }
 
+        private static Byteopia.Music.Lastfm.API lastfmAPI = new Byteopia.Music.Lastfm.API();
+
+        public static Byteopia.Music.Lastfm.API LastfmAPI
+        {
+            get { return App.lastfmAPI; }
+            set { App.lastfmAPI = value; }
+        }
+
         public static String APP_NAME = "decibel";
 
         /// <summary>

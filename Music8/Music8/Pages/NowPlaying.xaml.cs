@@ -5,16 +5,20 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using Windows.Data.Html;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -26,81 +30,45 @@ namespace Music8.Pages
     public sealed partial class NowPlaying : Music8.Common.LayoutAwarePage
     {
         List<Uri> ImageList;
-        Random random;
-
         public NowPlaying()
         {
             this.InitializeComponent();
 
             this.Loaded += NowPlaying_Loaded;
 
-            random = new Random(DateTime.Now.Millisecond);
-
-            ImageFadeIn.Completed += ImageFadeIn_Completed;
-            ImageZoomIn.Completed += ImageZoomIn_Completed;
-         
-            ImageFadeOut.Completed += ImageFadeOut_Completed;
-        }
-
-        void ImageFadeOut_Completed(object sender, object e)
-        {
-            scale.ScaleX = scale.ScaleY = 1;
-            GetImage();
-        }
-
-        void ImageZoomIn_Completed(object sender, object e)
-        {
-            ImageFadeOut.BeginTime = TimeSpan.FromSeconds(0);
-            ImageFadeOut.Begin();
-        }
-
-        void ImageFadeIn_Completed(object sender, object e)
-        {
-            ImageZoomIn.BeginTime = TimeSpan.FromSeconds(0);
-            ImageZoomIn.Begin();
+            PrettyBackground.ImageFadeInTime = TimeSpan.FromSeconds(2);
+            PrettyBackground.ImagePanTime = TimeSpan.FromSeconds(3);
+            PrettyBackground.WaitBeforePanBegin = TimeSpan.FromSeconds(2);
+            PrettyBackground.ImageScale = 1.8;
+            PrettyBackground.MaxImageOpacity = .8;
+            PrettyBackground.ImageFadeOutTime = TimeSpan.FromSeconds(2);
         }
 
         void NowPlaying_Loaded(object sender, RoutedEventArgs e)
         {
-            nowPlayingList.ItemsSource = App.MusicLibrary.Queue.Songs;
             SetImage();
+            GetBio();
         }
 
         private async System.Threading.Tasks.Task SetImage()
         {
             if (App.MusicLibrary.Queue.CurrentSong != null)
             {
-                ImageList = await App.ZuneAPI.GetArtistImages(App.MusicLibrary.Queue.CurrentSong.Artist);
-                GetImage();
+                PrettyBackground.ImageList = await App.ZuneAPI.GetArtistImages(App.MusicLibrary.Queue.CurrentSong.Artist);
             }
+
+            PrettyBackground.Prettyify();
         }
 
-        private void GetImage()
+        private async void GetBio()
         {
-            if (ImageList.Count > 0)
-            {
-                BitmapImage img = (ImageList != null && ImageList.Count > 0) ? new BitmapImage(ImageList[random.Next(0, ImageList.Count)]) : null;
-                if (img != null)
-                    artistBackground.Source = img;
-                else
-                {
+            String bioStr = HtmlUtilities.ConvertToText(await App.LastfmAPI.GetArtistBio(App.MusicLibrary.Queue.CurrentSong.Artist));
+            int endIndex = bioStr.IndexOf("Read more about");
 
-                }
-               
-                ImageFadeIn.BeginTime = TimeSpan.FromSeconds(0);
-                ImageFadeIn.Begin();
-            }
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            ImageFadeIn.Begin();
-            ImageZoomIn.Begin();
-        }
-
-        private void backButton_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            if (bioStr == "" || endIndex == -1)
+                artistBio.Text = "couldn't find bio";
+            else
+                artistBio.Text = bioStr.Substring(0, endIndex);
         }
     }
 }

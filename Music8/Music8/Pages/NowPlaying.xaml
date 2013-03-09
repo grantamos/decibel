@@ -4,57 +4,13 @@
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Music8.Pages"
+    xmlns:local="using:Music8"
     xmlns:common="using:Music8.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Page.Resources>
-        <Storyboard x:Name="Reset" Storyboard.TargetName="scale" Duration="0:0:1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleX" >
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" />
-            </DoubleAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleY" >
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Name="ImageFadeOut" Storyboard.TargetName="artistBackground">
-        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" >
-            <EasingDoubleKeyFrame KeyTime="0" Value=".2" />
-            <EasingDoubleKeyFrame KeyTime="0:0:5" Value="0" /> 
-        </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Name="ImageFadeIn" Storyboard.TargetName="artistBackground">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" >
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:5" Value=".2" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Name="ImageZoomIn" Storyboard.TargetName="scale" Duration="0:1:30">
-
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleX" >
-                <EasingDoubleKeyFrame KeyTime="5" Value="1" />
-                <EasingDoubleKeyFrame KeyTime="0:0:15" Value="1" />
-
- 
-                <EasingDoubleKeyFrame KeyTime="0:0:15" Value="1" />
-                <EasingDoubleKeyFrame KeyTime="0:1:30" Value="1.8" />
-            </DoubleAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleY" >
-                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
-                <EasingDoubleKeyFrame KeyTime="0:0:15" Value="1" />
-
-                <EasingDoubleKeyFrame KeyTime="0:0:15" Value="1" />
-                <EasingDoubleKeyFrame KeyTime="0:1:30" Value="1.8" />
-            </DoubleAnimationUsingKeyFrames>
-
-        </Storyboard>
-    </Page.Resources>
-    <Grid Background="Black">
+    
+    <Grid Background="Black" Name="NpGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
@@ -66,13 +22,7 @@
             <ColumnDefinition Width="450"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Image Name="artistBackground" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Stretch="UniformToFill" >
-            <Image.RenderTransform>
-                <ScaleTransform x:Name="scale"></ScaleTransform>
-            </Image.RenderTransform>
-            
-        </Image>
-
+        <local:NowPlayingCanvas x:Name="PrettyBackground"  Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
 
         <Button Grid.Column="0" Content="Button" HorizontalAlignment="Left" Click="GoBack" Style="{StaticResource BackButtonStyle}"/>
 
@@ -81,9 +31,18 @@
             <TextBlock Style="{StaticResource SubheaderTextStyle}" Text="albym by artist"  Foreground="White" Margin="0, 5, 0, 0"/>
             <TextBlock Style="{StaticResource ItemTextStyle}" Text="0:55/3:43" Foreground="White" Margin="0, 5, 0, 0"/>
         </StackPanel>
-        
-        
-        <ListView x:Name="nowPlayingList"
+
+        <StackPanel Orientation="Vertical" Background="#FF404040"
+                  Grid.RowSpan="3"
+                  Grid.Column="2">
+            
+            <TextBlock Text="bio" Style="{StaticResource HeaderTextStyle}" Foreground="LightGray" Margin="40"/>
+            
+            
+            <TextBlock Name="artistBio" Foreground="LightGray" Margin="40, 0" Style="{StaticResource SubheaderTextStyle}"/>
+        </StackPanel>
+
+        <!--<ListView x:Name="nowPlayingList"
                   Width="450" HorizontalAlignment="Right"
                   IsItemClickEnabled="False"
                   AllowDrop="True"
@@ -93,6 +52,8 @@
                   Grid.RowSpan="3"
                   Grid.Column="2"
                   >
+            
+            
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="300" HorizontalAlignment="Stretch">
@@ -114,7 +75,7 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView> !-->
 
     </Grid>
 </common:LayoutAwarePage>
