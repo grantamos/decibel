@@ -25,7 +25,7 @@ namespace Music8
         Random random;
      
 
-        public List<Uri> ImageList
+        public List<Byteopia.Music.Zune.Models.ZuneImage> ImageList
         {
             get;
             set;
@@ -97,7 +97,7 @@ namespace Music8
             shapeTimer = new DispatcherTimer();
             shapeTimer.Tick += shapeTimer_Tick;
             shapeTimer.Interval = TimeSpan.FromSeconds(1);
-            
+            StartMouseEnterAnimation(lawl); StartMouseEnterAnimation(lawl2);
         }
 
         void shapeTimer_Tick(object sender, object e)
@@ -114,7 +114,7 @@ namespace Music8
 
         public void SetBackground()
         {
-            BackgroundColor.Fill = new SolidColorBrush(GetRandomBackgroundColor());
+            BackgroundColor.Fill =  new SolidColorBrush(Color.FromArgb(0xff, 0xe1, 0x5b, 0x14));
         }
 
         public void SetImage()
@@ -122,14 +122,14 @@ namespace Music8
             if (ImageList.Count == 0)
                 return;
 
-            BitmapImage img = new BitmapImage(ImageList[random.Next(0, ImageList.Count)]);
+            BitmapImage img = new BitmapImage(ImageList[random.Next(0, ImageList.Count)].Uri);
 
             if (img != null)
             {
                 ImageBrush b = new ImageBrush();
                 
                 b.ImageSource = img;
-                CanvasBorder.Background= b;
+                ImageContainer.Background= b;
             }
 
             ImageFadeInZoom();
@@ -147,7 +147,7 @@ namespace Music8
 
             ScaleTransform scaleTransform = new ScaleTransform();
             scaleTransform.ScaleX = scaleTransform.ScaleY = 1;
-            CanvasBorder.RenderTransform = scaleTransform;
+            ImageContainer.RenderTransform = scaleTransform;
 
             DoubleAnimationUsingKeyFrames fadeInAnimation = new DoubleAnimationUsingKeyFrames();
             fadeInAnimation.KeyFrames.Add(new EasingDoubleKeyFrame()
@@ -216,8 +216,8 @@ namespace Music8
             Storyboard.SetTargetProperty(fadeInAnimation, new PropertyPath("Opacity").Path);
             Storyboard.SetTargetProperty(zoomInAnimationX, new PropertyPath("ScaleTransform.ScaleX").Path);
             Storyboard.SetTargetProperty(zoomInAnimationY, new PropertyPath("ScaleTransform.ScaleY").Path);
-  
-            Storyboard.SetTarget(fadeInAnimation, CanvasBorder);
+
+            Storyboard.SetTarget(fadeInAnimation, ImageContainer);
             Storyboard.SetTarget(zoomInAnimationX, scaleTransform);
             Storyboard.SetTarget(zoomInAnimationY, scaleTransform);
 
@@ -226,13 +226,13 @@ namespace Music8
 
             storyboard.Completed += (o, e) =>
             {
-                FadeOut(CanvasBorder);
+                FadeOut(ImageContainer);
             };
 
             storyboard.Begin();
         }
 
-        public void FadeOut(Border img)
+        public void FadeOut(Grid img)
         {
             Storyboard storyboard = new Storyboard();
 
@@ -250,7 +250,7 @@ namespace Music8
 
             storyboard.Children.Add(fadeOutAnimation);
             Storyboard.SetTargetProperty(fadeOutAnimation, new PropertyPath("Opacity").Path);
-            Storyboard.SetTarget(fadeOutAnimation, CanvasBorder);
+            Storyboard.SetTarget(fadeOutAnimation, ImageContainer);
 
 
             storyboard.BeginTime = TimeSpan.Zero;
@@ -275,8 +275,8 @@ namespace Music8
 
         public void StartMouseEnterAnimation(Rectangle button)
         {
-            
-            button.Fill = new SolidColorBrush(Colors.Blue);
+
+            button.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0xf5, 0xb8, 0x98));
 
             Storyboard storyboard = new Storyboard();
 
@@ -286,35 +286,59 @@ namespace Music8
             button.RenderTransformOrigin = new Point((button.Width / 2) / 100, (button.Height / 2) / 100);
             button.RenderTransform = scale;
 
+            DoubleAnimation fade1 = new DoubleAnimation();
+            fade1.BeginTime = TimeSpan.FromMilliseconds(0);
+            fade1.Duration = TimeSpan.FromMilliseconds(3000);
+            fade1.From = 0;
+            fade1.To = .1;
+
+            storyboard.Children.Add(fade1);
+
             DoubleAnimation growAnimation = new DoubleAnimation();
             growAnimation.Duration = TimeSpan.FromMilliseconds(10000);
             growAnimation.From = 1;
-            growAnimation.To = 3;
+            growAnimation.To = 30;
             storyboard.Children.Add(growAnimation);
 
 
             DoubleAnimation growY = new DoubleAnimation();
             growY.Duration = TimeSpan.FromMilliseconds(10000);
             growY.From = 1;
-            growY.To = 3;
+            growY.To = 30;
             storyboard.Children.Add(growY);
 
-            DoubleAnimation fade = new DoubleAnimation();
-            fade.BeginTime = TimeSpan.FromMilliseconds(10000);
-            fade.Duration = TimeSpan.FromMilliseconds(3000);
-            fade.From = 1;
-            fade.To = 0;
-            storyboard.Children.Add(fade);
+           
 
             Storyboard.SetTargetName(growAnimation, button.Name);
             Storyboard.SetTargetProperty(growAnimation, new PropertyPath("ScaleTransform.ScaleX").Path);
             Storyboard.SetTargetProperty(growY, new PropertyPath("ScaleTransform.ScaleY").Path);
-            Storyboard.SetTargetProperty(fade, new PropertyPath("Opacity").Path);
+            
+            Storyboard.SetTargetProperty(fade1, new PropertyPath("Opacity").Path);
             Storyboard.SetTarget(growAnimation, scale);
             Storyboard.SetTarget(growY, scale);
-            Storyboard.SetTarget(fade, button);
+            
+            Storyboard.SetTarget(fade1, button);
+            storyboard.Duration = TimeSpan.FromMilliseconds(10000);
+            storyboard.BeginTime = TimeSpan.FromSeconds(0);
+            storyboard.Completed += (e,s)=>
+                {
+                    Fadeoutimg(button);
+                };
+            storyboard.Begin();
+        }
 
-            //storyboard.Completed += storyboard_Completed;
+        public void Fadeoutimg(Rectangle button)
+        {
+            Storyboard storyboard = new Storyboard();
+
+            DoubleAnimation fade = new DoubleAnimation();
+            fade.BeginTime = TimeSpan.FromMilliseconds(0);
+            fade.Duration = TimeSpan.FromMilliseconds(3000);
+            fade.From = .1;
+            fade.To = 0;
+            storyboard.Children.Add(fade);
+            Storyboard.SetTarget(fade, button);
+            Storyboard.SetTargetProperty(fade, new PropertyPath("Opacity").Path);
             storyboard.BeginTime = TimeSpan.FromSeconds(0);
             storyboard.Begin();
         }

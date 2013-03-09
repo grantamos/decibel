@@ -10,8 +10,14 @@
     d:DesignWidth="400" Background="Black"
     Name="RootControl">
 
-    <Border Name="CanvasBorder" Background="Black">
-        <Rectangle Name="BackgroundColor" Fill="#ff000000" Stretch="Fill" Opacity=".2"/>
-    </Border>
+    <Grid Name="ShapeContainer">
+        <Grid Name="ImageContainer" Background="Black">
+            <Rectangle Name="BackgroundColor" Fill="#ff000000" Stretch="Fill" Opacity=".2"/>
+            
+        </Grid>
+
+        <Rectangle Name="lawl2" Fill="Blue" Width="40" Height="40" Opacity=".2" Margin="80, 80, 0, 0"/>
+        <Rectangle Name="lawl" Fill="Blue" Width="10" Height="10" Opacity=".2" Margin="0" HorizontalAlignment="Left"/>
+    </Grid>
 
 </UserControl>

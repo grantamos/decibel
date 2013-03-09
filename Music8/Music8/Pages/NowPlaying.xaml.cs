@@ -29,19 +29,28 @@ namespace Music8.Pages
     /// </summary>
     public sealed partial class NowPlaying : Music8.Common.LayoutAwarePage
     {
-        List<Uri> ImageList;
+        List<Byteopia.Music.Zune.Models.ZuneImage> ImageList;
+
+        public GoogleMusicSong Song
+        {
+            get;
+            set;
+        }
+
         public NowPlaying()
         {
             this.InitializeComponent();
 
             this.Loaded += NowPlaying_Loaded;
 
-            PrettyBackground.ImageFadeInTime = TimeSpan.FromSeconds(2);
-            PrettyBackground.ImagePanTime = TimeSpan.FromSeconds(3);
-            PrettyBackground.WaitBeforePanBegin = TimeSpan.FromSeconds(2);
+            PrettyBackground.ImageFadeInTime = TimeSpan.FromSeconds(5);
+            PrettyBackground.ImagePanTime = TimeSpan.FromSeconds(60);
+            PrettyBackground.WaitBeforePanBegin = TimeSpan.FromSeconds(5);
             PrettyBackground.ImageScale = 1.8;
             PrettyBackground.MaxImageOpacity = .8;
-            PrettyBackground.ImageFadeOutTime = TimeSpan.FromSeconds(2);
+            PrettyBackground.ImageFadeOutTime = TimeSpan.FromSeconds(5);
+
+            Song = App.MusicLibrary.Queue.CurrentSong;
         }
 
         void NowPlaying_Loaded(object sender, RoutedEventArgs e)
@@ -62,13 +71,16 @@ namespace Music8.Pages
 
         private async void GetBio()
         {
-            String bioStr = HtmlUtilities.ConvertToText(await App.LastfmAPI.GetArtistBio(App.MusicLibrary.Queue.CurrentSong.Artist));
-            int endIndex = bioStr.IndexOf("Read more about");
-
-            if (bioStr == "" || endIndex == -1)
-                artistBio.Text = "couldn't find bio";
+            String bio = HtmlUtilities.ConvertToText(await App.ZuneAPI.GetArtistBio(App.MusicLibrary.Queue.CurrentSong.Artist));
+            if (!bio.Equals(String.Empty))
+            {
+                artistBio.Text = bio;
+            }
             else
-                artistBio.Text = bioStr.Substring(0, endIndex);
+            {
+                
+                artistBio.Text = "unable to locate a bio";
+            }
         }
     }
 }

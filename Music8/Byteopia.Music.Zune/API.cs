@@ -1,18 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using Windows.Data.Xml.Dom;
+using Windows.Storage.Streams;
 using Windows.Web.Syndication;
 
 namespace Byteopia.Music.Zune
 {
     public class API
     {
-        public async Task<List<Uri>> GetArtistImages(String artist){
+        HttpClient client;
+        public API()
+        {
+            client = new HttpClient();
+        }
 
-            List<Uri> imgs = new List<Uri>();
 
+        public async Task<String> GetArtistID(String artist)
+        {
             SyndicationClient client = new SyndicationClient();
 
             SyndicationFeed artistFeed = await client.RetrieveFeedAsync(new Uri(String.Format("http://catalog.zune.net/v3.2/en-US/music/artist?q={0}&clientType=PC/Windows", artist)));
@@ -27,13 +38,56 @@ namespace Byteopia.Music.Zune
             if (artistId == "")
                 return null;
 
-            artistId = artistId.Replace("urn:uuid:", "");
+            return artistId.Replace("urn:uuid:", "");
+        }
 
-            SyndicationFeed imageFeed = await client.RetrieveFeedAsync(new Uri(String.Format("http://catalog.zune.net/v3.2/en-US/music/artist/{0}/images", artistId)));
+        public async Task<String> GetArtistBio(String artist)
+        {
+            String artistID = await GetArtistID(artist);
 
-            foreach (var l in imageFeed.Items)
+            if (artistID == String.Empty)
+                return String.Empty;
+
+            XmlDocument d = await XmlDocument.LoadFromUriAsync(new Uri(String.Format("http://catalog.zune.net/v3.2/en-US/music/artist/{0}/biography", artistID)));
+            SyndicationItem item = new SyndicationItem();
+            item.LoadFromXml(d);
+
+            if (item.Content != null && !item.Content.NodeValue.Equals(String.Empty))
+                return item.Content.NodeValue;
+
+            return string.Empty;
+        }
+
+
+        public async Task<List<Byteopia.Music.Zune.Models.ZuneImage>> GetArtistImages(String artist)
+        {
+
+            List<Byteopia.Music.Zune.Models.ZuneImage> imgs = new List<Byteopia.Music.Zune.Models.ZuneImage>();
+
+            String artistID = await GetArtistID(artist);
+
+            if (artistID == String.Empty)
+                return null;
+
+            SyndicationClient client = new SyndicationClient();
+            SyndicationFeed imageFeed = await client.RetrieveFeedAsync(new Uri(String.Format("http://catalog.zune.net/v3.2/en-US/music/artist/{0}/images", artistID)));
+
+            foreach (var item in imageFeed.Items)
             {
-                imgs.Add(new Uri(String.Format("http://image.catalog.zune.net/v3.2/en-US/image/{0}?width=1920&height=1080", l.Id.Replace("urn:uuid:", ""))));
+                foreach (var instance in item.ElementExtensions)
+                {
+                    foreach (var imageInstance in instance.ElementExtensions)
+                    {
+                        if (imageInstance.ElementExtensions.Count < 2)
+                            continue;
+
+                        imgs.Add(new Byteopia.Music.Zune.Models.ZuneImage()
+                        {
+                            Url = imageInstance.ElementExtensions[1].NodeValue
+                        });
+                    }
+                }
+                
             }
 
             return imgs;

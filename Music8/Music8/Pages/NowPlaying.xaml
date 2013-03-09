@@ -1,5 +1,5 @@
 ﻿<common:LayoutAwarePage
-    x:Name="pageRoot"
+   
     x:Class="Music8.Pages.NowPlaying"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,40 +8,43 @@
     xmlns:common="using:Music8.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Name="root">
     
     <Grid Background="Black" Name="NpGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="450"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
-        <local:NowPlayingCanvas x:Name="PrettyBackground"  Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+        
+        <local:NowPlayingCanvas x:Name="PrettyBackground"  Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="Black"/>
 
         <Button Grid.Column="0" Content="Button" HorizontalAlignment="Left" Click="GoBack" Style="{StaticResource BackButtonStyle}"/>
 
-        <StackPanel  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Margin="40, 0, 0, 0" Background="Transparent">
-            <TextBlock Style="{StaticResource HeaderTextStyle}" Text="Test" Grid.ColumnSpan="2" Foreground="White" Margin="0, 10, 0, 0"/>
-            <TextBlock Style="{StaticResource SubheaderTextStyle}" Text="albym by artist"  Foreground="White" Margin="0, 5, 0, 0"/>
-            <TextBlock Style="{StaticResource ItemTextStyle}" Text="0:55/3:43" Foreground="White" Margin="0, 5, 0, 0"/>
+        <StackPanel  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"  Grid.RowSpan="2" Margin="40, 0, 0, 0" Background="Transparent">
+            <TextBlock Name="tbTitle" Style="{StaticResource HeaderTextStyle}" Text="{Binding ElementName=root, Path=Song.Title}" Grid.ColumnSpan="2" Foreground="White" Margin="0, 10, 0, 0"/>
+            <TextBlock Name="tbAlbum" Style="{StaticResource SubheaderTextStyle}" Text="{Binding ElementName=root, Path=Song.Artist}"  Foreground="White" Margin="0, 5, 0, 0"/>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Background="#FF404040"
-                  Grid.RowSpan="3"
-                  Grid.Column="2">
-            
-            <TextBlock Text="bio" Style="{StaticResource HeaderTextStyle}" Foreground="LightGray" Margin="40"/>
-            
-            
-            <TextBlock Name="artistBio" Foreground="LightGray" Margin="40, 0" Style="{StaticResource SubheaderTextStyle}"/>
-        </StackPanel>
 
+        <Rectangle Fill="Gray" Grid.Column="3" Grid.Row="0" Grid.RowSpan="4">
+            
+        </Rectangle>
+
+        <TextBlock  Text="bio" Style="{StaticResource HeaderTextStyle}" Foreground="LightGray" Grid.Row="0" Grid.Column="3"  Margin="40"/>
+
+
+        <ScrollViewer Name="bioScroller" Grid.Row="1" Grid.Column="3" Grid.RowSpan="4"  VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto"  Margin="40, 0">
+            <TextBlock Grid.RowSpan="2" VerticalAlignment="Top"  Name="artistBio" Foreground="White" Style="{StaticResource BodyTextStyle}"/>
+        </ScrollViewer>
+        
         <!--<ListView x:Name="nowPlayingList"
                   Width="450" HorizontalAlignment="Right"
                   IsItemClickEnabled="False"
