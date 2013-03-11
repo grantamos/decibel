@@ -23,7 +23,7 @@ namespace Music8
     public sealed partial class NowPlayingCanvas : UserControl
     {
         Random random;
-     
+        ShapeManager shapes;
 
         public List<Byteopia.Music.Zune.Models.ZuneImage> ImageList
         {
@@ -68,6 +68,12 @@ namespace Music8
 
         }
 
+        public Windows.UI.Xaml.Shapes.Path Mypath
+        {
+            get;
+            set;
+        }
+
         Color[,] AcceptablePallete = new Color[,]
         {
             {Color.FromArgb(0xff, 0xe1, 0x5b, 0x14), Color.FromArgb(0xff, 0xf5, 0xb8, 0x98)},
@@ -78,8 +84,6 @@ namespace Music8
             {Color.FromArgb(0xFF,0xE2,0x68,0x72),Color.FromArgb( 0xFF,0xfa,0xe8,0xe9)},
             {Color.FromArgb( 0xFF,0xd5, 0x91, 0xfd),Color.FromArgb(0xFF,0xfa,0xe8,0xe9)}
         };
-
-        DispatcherTimer shapeTimer;
 
         public NowPlayingCanvas()
         {
@@ -94,15 +98,18 @@ namespace Music8
             ImageFadeOutTime = TimeSpan.FromSeconds(5);
 
            
-            shapeTimer = new DispatcherTimer();
-            shapeTimer.Tick += shapeTimer_Tick;
-            shapeTimer.Interval = TimeSpan.FromSeconds(1);
-            StartMouseEnterAnimation(lawl); StartMouseEnterAnimation(lawl2);
+
+            //shapes.Good = Test;
+            //shapes.Canvas = this;
+            this.Loaded += NowPlayingCanvas_Loaded;
         }
 
-        void shapeTimer_Tick(object sender, object e)
+        void NowPlayingCanvas_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            shapes = new ShapeManager();
+            shapes.Container = ShapeContainer;
+            shapes.ContainerSize = new Point(ShapeContainer.ActualWidth - (ShapeContainer.ActualWidth * .26), ShapeContainer.ActualHeight);
+            shapes.Load();
         }
 
         public void Prettyify()
@@ -114,7 +121,7 @@ namespace Music8
 
         public void SetBackground()
         {
-            BackgroundColor.Fill =  new SolidColorBrush(Color.FromArgb(0xff, 0xe1, 0x5b, 0x14));
+            BackgroundColor.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0x77, 0x77, 0xd9));
         }
 
         public void SetImage()
@@ -137,8 +144,7 @@ namespace Music8
 
         public void StartShapes()
         {
-            if (!shapeTimer.IsEnabled)
-                shapeTimer.Start();
+            
         }
 
         public void ImageFadeInZoom()
@@ -258,7 +264,8 @@ namespace Music8
 
             storyboard.Completed += (o, e) =>
             {
-                Prettyify();
+                SetImage();
+                //Prettyify();
             };
 
             storyboard.Begin();
@@ -273,74 +280,9 @@ namespace Music8
             return AcceptablePallete[random.Next(0, AcceptablePallete.Length / 2), 0];
         }
 
-        public void StartMouseEnterAnimation(Rectangle button)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
-            button.Fill = new SolidColorBrush(Color.FromArgb(0xff, 0xf5, 0xb8, 0x98));
-
-            Storyboard storyboard = new Storyboard();
-
-            ScaleTransform scale = new ScaleTransform();
-            scale.ScaleX = scale.ScaleY = 1;
-
-            button.RenderTransformOrigin = new Point((button.Width / 2) / 100, (button.Height / 2) / 100);
-            button.RenderTransform = scale;
-
-            DoubleAnimation fade1 = new DoubleAnimation();
-            fade1.BeginTime = TimeSpan.FromMilliseconds(0);
-            fade1.Duration = TimeSpan.FromMilliseconds(3000);
-            fade1.From = 0;
-            fade1.To = .1;
-
-            storyboard.Children.Add(fade1);
-
-            DoubleAnimation growAnimation = new DoubleAnimation();
-            growAnimation.Duration = TimeSpan.FromMilliseconds(10000);
-            growAnimation.From = 1;
-            growAnimation.To = 30;
-            storyboard.Children.Add(growAnimation);
-
-
-            DoubleAnimation growY = new DoubleAnimation();
-            growY.Duration = TimeSpan.FromMilliseconds(10000);
-            growY.From = 1;
-            growY.To = 30;
-            storyboard.Children.Add(growY);
-
-           
-
-            Storyboard.SetTargetName(growAnimation, button.Name);
-            Storyboard.SetTargetProperty(growAnimation, new PropertyPath("ScaleTransform.ScaleX").Path);
-            Storyboard.SetTargetProperty(growY, new PropertyPath("ScaleTransform.ScaleY").Path);
-            
-            Storyboard.SetTargetProperty(fade1, new PropertyPath("Opacity").Path);
-            Storyboard.SetTarget(growAnimation, scale);
-            Storyboard.SetTarget(growY, scale);
-            
-            Storyboard.SetTarget(fade1, button);
-            storyboard.Duration = TimeSpan.FromMilliseconds(10000);
-            storyboard.BeginTime = TimeSpan.FromSeconds(0);
-            storyboard.Completed += (e,s)=>
-                {
-                    Fadeoutimg(button);
-                };
-            storyboard.Begin();
-        }
-
-        public void Fadeoutimg(Rectangle button)
-        {
-            Storyboard storyboard = new Storyboard();
-
-            DoubleAnimation fade = new DoubleAnimation();
-            fade.BeginTime = TimeSpan.FromMilliseconds(0);
-            fade.Duration = TimeSpan.FromMilliseconds(3000);
-            fade.From = .1;
-            fade.To = 0;
-            storyboard.Children.Add(fade);
-            Storyboard.SetTarget(fade, button);
-            Storyboard.SetTargetProperty(fade, new PropertyPath("Opacity").Path);
-            storyboard.BeginTime = TimeSpan.FromSeconds(0);
-            storyboard.Begin();
+            myStoryboard.Begin();
         }
     }
 }

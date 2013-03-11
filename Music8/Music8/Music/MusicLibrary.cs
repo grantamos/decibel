@@ -37,7 +37,7 @@ namespace Music8.Music
 
         public MusicLibrary()
         {
-            PagesToLoad = 2;
+            PagesToLoad = 5;
 
             queue = new NowPlayingQueue();
         }

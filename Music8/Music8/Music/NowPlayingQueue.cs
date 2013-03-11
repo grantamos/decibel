@@ -26,7 +26,13 @@ namespace Music8.Music
 
         public GoogleMusicSong CurrentSong
         {
-            get { return queue[index]; }
+            get 
+            {
+                if (queue == null || queue.Count == 0)
+                    return null;
+
+                return queue[index]; 
+            }
         }
 
         public NowPlayingQueue()

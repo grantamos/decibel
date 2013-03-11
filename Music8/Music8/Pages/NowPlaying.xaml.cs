@@ -30,6 +30,7 @@ namespace Music8.Pages
     public sealed partial class NowPlaying : Music8.Common.LayoutAwarePage
     {
         List<Byteopia.Music.Zune.Models.ZuneImage> ImageList;
+        bool isFullScreen;
 
         public GoogleMusicSong Song
         {
@@ -49,14 +50,19 @@ namespace Music8.Pages
             PrettyBackground.ImageScale = 1.8;
             PrettyBackground.MaxImageOpacity = .8;
             PrettyBackground.ImageFadeOutTime = TimeSpan.FromSeconds(5);
-
-            Song = App.MusicLibrary.Queue.CurrentSong;
         }
 
         void NowPlaying_Loaded(object sender, RoutedEventArgs e)
         {
+            Song = App.MusicLibrary.Queue.CurrentSong;
+
+            isFullScreen = false;
+
             SetImage();
+
             GetBio();
+
+            nowPlayingList.ItemsSource = App.MusicLibrary.Queue.Songs;
         }
 
         private async System.Threading.Tasks.Task SetImage()
@@ -71,16 +77,52 @@ namespace Music8.Pages
 
         private async void GetBio()
         {
-            String bio = HtmlUtilities.ConvertToText(await App.ZuneAPI.GetArtistBio(App.MusicLibrary.Queue.CurrentSong.Artist));
+          /* String bio = HtmlUtilities.ConvertToText(await App.ZuneAPI.GetArtistBio(App.MusicLibrary.Queue.CurrentSong.Artist));
             if (!bio.Equals(String.Empty))
             {
-                artistBio.Text = bio;
+                artistBio.Text = "blah";
             }
             else
             {
                 
                 artistBio.Text = "unable to locate a bio";
+            } */
+        }
+
+        private void btnFullScreenToggle_Click(object sender, RoutedEventArgs e)
+        {
+            if (isFullScreen == false)
+            {
+                //btnFullScreenToggle.NormalStateImageUriSource = new Uri("ms-appx:///Assets/Icons/NowPlaying/normalscreen.png");
             }
+            else
+            {
+                //btnFullScreenToggle.NormalStateImageUriSource = new Uri("ms-appx:///Assets/Icons/NowPlaying/fullscreen.png");
+            }
+
+            isFullScreen = !isFullScreen;
+
+            if (isFullScreen)
+            {
+                this.SideGrid.Visibility = Visibility.Collapsed;
+                //Grid.SetColumn(btnFullScreenToggle, 3);
+            }
+            else
+            {
+                this.SideGrid.Visibility = Visibility.Visible;
+                //Grid.SetColumn(btnFullScreenToggle, 1);
+            }
+
+        }
+
+        private void lwl_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void ScrollViewer_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

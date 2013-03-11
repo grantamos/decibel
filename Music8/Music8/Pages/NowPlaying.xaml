@@ -9,76 +9,103 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:toolkit="using:WinRTXamlToolkit.Controls"
     Name="root">
+
     
-    <Grid Background="Black" Name="NpGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="450"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <local:NowPlayingCanvas x:Name="PrettyBackground"  Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="Black"/>
+       
+            <Grid Background="Black" Name="NpGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="400"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="0" Content="Button" HorizontalAlignment="Left" Click="GoBack" Style="{StaticResource BackButtonStyle}"/>
+                <local:NowPlayingCanvas x:Name="PrettyBackground"  
+                                            Grid.Row="0"  
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="3" 
+                                            Grid.RowSpan="4" 
+                                            Background="Red" />
 
-        <StackPanel  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"  Grid.RowSpan="2" Margin="40, 0, 0, 0" Background="Transparent">
-            <TextBlock Name="tbTitle" Style="{StaticResource HeaderTextStyle}" Text="{Binding ElementName=root, Path=Song.Title}" Grid.ColumnSpan="2" Foreground="White" Margin="0, 10, 0, 0"/>
-            <TextBlock Name="tbAlbum" Style="{StaticResource SubheaderTextStyle}" Text="{Binding ElementName=root, Path=Song.Artist}"  Foreground="White" Margin="0, 5, 0, 0"/>
-        </StackPanel>
+                <Button Name="BackButton" 
+                            Grid.Column="0" 
+                            Content="Button" 
+                            HorizontalAlignment="Left" 
+                            Click="GoBack" 
+                            Style="{StaticResource BackButtonStyle}"/>
 
 
-        <Rectangle Fill="Gray" Grid.Column="3" Grid.Row="0" Grid.RowSpan="4">
+                <StackPanel  
+                    Grid.Column="0" 
+                    Grid.ColumnSpan="2" 
+                    Grid.Row="2"  
+                    Grid.RowSpan="2" 
+                    Margin="40, 0, 0, 0" 
+                    Background="Transparent">
+                        <TextBlock Name="tbTitle" Style="{StaticResource HeaderTextStyle}" Text="...And Justice For All" Grid.ColumnSpan="2" Foreground="White" Margin="0, 10, 0, 0"/>
+                        <TextBlock Name="tbAlbum" Style="{StaticResource SubheaderTextStyle}" Text="Metallica"  Foreground="White" Margin="0, 5, 0, 0"/>
+                </StackPanel>
+
+               <!-- <toolkit:ImageButton Name="btnFullScreenToggle"  
+                                     Grid.Column="1" 
+                                     Grid.Row="2" 
+                                     HorizontalAlignment="Right" 
+                                     VerticalAlignment="Center"
+                                      NormalStateImageSource="ms-appx:///Assets/Icons/NowPlaying/fullscreen.png" 
+                                      Canvas.ZIndex="1" GenerateMissingImages="True" 
+                                      RecyclePressedStateImageForHover="True" Margin="0, 10, 40, 0" 
+                                     Click="btnFullScreenToggle_Click" Background="Black"/> -->
+
+                <Grid Name="SideGrid" Width="400"
+                      Grid.Row="0" 
+                      Grid.Column="3" 
+                     Grid.RowSpan="4"
+                      Background="#FFC6C6C6">
+
+                    <StackPanel Margin="40, 40, 0, 0">
+                        <TextBlock Text="queue" Style="{StaticResource HeaderTextStyle}" Foreground="Gray" />
+                
+                        <ListView x:Name="nowPlayingList"
+                                Grid.Column="0"
+                                Width="500"
+                                IsItemClickEnabled="False"
+                                AllowDrop="True"
+                                SelectionMode="Single"
+                                CanReorderItems="True"
+                                  Margin="0, 20, 0, 0">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="300" HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Margin="5">
+                                            <TextBlock Text="{Binding Title}" TextWrapping="NoWrap" Style="{StaticResource ItemTextStyle}"/>
+                                            <TextBlock Text="{Binding AlbumArtist}" FontSize="12" TextWrapping="NoWrap" Style="{StaticResource SubtitleTextStyle}"/>
+                                            <TextBlock TextWrapping="NoWrap" Style="{StaticResource CaptionTextStyle}">
+                                                        <Run Text="{Binding DurationTimeSpan}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <Button Content="&#xE10A;" Grid.Column="1"
+                                                    Style="{StaticResource CustomButtonStyle}"
+                                                   HorizontalAlignment="Right"
+                                                    Tag="{Binding}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
             
-        </Rectangle>
-
-        <TextBlock  Text="bio" Style="{StaticResource HeaderTextStyle}" Foreground="LightGray" Grid.Row="0" Grid.Column="3"  Margin="40"/>
-
-
-        <ScrollViewer Name="bioScroller" Grid.Row="1" Grid.Column="3" Grid.RowSpan="4"  VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto"  Margin="40, 0">
-            <TextBlock Grid.RowSpan="2" VerticalAlignment="Top"  Name="artistBio" Foreground="White" Style="{StaticResource BodyTextStyle}"/>
-        </ScrollViewer>
-        
-        <!--<ListView x:Name="nowPlayingList"
-                  Width="450" HorizontalAlignment="Right"
-                  IsItemClickEnabled="False"
-                  AllowDrop="True"
-                  SelectionMode="Single"
-                  CanReorderItems="True"
-                  Background="#FFC6C6C6"
-                  Grid.RowSpan="3"
-                  Grid.Column="2"
-                  >
-            
-            
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="300" HorizontalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Margin="5">
-                            <TextBlock Text="{Binding Title}" TextWrapping="NoWrap"/>
-                            <TextBlock Text="{Binding AlbumArtist}" FontSize="12" TextWrapping="NoWrap"/>
-                            <TextBlock TextWrapping="NoWrap">
-                                    <Run Text="{Binding DurationTimeSpan}"/>
-                            </TextBlock>
-                        </StackPanel>
-                        <Button Content="&#xE10A;" Grid.Column="1"
-                                Style="{StaticResource CustomButtonStyle}"
-                               HorizontalAlignment="Right"
-                                Tag="{Binding}" Click="Button_Click_1" />
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView> !-->
-
-    </Grid>
+            </Grid>
+    
 </common:LayoutAwarePage>
+
