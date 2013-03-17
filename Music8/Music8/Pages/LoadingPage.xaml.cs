@@ -28,7 +28,7 @@ namespace Music8.Pages
         {
             get
             {
-                if (App.MusicLibrary.CurrentTotalTracks == 0)
+                if (App.MusicLibrary.CurrentTotalTracks == 0 || RemoteTrackCount == 0)
                     return 0;
 
                 return ((double)App.MusicLibrary.CurrentTotalTracks / (double)RemoteTrackCount) * 100.0;
